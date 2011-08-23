@@ -1,0 +1,445 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C2FFA8F31403729000DCBDD4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2FFA8F21403729000DCBDD4 /* UIKit.framework */; };
+		C2FFA8F51403729000DCBDD4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2FFA8F41403729000DCBDD4 /* Foundation.framework */; };
+		C2FFA8F71403729000DCBDD4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2FFA8F61403729000DCBDD4 /* CoreGraphics.framework */; };
+		C2FFA8FD1403729100DCBDD4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C2FFA8FB1403729100DCBDD4 /* InfoPlist.strings */; };
+		C2FFA8FF1403729100DCBDD4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FFA8FE1403729100DCBDD4 /* main.m */; };
+		C2FFA9031403729100DCBDD4 /* NodeCanvasDemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FFA9021403729100DCBDD4 /* NodeCanvasDemoAppDelegate.m */; };
+		C2FFA9061403729100DCBDD4 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2FFA9041403729100DCBDD4 /* MainWindow.xib */; };
+		C2FFA9091403729100DCBDD4 /* NodeCanvasDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FFA9081403729100DCBDD4 /* NodeCanvasDemoViewController.m */; };
+		C2FFA90C1403729100DCBDD4 /* NodeCanvasDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2FFA90A1403729100DCBDD4 /* NodeCanvasDemoViewController.xib */; };
+		C2FFA917140372D800DCBDD4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2FFA8F41403729000DCBDD4 /* Foundation.framework */; };
+		C2FFA91D140372D800DCBDD4 /* NodeCanvasKit.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FFA91C140372D800DCBDD4 /* NodeCanvasKit.m */; };
+		C2FFA92A1403731F00DCBDD4 /* NKNodeCanvasViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C2FFA9211403731F00DCBDD4 /* NKNodeCanvasViewController.h */; };
+		C2FFA92B1403731F00DCBDD4 /* NKNodeCanvasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FFA9221403731F00DCBDD4 /* NKNodeCanvasViewController.m */; };
+		C2FFA92C1403731F00DCBDD4 /* NKNodeCanvasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FFA9221403731F00DCBDD4 /* NKNodeCanvasViewController.m */; };
+		C2FFA92D1403731F00DCBDD4 /* NKNodeCanvasViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2FFA9231403731F00DCBDD4 /* NKNodeCanvasViewController.xib */; };
+		C2FFA92E1403731F00DCBDD4 /* NKNodeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C2FFA9241403731F00DCBDD4 /* NKNodeViewController.h */; };
+		C2FFA92F1403731F00DCBDD4 /* NKNodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FFA9251403731F00DCBDD4 /* NKNodeViewController.m */; };
+		C2FFA9301403731F00DCBDD4 /* NKNodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FFA9251403731F00DCBDD4 /* NKNodeViewController.m */; };
+		C2FFA9311403731F00DCBDD4 /* NKNodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2FFA9261403731F00DCBDD4 /* NKNodeViewController.xib */; };
+		C2FFA9321403731F00DCBDD4 /* NKWireView.h in Headers */ = {isa = PBXBuildFile; fileRef = C2FFA9271403731F00DCBDD4 /* NKWireView.h */; };
+		C2FFA9331403731F00DCBDD4 /* NKWireView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FFA9281403731F00DCBDD4 /* NKWireView.m */; };
+		C2FFA9341403731F00DCBDD4 /* NKWireView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FFA9281403731F00DCBDD4 /* NKWireView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		C2FFA8EE1403729000DCBDD4 /* NodeCanvasKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NodeCanvasKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2FFA8F21403729000DCBDD4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C2FFA8F41403729000DCBDD4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C2FFA8F61403729000DCBDD4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C2FFA8FA1403729100DCBDD4 /* NodeCanvasKit-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NodeCanvasKit-Info.plist"; sourceTree = "<group>"; };
+		C2FFA8FC1403729100DCBDD4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C2FFA8FE1403729100DCBDD4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C2FFA9001403729100DCBDD4 /* NodeCanvasKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NodeCanvasKit-Prefix.pch"; sourceTree = "<group>"; };
+		C2FFA9011403729100DCBDD4 /* NodeCanvasDemoAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeCanvasDemoAppDelegate.h; sourceTree = "<group>"; };
+		C2FFA9021403729100DCBDD4 /* NodeCanvasDemoAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NodeCanvasDemoAppDelegate.m; sourceTree = "<group>"; };
+		C2FFA9051403729100DCBDD4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		C2FFA9071403729100DCBDD4 /* NodeCanvasDemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeCanvasDemoViewController.h; sourceTree = "<group>"; };
+		C2FFA9081403729100DCBDD4 /* NodeCanvasDemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NodeCanvasDemoViewController.m; sourceTree = "<group>"; };
+		C2FFA90B1403729100DCBDD4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/NodeCanvasDemoViewController.xib; sourceTree = "<group>"; };
+		C2FFA916140372D800DCBDD4 /* libNodeCanvasKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libNodeCanvasKit.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2FFA91A140372D800DCBDD4 /* NodeCanvasKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NodeCanvasKit-Prefix.pch"; sourceTree = "<group>"; };
+		C2FFA91B140372D800DCBDD4 /* NodeCanvasKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeCanvasKit.h; sourceTree = "<group>"; };
+		C2FFA91C140372D800DCBDD4 /* NodeCanvasKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NodeCanvasKit.m; sourceTree = "<group>"; };
+		C2FFA9211403731F00DCBDD4 /* NKNodeCanvasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKNodeCanvasViewController.h; sourceTree = "<group>"; };
+		C2FFA9221403731F00DCBDD4 /* NKNodeCanvasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKNodeCanvasViewController.m; sourceTree = "<group>"; };
+		C2FFA9231403731F00DCBDD4 /* NKNodeCanvasViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NKNodeCanvasViewController.xib; sourceTree = "<group>"; };
+		C2FFA9241403731F00DCBDD4 /* NKNodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKNodeViewController.h; sourceTree = "<group>"; };
+		C2FFA9251403731F00DCBDD4 /* NKNodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKNodeViewController.m; sourceTree = "<group>"; };
+		C2FFA9261403731F00DCBDD4 /* NKNodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NKNodeViewController.xib; sourceTree = "<group>"; };
+		C2FFA9271403731F00DCBDD4 /* NKWireView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKWireView.h; sourceTree = "<group>"; };
+		C2FFA9281403731F00DCBDD4 /* NKWireView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKWireView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C2FFA8EB1403729000DCBDD4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2FFA8F31403729000DCBDD4 /* UIKit.framework in Frameworks */,
+				C2FFA8F51403729000DCBDD4 /* Foundation.framework in Frameworks */,
+				C2FFA8F71403729000DCBDD4 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C2FFA913140372D800DCBDD4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2FFA917140372D800DCBDD4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C2FFA8E31403729000DCBDD4 = {
+			isa = PBXGroup;
+			children = (
+				C2FFA9361403732C00DCBDD4 /* NodeCanvasKit */,
+				C2FFA8F81403729100DCBDD4 /* NodeCanvasDemo */,
+				C2FFA918140372D800DCBDD4 /* NodeCanvasKit */,
+				C2FFA8F11403729000DCBDD4 /* Frameworks */,
+				C2FFA8EF1403729000DCBDD4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C2FFA8EF1403729000DCBDD4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C2FFA8EE1403729000DCBDD4 /* NodeCanvasKit.app */,
+				C2FFA916140372D800DCBDD4 /* libNodeCanvasKit.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C2FFA8F11403729000DCBDD4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C2FFA8F21403729000DCBDD4 /* UIKit.framework */,
+				C2FFA8F41403729000DCBDD4 /* Foundation.framework */,
+				C2FFA8F61403729000DCBDD4 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C2FFA8F81403729100DCBDD4 /* NodeCanvasDemo */ = {
+			isa = PBXGroup;
+			children = (
+				C2FFA9011403729100DCBDD4 /* NodeCanvasDemoAppDelegate.h */,
+				C2FFA9021403729100DCBDD4 /* NodeCanvasDemoAppDelegate.m */,
+				C2FFA9041403729100DCBDD4 /* MainWindow.xib */,
+				C2FFA9071403729100DCBDD4 /* NodeCanvasDemoViewController.h */,
+				C2FFA9081403729100DCBDD4 /* NodeCanvasDemoViewController.m */,
+				C2FFA90A1403729100DCBDD4 /* NodeCanvasDemoViewController.xib */,
+				C2FFA8F91403729100DCBDD4 /* Supporting Files */,
+			);
+			path = NodeCanvasDemo;
+			sourceTree = "<group>";
+		};
+		C2FFA8F91403729100DCBDD4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C2FFA8FA1403729100DCBDD4 /* NodeCanvasKit-Info.plist */,
+				C2FFA8FB1403729100DCBDD4 /* InfoPlist.strings */,
+				C2FFA8FE1403729100DCBDD4 /* main.m */,
+				C2FFA9001403729100DCBDD4 /* NodeCanvasKit-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C2FFA918140372D800DCBDD4 /* NodeCanvasKit */ = {
+			isa = PBXGroup;
+			children = (
+				C2FFA91B140372D800DCBDD4 /* NodeCanvasKit.h */,
+				C2FFA91C140372D800DCBDD4 /* NodeCanvasKit.m */,
+				C2FFA919140372D800DCBDD4 /* Supporting Files */,
+			);
+			path = NodeCanvasKit;
+			sourceTree = "<group>";
+		};
+		C2FFA919140372D800DCBDD4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C2FFA91A140372D800DCBDD4 /* NodeCanvasKit-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C2FFA9361403732C00DCBDD4 /* NodeCanvasKit */ = {
+			isa = PBXGroup;
+			children = (
+				C2FFA9211403731F00DCBDD4 /* NKNodeCanvasViewController.h */,
+				C2FFA9221403731F00DCBDD4 /* NKNodeCanvasViewController.m */,
+				C2FFA9231403731F00DCBDD4 /* NKNodeCanvasViewController.xib */,
+				C2FFA9241403731F00DCBDD4 /* NKNodeViewController.h */,
+				C2FFA9251403731F00DCBDD4 /* NKNodeViewController.m */,
+				C2FFA9261403731F00DCBDD4 /* NKNodeViewController.xib */,
+				C2FFA9271403731F00DCBDD4 /* NKWireView.h */,
+				C2FFA9281403731F00DCBDD4 /* NKWireView.m */,
+			);
+			name = NodeCanvasKit;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		C2FFA914140372D800DCBDD4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2FFA92A1403731F00DCBDD4 /* NKNodeCanvasViewController.h in Headers */,
+				C2FFA92E1403731F00DCBDD4 /* NKNodeViewController.h in Headers */,
+				C2FFA9321403731F00DCBDD4 /* NKWireView.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		C2FFA8ED1403729000DCBDD4 /* NodeCanvasDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C2FFA90F1403729100DCBDD4 /* Build configuration list for PBXNativeTarget "NodeCanvasDemo" */;
+			buildPhases = (
+				C2FFA8EA1403729000DCBDD4 /* Sources */,
+				C2FFA8EB1403729000DCBDD4 /* Frameworks */,
+				C2FFA8EC1403729000DCBDD4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NodeCanvasDemo;
+			productName = NodeCanvasDemo;
+			productReference = C2FFA8EE1403729000DCBDD4 /* NodeCanvasKit.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C2FFA915140372D800DCBDD4 /* NodeCanvasKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C2FFA91E140372D800DCBDD4 /* Build configuration list for PBXNativeTarget "NodeCanvasKit" */;
+			buildPhases = (
+				C2FFA912140372D800DCBDD4 /* Sources */,
+				C2FFA913140372D800DCBDD4 /* Frameworks */,
+				C2FFA914140372D800DCBDD4 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NodeCanvasKit;
+			productName = NodeCanvasKit;
+			productReference = C2FFA916140372D800DCBDD4 /* libNodeCanvasKit.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C2FFA8E51403729000DCBDD4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = Eeoo;
+			};
+			buildConfigurationList = C2FFA8E81403729000DCBDD4 /* Build configuration list for PBXProject "NodeCanvasKit" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C2FFA8E31403729000DCBDD4;
+			productRefGroup = C2FFA8EF1403729000DCBDD4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C2FFA8ED1403729000DCBDD4 /* NodeCanvasDemo */,
+				C2FFA915140372D800DCBDD4 /* NodeCanvasKit */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C2FFA8EC1403729000DCBDD4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2FFA8FD1403729100DCBDD4 /* InfoPlist.strings in Resources */,
+				C2FFA9061403729100DCBDD4 /* MainWindow.xib in Resources */,
+				C2FFA90C1403729100DCBDD4 /* NodeCanvasDemoViewController.xib in Resources */,
+				C2FFA92D1403731F00DCBDD4 /* NKNodeCanvasViewController.xib in Resources */,
+				C2FFA9311403731F00DCBDD4 /* NKNodeViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C2FFA8EA1403729000DCBDD4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2FFA8FF1403729100DCBDD4 /* main.m in Sources */,
+				C2FFA9031403729100DCBDD4 /* NodeCanvasDemoAppDelegate.m in Sources */,
+				C2FFA9091403729100DCBDD4 /* NodeCanvasDemoViewController.m in Sources */,
+				C2FFA92B1403731F00DCBDD4 /* NKNodeCanvasViewController.m in Sources */,
+				C2FFA92F1403731F00DCBDD4 /* NKNodeViewController.m in Sources */,
+				C2FFA9331403731F00DCBDD4 /* NKWireView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C2FFA912140372D800DCBDD4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C2FFA91D140372D800DCBDD4 /* NodeCanvasKit.m in Sources */,
+				C2FFA92C1403731F00DCBDD4 /* NKNodeCanvasViewController.m in Sources */,
+				C2FFA9301403731F00DCBDD4 /* NKNodeViewController.m in Sources */,
+				C2FFA9341403731F00DCBDD4 /* NKWireView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		C2FFA8FB1403729100DCBDD4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C2FFA8FC1403729100DCBDD4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		C2FFA9041403729100DCBDD4 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C2FFA9051403729100DCBDD4 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		C2FFA90A1403729100DCBDD4 /* NodeCanvasDemoViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C2FFA90B1403729100DCBDD4 /* en */,
+			);
+			name = NodeCanvasDemoViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C2FFA90D1403729100DCBDD4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		C2FFA90E1403729100DCBDD4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C2FFA9101403729100DCBDD4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NodeCanvasDemo/NodeCanvasKit-Prefix.pch";
+				INFOPLIST_FILE = "NodeCanvasDemo/NodeCanvasKit-Info.plist";
+				PRODUCT_NAME = NodeCanvasKit;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C2FFA9111403729100DCBDD4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NodeCanvasDemo/NodeCanvasKit-Prefix.pch";
+				INFOPLIST_FILE = "NodeCanvasDemo/NodeCanvasKit-Info.plist";
+				PRODUCT_NAME = NodeCanvasKit;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C2FFA91F140372D800DCBDD4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DSTROOT = /tmp/NodeCanvasKit.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NodeCanvasKit/NodeCanvasKit-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		C2FFA920140372D800DCBDD4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DSTROOT = /tmp/NodeCanvasKit.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NodeCanvasKit/NodeCanvasKit-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C2FFA8E81403729000DCBDD4 /* Build configuration list for PBXProject "NodeCanvasKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C2FFA90D1403729100DCBDD4 /* Debug */,
+				C2FFA90E1403729100DCBDD4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C2FFA90F1403729100DCBDD4 /* Build configuration list for PBXNativeTarget "NodeCanvasDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C2FFA9101403729100DCBDD4 /* Debug */,
+				C2FFA9111403729100DCBDD4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C2FFA91E140372D800DCBDD4 /* Build configuration list for PBXNativeTarget "NodeCanvasKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C2FFA91F140372D800DCBDD4 /* Debug */,
+				C2FFA920140372D800DCBDD4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C2FFA8E51403729000DCBDD4 /* Project object */;
+}
