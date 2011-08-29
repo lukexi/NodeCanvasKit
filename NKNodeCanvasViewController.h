@@ -21,8 +21,12 @@
 @property (nonatomic, readonly) UIView *canvasView;
 
 - (IBAction)addNode:(id)sender;
+
 - (void)connectOutlet:(NKNodeOutletView *)outlet toInlet:(NKNodeInletView *)inlet;
 - (void)disconnectWire:(NKWireView *)wire;
+
+- (void)addNode:(NKNodeViewController *)node atCenterPoint:(CGPoint)centerPoint;
+- (void)removeNode:(NKNodeViewController *)node;
 
 @property (nonatomic, retain) NSMutableSet *nodeViewControllers;
 @property (nonatomic, retain) NSMutableSet *wires;

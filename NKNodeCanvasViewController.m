@@ -14,11 +14,9 @@
 
 - (void)commonInit;
 
-@property (nonatomic) CGPoint movingNodeOffset;
 @property (nonatomic, retain) NKWireView *draggingWire;
 @property (nonatomic, retain) NKWireView *selectedWire;
-
-- (void)addNode:(NKNodeViewController *)node atCenterPoint:(CGPoint)centerPoint;
+@property (nonatomic, retain) NKNodeViewController *selectedNode;
 
 @end
 
@@ -27,9 +25,18 @@
 @synthesize nodeViewControllers;
 @synthesize wires;
 @synthesize draggingWire, selectedWire;
-@synthesize movingNodeOffset;
+@synthesize selectedNode;
 
- // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
+- (void)dealloc 
+{
+    [selectedNode release];
+    [selectedWire release];
+    [draggingWire release];
+    [nodeViewControllers release];
+    [wires release];
+    [super dealloc];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil 
 {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) 
@@ -68,13 +75,6 @@
 - (void)viewDidLoad 
 {
     [super viewDidLoad];
-    
-    NKOutNodeViewController *outletNode = [NKOutNodeViewController outNode];
-    
-    CGPoint outletCenter = CGPointMake(self.view.center.x, 
-                                       self.canvasView.bounds.size.height - (outletNode.view.bounds.size.height/2) - 44);
-    
-    [self addNode:outletNode atCenterPoint:outletCenter];
 }
 
 - (IBAction)addNode:(id)sender
@@ -93,6 +93,15 @@
     [self.nodeViewControllers addObject:node];
     node.delegate = self;
     [self.canvasView addSubview:node.view];
+}
+
+- (void)node:(NKNodeViewController *)node wasTapped:(UITapGestureRecognizer *)gestureRecognizer
+{
+    [self becomeFirstResponder];
+    [[UIMenuController sharedMenuController] setTargetRect:node.view.frame inView:self.canvasView];
+    [[UIMenuController sharedMenuController] setMenuVisible:YES animated:YES];
+    self.selectedNode = node;
+    self.selectedWire = nil;
 }
 
 - (void)node:(NKNodeViewController *)node didMove:(UILongPressGestureRecognizer *)gestureRecognizer
@@ -152,6 +161,19 @@
     }];
 }
 
+- (void)removeNode:(NKNodeViewController *)node
+{
+    [[node retain] autorelease];
+    [node disconnectAllXLets];
+    [self.nodeViewControllers removeObject:node];
+    [UIView animateWithDuration:0.5 animations:^(void) {
+        node.view.alpha = 0;
+        node.view.transform = CGAffineTransformMakeScale(0.1, 0.1);
+    } completion:^(BOOL finished) {
+        [node.view removeFromSuperview];
+    }];
+}
+
 - (void)wireViewTapped:(NKWireView *)aWireView
 {
     [self becomeFirstResponder];
@@ -159,22 +181,34 @@
     CGFloat halfHeight = frame.size.height / 2;
     frame.origin.y += halfHeight;
     frame.size.height = halfHeight;
-    [[UIMenuController sharedMenuController] setTargetRect:frame inView:[self canvasView]];
+    [[UIMenuController sharedMenuController] setTargetRect:frame inView:self.canvasView];
     [[UIMenuController sharedMenuController] setMenuVisible:YES animated:YES];
-    self.selectedWire = nil;
-    for (NKWireView *wire in self.wires) 
-    {
-        if (wire == aWireView) 
-        {
-            self.selectedWire = wire;
-        }
-    }
+    
+    self.selectedNode = nil;
+    self.selectedWire = aWireView;
+//    for (NKWireView *wire in self.wires) 
+//    {
+//        if (wire == aWireView) 
+//        {
+//            self.selectedWire = wire;
+//        }
+//    }
 }
+
+
 
 - (void)delete:(id)sender
 {
-    [self disconnectWire:self.selectedWire];
-    self.selectedWire = nil;
+    if (self.selectedWire) 
+    {
+        [self disconnectWire:self.selectedWire];
+        self.selectedWire = nil;
+    }
+    else if (self.selectedNode)
+    {
+        [self removeNode:self.selectedNode];
+        self.selectedNode = nil;
+    }
 }
 
 - (BOOL)canPerformAction:(SEL)selector withSender:(id) sender 
@@ -215,13 +249,7 @@
 }
 
 
-- (void)dealloc 
-{
-    [draggingWire release];
-    [nodeViewControllers release];
-    [wires release];
-    [super dealloc];
-}
+
 
 
 @end

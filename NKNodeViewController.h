@@ -13,6 +13,7 @@
 @class NKNodeInletView;
 @protocol NKNodeViewControllerDelegate <NSObject>
 
+- (void)node:(NKNodeViewController *)node wasTapped:(UITapGestureRecognizer *)gestureRecognizer;
 - (void)node:(NKNodeViewController *)node didMove:(UILongPressGestureRecognizer *)gestureRecognizer;
 - (void)outlet:(NKNodeOutletView *)outlet didDrag:(UILongPressGestureRecognizer *)gestureRecognizer;
 
@@ -43,5 +44,7 @@
 
 - (void)moveToTouchAdjustedPoint:(CGPoint)point;
 - (NKNodeInletView *)inletForPointInSuperview:(CGPoint)point;
+
+- (void)disconnectAllXLets;
 
 @end

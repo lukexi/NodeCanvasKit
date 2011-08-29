@@ -19,7 +19,7 @@
 
 - (void)addConnection:(NKWireView *)connection;
 - (void)removeConnection:(NKWireView *)connection;
-- (void)removeAllConnections;
+- (void)disconnectAllConnections;
 
 - (void)updateConnections;
 

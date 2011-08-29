@@ -9,6 +9,7 @@
 #import "NKNodeViewController.h"
 #import "NKNodeInletView.h"
 #import "NKNodeOutletView.h"
+#import "NKWireView.h"
 
 @interface NKNodeViewController ()
 
@@ -86,6 +87,12 @@
     moveRecognizer.delegate = self;
     [self.view addGestureRecognizer:moveRecognizer];
     
+    UITapGestureRecognizer *tapRecognizer = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)] autorelease];
+    tapRecognizer.delegate = self;
+    [self.view addGestureRecognizer:tapRecognizer];
+    
+    [moveRecognizer requireGestureRecognizerToFail:tapRecognizer];
+    
     self.nameLabel.text = self.name;
     
     [self setupXLets];
@@ -103,6 +110,7 @@
 
 - (void)setupXLets
 {
+    // must inform any connected members that these XLets are going away, so this can only be called at startup right now!
     [self.XLets makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [self.XLets removeAllObjects];
     [self updateXLetContainerSizes];
@@ -193,6 +201,11 @@
     [self.delegate outlet:outlet didDrag:gestureRecognizer];
 }
 
+- (void)handleTap:(UITapGestureRecognizer *)gestureRecognizer
+{
+    [self.delegate node:self wasTapped:gestureRecognizer];
+}
+
 - (void)handleMove:(UILongPressGestureRecognizer *)gestureRecognizer
 {
     if (gestureRecognizer.state == UIGestureRecognizerStateBegan) 
@@ -223,6 +236,14 @@
         }
     }
     return nil;
+}
+
+- (void)disconnectAllXLets
+{
+    for (NKNodeXLetView *XLet in self.XLets) 
+    {
+        [XLet disconnectAllConnections];
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 

@@ -59,14 +59,21 @@
     [self.mutableConnections removeObject:connection];
 }
 
-- (void)removeAllConnections
+- (void)disconnectAllConnections
 {
+    // Use a copy, because we'll be mutating the array by disconnecting wires
+    NSArray *connectionsCopy = [[self.mutableConnections copy] autorelease];
+    for (NKWireView *connection in connectionsCopy) 
+    {
+        [connection disconnect];
+        [connection removeFromSuperview];
+    }
     [self.mutableConnections removeAllObjects];
 }
 
 - (NSArray *)connections
 {
-    return self.mutableConnections;
+    return [[self.mutableConnections copy] autorelease];
 }
 
 - (void)updateConnections

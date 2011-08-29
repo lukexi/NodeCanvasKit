@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "NKNodeCanvasViewController.h"
+#import "NKOutNodeViewController.h"
 
 @interface NodeCanvasDemoViewController : NKNodeCanvasViewController
+
+@property (nonatomic, retain) NKOutNodeViewController *outNodeViewController;
 
 @end
