@@ -6,18 +6,18 @@
 //  Copyright 2011 Eeoo. All rights reserved.
 //
 
-#import "NKNodeXLetView.h"
+#import "NKNodeXLet.h"
 #import "NKNodeViewController.h"
 #import "NKWireView.h"
 
-@interface NKNodeXLetView ()
+@interface NKNodeXLet ()
 
 @property (nonatomic, retain) NSMutableArray *mutableConnections;
 @property (nonatomic, assign, readwrite) NKNodeViewController *parentNode;
 
 @end
 
-@implementation NKNodeXLetView
+@implementation NKNodeXLet
 @synthesize mutableConnections;
 @synthesize parentNode;
 
@@ -29,7 +29,7 @@
 
 + (id)XLetForNode:(NKNodeViewController *)node withFrame:(CGRect)frame
 {
-    NKNodeXLetView *XLet = [[[[self class] alloc] initWithFrame:frame] autorelease];
+    NKNodeXLet *XLet = [[[[self class] alloc] initWithFrame:frame] autorelease];
     XLet.parentNode = node;
     return XLet;
 }

@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NKNodeXLetView.h"
+#import "NKNodeXLet.h"
 
-@interface NKNodeInletView : NKNodeXLetView
+@interface NKNodeInlet : NKNodeXLet
 
 @property (nonatomic, retain) UISlider *slider;
 @property (nonatomic, retain) UILabel *label;

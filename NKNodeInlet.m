@@ -6,11 +6,11 @@
 //  Copyright 2011 Eeoo. All rights reserved.
 //
 
-#import "NKNodeInletView.h"
+#import "NKNodeInlet.h"
 
 #define kNKNodeInletLeftMargin 5
 #define kNKNodeInletLabelColor [UIColor colorWithRed:0.822 green:1.000 blue:0.020 alpha:1.000]
-@implementation NKNodeInletView
+@implementation NKNodeInlet
 @synthesize slider;
 @synthesize label;
 

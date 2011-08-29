@@ -8,7 +8,7 @@
 
 #import "NKNodeCanvasViewController.h"
 #import "NKOutNodeViewController.h"
-#import "NKNodeOutletView.h"
+#import "NKNodeOutlet.h"
 
 @interface NKNodeCanvasViewController ()
 
@@ -85,6 +85,14 @@
     CGPoint nodeCenter = CGPointMake(self.canvasView.bounds.size.width / 2, 
                                      self.canvasView.bounds.size.height / 2);
     [self addNode:node atCenterPoint:nodeCenter];
+    node.view.transform = CGAffineTransformMakeScale(0.1, 0.1);
+    [UIView animateWithDuration:0.3 animations:^(void) {
+        node.view.transform = CGAffineTransformMakeScale(1.1, 1.1);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.3 animations:^(void) {
+            node.view.transform = CGAffineTransformIdentity;
+        }];
+    }];
 }
 
 - (void)addNode:(NKNodeViewController *)node atCenterPoint:(CGPoint)centerPoint
@@ -109,7 +117,7 @@
     [node moveToTouchAdjustedPoint:[gestureRecognizer locationInView:[self canvasView]]];
 }
 
-- (void)outlet:(NKNodeOutletView *)outlet didDrag:(UILongPressGestureRecognizer *)gestureRecognizer
+- (void)outlet:(NKNodeOutlet *)outlet didDrag:(UILongPressGestureRecognizer *)gestureRecognizer
 {
     CGPoint locationInView = [gestureRecognizer locationInView:[self canvasView]];
     switch (gestureRecognizer.state) {
@@ -123,7 +131,7 @@
         case UIGestureRecognizerStateEnded:
             for (NKNodeViewController *nodeViewController in self.nodeViewControllers) 
             {
-                NKNodeInletView *foundInlet = [nodeViewController inletForPointInSuperview:locationInView];
+                NKNodeInlet *foundInlet = [nodeViewController inletForPointInSuperview:locationInView];
                 if (foundInlet)
                 {
                     if (nodeViewController == outlet.parentNode) 
@@ -141,7 +149,7 @@
     }
 }
 
-- (void)connectOutlet:(NKNodeOutletView *)outlet toInlet:(NKNodeInletView *)inlet
+- (void)connectOutlet:(NKNodeOutlet *)outlet toInlet:(NKNodeInlet *)inlet
 {
     NKWireView *wire = [NKWireView wireFrom:outlet to:inlet delegate:self];
     [self.wires addObject:wire];

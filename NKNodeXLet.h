@@ -10,7 +10,7 @@
 
 @class NKNodeViewController;
 @class NKWireView;
-@interface NKNodeXLetView : UIView
+@interface NKNodeXLet : UIView
 
 + (id)XLetForNode:(NKNodeViewController *)node withFrame:(CGRect)frame;
 

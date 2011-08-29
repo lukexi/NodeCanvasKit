@@ -11,10 +11,20 @@
 #import "NKNodeViewController.h"
 #import "NKWireView.h"
 
+@class NKNodeCanvasViewController;
+@protocol NKNodeCanvasViewControllerDelegate <NSObject>
+
+- (void)nodeCanvas:(NKNodeCanvasViewController *)aNodeCanvas 
+   connectedOutlet:(NKNodeOutlet *)outlet 
+           toInlet:(NKNodeInlet *)inlet;
+
+- (void)nodeCanvas:(NKNodeCanvasViewController *)aNodeCanvas 
+disconnectedOutlet:(NKNodeOutlet *)outlet 
+         fromInlet:(NKNodeInlet *)inlet;
+
+@end
+
 @interface NKNodeCanvasViewController : UIViewController <NKNodeViewControllerDelegate, NKWireViewDelegate>
-{
-    
-}
 
 + (Class)nodeClass;
 
@@ -22,7 +32,7 @@
 
 - (IBAction)addNode:(id)sender;
 
-- (void)connectOutlet:(NKNodeOutletView *)outlet toInlet:(NKNodeInletView *)inlet;
+- (void)connectOutlet:(NKNodeOutlet *)outlet toInlet:(NKNodeInlet *)inlet;
 - (void)disconnectWire:(NKWireView *)wire;
 
 - (void)addNode:(NKNodeViewController *)node atCenterPoint:(CGPoint)centerPoint;

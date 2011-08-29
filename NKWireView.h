@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "NKNodeViewController.h"
-#import "NKNodeInletView.h"
-#import "NKNodeOutletView.h"
+#import "NKNodeInlet.h"
+#import "NKNodeOutlet.h"
 
 @class NKWireView;
 @protocol NKWireViewDelegate <NSObject>
@@ -22,13 +22,13 @@
 @interface NKWireView : UIView
 
 + (NKWireView *)wireWithDelegate:(UIViewController <NKWireViewDelegate> *)delegate;
-+ (NKWireView *)wireFrom:(NKNodeOutletView *)fromOutlet 
-                      to:(NKNodeInletView *)toInlet 
++ (NKWireView *)wireFrom:(NKNodeOutlet *)fromOutlet 
+                      to:(NKNodeInlet *)toInlet 
                 delegate:(UIViewController <NKWireViewDelegate> *)delegate;
 
 @property (nonatomic, assign) UIViewController <NKWireViewDelegate> *delegate;
-@property (nonatomic, retain) NKNodeOutletView *fromOutlet;
-@property (nonatomic, retain) NKNodeInletView *toInlet;
+@property (nonatomic, retain) NKNodeOutlet *fromOutlet;
+@property (nonatomic, retain) NKNodeInlet *toInlet;
 @property (nonatomic) CGPoint endPoint;
 
 - (void)update;

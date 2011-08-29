@@ -35,8 +35,8 @@
     return wire;
 }
 
-+ (NKWireView *)wireFrom:(NKNodeOutletView *)fromOutlet 
-                      to:(NKNodeInletView *)toInlet 
++ (NKWireView *)wireFrom:(NKNodeOutlet *)fromOutlet 
+                      to:(NKNodeInlet *)toInlet 
                 delegate:(UIViewController <NKWireViewDelegate> *)delegate;
 {
     NKWireView *wire = [self wireWithDelegate:delegate];

@@ -9,15 +9,15 @@
 /* Begin PBXBuildFile section */
 		C2E0D826140A6B47000B1F73 /* NKNodeBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D825140A6B47000B1F73 /* NKNodeBackgroundView.m */; };
 		C2E0D828140A6B4C000B1F73 /* NKNodeBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D825140A6B47000B1F73 /* NKNodeBackgroundView.m */; };
-		C2E0D82B140AF956000B1F73 /* NKNodeInletView.h in Headers */ = {isa = PBXBuildFile; fileRef = C2E0D829140AF956000B1F73 /* NKNodeInletView.h */; };
-		C2E0D82C140AF956000B1F73 /* NKNodeInletView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D82A140AF956000B1F73 /* NKNodeInletView.m */; };
-		C2E0D82D140AF956000B1F73 /* NKNodeInletView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D82A140AF956000B1F73 /* NKNodeInletView.m */; };
-		C2E0D830140B0797000B1F73 /* NKNodeOutletView.h in Headers */ = {isa = PBXBuildFile; fileRef = C2E0D82E140B0797000B1F73 /* NKNodeOutletView.h */; };
-		C2E0D831140B0797000B1F73 /* NKNodeOutletView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D82F140B0797000B1F73 /* NKNodeOutletView.m */; };
-		C2E0D832140B0797000B1F73 /* NKNodeOutletView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D82F140B0797000B1F73 /* NKNodeOutletView.m */; };
-		C2E0D841140B1EEB000B1F73 /* NKNodeXLetView.h in Headers */ = {isa = PBXBuildFile; fileRef = C2E0D83F140B1EEB000B1F73 /* NKNodeXLetView.h */; };
-		C2E0D842140B1EEB000B1F73 /* NKNodeXLetView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D840140B1EEB000B1F73 /* NKNodeXLetView.m */; };
-		C2E0D843140B1EEB000B1F73 /* NKNodeXLetView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D840140B1EEB000B1F73 /* NKNodeXLetView.m */; };
+		C2E0D82B140AF956000B1F73 /* NKNodeInlet.h in Headers */ = {isa = PBXBuildFile; fileRef = C2E0D829140AF956000B1F73 /* NKNodeInlet.h */; };
+		C2E0D82C140AF956000B1F73 /* NKNodeInlet.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D82A140AF956000B1F73 /* NKNodeInlet.m */; };
+		C2E0D82D140AF956000B1F73 /* NKNodeInlet.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D82A140AF956000B1F73 /* NKNodeInlet.m */; };
+		C2E0D830140B0797000B1F73 /* NKNodeOutlet.h in Headers */ = {isa = PBXBuildFile; fileRef = C2E0D82E140B0797000B1F73 /* NKNodeOutlet.h */; };
+		C2E0D831140B0797000B1F73 /* NKNodeOutlet.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D82F140B0797000B1F73 /* NKNodeOutlet.m */; };
+		C2E0D832140B0797000B1F73 /* NKNodeOutlet.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D82F140B0797000B1F73 /* NKNodeOutlet.m */; };
+		C2E0D841140B1EEB000B1F73 /* NKNodeXLet.h in Headers */ = {isa = PBXBuildFile; fileRef = C2E0D83F140B1EEB000B1F73 /* NKNodeXLet.h */; };
+		C2E0D842140B1EEB000B1F73 /* NKNodeXLet.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D840140B1EEB000B1F73 /* NKNodeXLet.m */; };
+		C2E0D843140B1EEB000B1F73 /* NKNodeXLet.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D840140B1EEB000B1F73 /* NKNodeXLet.m */; };
 		C2E0D846140B2C0B000B1F73 /* NKSpiralView.h in Headers */ = {isa = PBXBuildFile; fileRef = C2E0D844140B2C0B000B1F73 /* NKSpiralView.h */; };
 		C2E0D847140B2C0B000B1F73 /* NKSpiralView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D845140B2C0B000B1F73 /* NKSpiralView.m */; };
 		C2E0D848140B2C0B000B1F73 /* NKSpiralView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D845140B2C0B000B1F73 /* NKSpiralView.m */; };
@@ -57,12 +57,12 @@
 /* Begin PBXFileReference section */
 		C2E0D824140A6B46000B1F73 /* NKNodeBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKNodeBackgroundView.h; sourceTree = "<group>"; };
 		C2E0D825140A6B47000B1F73 /* NKNodeBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKNodeBackgroundView.m; sourceTree = "<group>"; };
-		C2E0D829140AF956000B1F73 /* NKNodeInletView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKNodeInletView.h; sourceTree = "<group>"; };
-		C2E0D82A140AF956000B1F73 /* NKNodeInletView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKNodeInletView.m; sourceTree = "<group>"; };
-		C2E0D82E140B0797000B1F73 /* NKNodeOutletView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKNodeOutletView.h; sourceTree = "<group>"; };
-		C2E0D82F140B0797000B1F73 /* NKNodeOutletView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKNodeOutletView.m; sourceTree = "<group>"; };
-		C2E0D83F140B1EEB000B1F73 /* NKNodeXLetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKNodeXLetView.h; sourceTree = "<group>"; };
-		C2E0D840140B1EEB000B1F73 /* NKNodeXLetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKNodeXLetView.m; sourceTree = "<group>"; };
+		C2E0D829140AF956000B1F73 /* NKNodeInlet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKNodeInlet.h; sourceTree = "<group>"; };
+		C2E0D82A140AF956000B1F73 /* NKNodeInlet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKNodeInlet.m; sourceTree = "<group>"; };
+		C2E0D82E140B0797000B1F73 /* NKNodeOutlet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKNodeOutlet.h; sourceTree = "<group>"; };
+		C2E0D82F140B0797000B1F73 /* NKNodeOutlet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKNodeOutlet.m; sourceTree = "<group>"; };
+		C2E0D83F140B1EEB000B1F73 /* NKNodeXLet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKNodeXLet.h; sourceTree = "<group>"; };
+		C2E0D840140B1EEB000B1F73 /* NKNodeXLet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKNodeXLet.m; sourceTree = "<group>"; };
 		C2E0D844140B2C0B000B1F73 /* NKSpiralView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKSpiralView.h; sourceTree = "<group>"; };
 		C2E0D845140B2C0B000B1F73 /* NKSpiralView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKSpiralView.m; sourceTree = "<group>"; };
 		C2E0D84E140B3214000B1F73 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -146,12 +146,12 @@
 				C2FFA9261403731F00DCBDD4 /* NKNodeViewController.xib */,
 				C2E0D824140A6B46000B1F73 /* NKNodeBackgroundView.h */,
 				C2E0D825140A6B47000B1F73 /* NKNodeBackgroundView.m */,
-				C2E0D83F140B1EEB000B1F73 /* NKNodeXLetView.h */,
-				C2E0D840140B1EEB000B1F73 /* NKNodeXLetView.m */,
-				C2E0D829140AF956000B1F73 /* NKNodeInletView.h */,
-				C2E0D82A140AF956000B1F73 /* NKNodeInletView.m */,
-				C2E0D82E140B0797000B1F73 /* NKNodeOutletView.h */,
-				C2E0D82F140B0797000B1F73 /* NKNodeOutletView.m */,
+				C2E0D83F140B1EEB000B1F73 /* NKNodeXLet.h */,
+				C2E0D840140B1EEB000B1F73 /* NKNodeXLet.m */,
+				C2E0D829140AF956000B1F73 /* NKNodeInlet.h */,
+				C2E0D82A140AF956000B1F73 /* NKNodeInlet.m */,
+				C2E0D82E140B0797000B1F73 /* NKNodeOutlet.h */,
+				C2E0D82F140B0797000B1F73 /* NKNodeOutlet.m */,
 			);
 			name = Nodes;
 			sourceTree = "<group>";
@@ -255,9 +255,9 @@
 				C2FFA92A1403731F00DCBDD4 /* NKNodeCanvasViewController.h in Headers */,
 				C2FFA92E1403731F00DCBDD4 /* NKNodeViewController.h in Headers */,
 				C2FFA9321403731F00DCBDD4 /* NKWireView.h in Headers */,
-				C2E0D82B140AF956000B1F73 /* NKNodeInletView.h in Headers */,
-				C2E0D830140B0797000B1F73 /* NKNodeOutletView.h in Headers */,
-				C2E0D841140B1EEB000B1F73 /* NKNodeXLetView.h in Headers */,
+				C2E0D82B140AF956000B1F73 /* NKNodeInlet.h in Headers */,
+				C2E0D830140B0797000B1F73 /* NKNodeOutlet.h in Headers */,
+				C2E0D841140B1EEB000B1F73 /* NKNodeXLet.h in Headers */,
 				C2E0D846140B2C0B000B1F73 /* NKSpiralView.h in Headers */,
 				C2E0D855140B3316000B1F73 /* NKOutNodeViewController.h in Headers */,
 				C2E0D85B140B37A3000B1F73 /* NKOutNodeInletView.h in Headers */,
@@ -356,9 +356,9 @@
 				C2FFA92F1403731F00DCBDD4 /* NKNodeViewController.m in Sources */,
 				C2FFA9331403731F00DCBDD4 /* NKWireView.m in Sources */,
 				C2E0D826140A6B47000B1F73 /* NKNodeBackgroundView.m in Sources */,
-				C2E0D82C140AF956000B1F73 /* NKNodeInletView.m in Sources */,
-				C2E0D831140B0797000B1F73 /* NKNodeOutletView.m in Sources */,
-				C2E0D842140B1EEB000B1F73 /* NKNodeXLetView.m in Sources */,
+				C2E0D82C140AF956000B1F73 /* NKNodeInlet.m in Sources */,
+				C2E0D831140B0797000B1F73 /* NKNodeOutlet.m in Sources */,
+				C2E0D842140B1EEB000B1F73 /* NKNodeXLet.m in Sources */,
 				C2E0D847140B2C0B000B1F73 /* NKSpiralView.m in Sources */,
 				C2E0D856140B3316000B1F73 /* NKOutNodeViewController.m in Sources */,
 				C2E0D85C140B37A3000B1F73 /* NKOutNodeInletView.m in Sources */,
@@ -374,9 +374,9 @@
 				C2FFA9301403731F00DCBDD4 /* NKNodeViewController.m in Sources */,
 				C2FFA9341403731F00DCBDD4 /* NKWireView.m in Sources */,
 				C2E0D828140A6B4C000B1F73 /* NKNodeBackgroundView.m in Sources */,
-				C2E0D82D140AF956000B1F73 /* NKNodeInletView.m in Sources */,
-				C2E0D832140B0797000B1F73 /* NKNodeOutletView.m in Sources */,
-				C2E0D843140B1EEB000B1F73 /* NKNodeXLetView.m in Sources */,
+				C2E0D82D140AF956000B1F73 /* NKNodeInlet.m in Sources */,
+				C2E0D832140B0797000B1F73 /* NKNodeOutlet.m in Sources */,
+				C2E0D843140B1EEB000B1F73 /* NKNodeXLet.m in Sources */,
 				C2E0D848140B2C0B000B1F73 /* NKSpiralView.m in Sources */,
 				C2E0D857140B3316000B1F73 /* NKOutNodeViewController.m in Sources */,
 				C2E0D85D140B37A3000B1F73 /* NKOutNodeInletView.m in Sources */,

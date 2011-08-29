@@ -6,8 +6,8 @@
 //  Copyright 2011 Eeoo. All rights reserved.
 //
 
-#import "NKNodeInletView.h"
+#import "NKNodeInlet.h"
 
-@interface NKOutNodeInletView : NKNodeInletView
+@interface NKOutNodeInletView : NKNodeInlet
 
 @end

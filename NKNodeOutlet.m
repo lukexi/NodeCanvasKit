@@ -6,9 +6,9 @@
 //  Copyright 2011 Eeoo. All rights reserved.
 //
 
-#import "NKNodeOutletView.h"
+#import "NKNodeOutlet.h"
 
-@implementation NKNodeOutletView
+@implementation NKNodeOutlet
 
 - (id)initWithFrame:(CGRect)frame
 {

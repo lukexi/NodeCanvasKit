@@ -7,8 +7,8 @@
 //
 
 #import "NKNodeViewController.h"
-#import "NKNodeInletView.h"
-#import "NKNodeOutletView.h"
+#import "NKNodeInlet.h"
+#import "NKNodeOutlet.h"
 #import "NKWireView.h"
 
 @interface NKNodeViewController ()
@@ -87,7 +87,8 @@
     moveRecognizer.delegate = self;
     [self.view addGestureRecognizer:moveRecognizer];
     
-    UITapGestureRecognizer *tapRecognizer = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)] autorelease];
+    UITapGestureRecognizer *tapRecognizer = [[[UITapGestureRecognizer alloc] initWithTarget:self 
+                                                                                     action:@selector(handleTap:)] autorelease];
     tapRecognizer.delegate = self;
     [self.view addGestureRecognizer:tapRecognizer];
     
@@ -145,7 +146,7 @@
     {
         CGRect inletRect = CGRectMake(0, index * [[self class] nodeXLetHeight], 
                                       self.inletsView.bounds.size.width, [[self class] nodeXLetHeight]);
-        NKNodeInletView *inletView = [[[self class] inletViewClass] XLetForNode:self withFrame:inletRect];
+        NKNodeInlet *inletView = [[[self class] inletViewClass] XLetForNode:self withFrame:inletRect];
         inletView.label.text = inletName;
         [self.inletsView addSubview:inletView];
         [self.inletViews addObject:inletView];
@@ -167,7 +168,7 @@
     {
         CGRect outletRect = CGRectMake(0, index * [[self class] nodeXLetHeight] + yCenteringOffset, 
                                        self.outletsView.bounds.size.width, [[self class] nodeXLetHeight]);
-        NKNodeOutletView *outletView = [[[self class] outletViewClass] XLetForNode:self withFrame:outletRect];
+        NKNodeOutlet *outletView = [[[self class] outletViewClass] XLetForNode:self withFrame:outletRect];
         [self.outletsView addSubview:outletView];
         [self.outletViews addObject:outletView];
         [self.XLets addObject:outletView];
@@ -182,12 +183,12 @@
 
 + (Class)inletViewClass
 {
-    return [NKNodeInletView class];
+    return [NKNodeInlet class];
 }
 
 + (Class)outletViewClass
 {
-    return [NKNodeOutletView class];
+    return [NKNodeOutlet class];
 }
 
 + (CGFloat)nodeXLetHeight
@@ -197,7 +198,7 @@
 
 - (void)handleOutletDrag:(UILongPressGestureRecognizer *)gestureRecognizer
 {
-    NKNodeOutletView *outlet = (NKNodeOutletView *)[gestureRecognizer view];
+    NKNodeOutlet *outlet = (NKNodeOutlet *)[gestureRecognizer view];
     [self.delegate outlet:outlet didDrag:gestureRecognizer];
 }
 
@@ -225,10 +226,10 @@
     self.view.center = CGPointMake(point.x + self.movingOffset.x, point.y + self.movingOffset.y);
 }
 
-- (NKNodeInletView *)inletForPointInSuperview:(CGPoint)point
+- (NKNodeInlet *)inletForPointInSuperview:(CGPoint)point
 {
     CGPoint localPoint = [self.inletsView convertPoint:point fromView:self.view.superview];
-    for (NKNodeInletView *inlet in self.inletViews) 
+    for (NKNodeInlet *inlet in self.inletViews) 
     {
         if (CGRectContainsPoint(inlet.frame, localPoint)) 
         {
@@ -240,7 +241,7 @@
 
 - (void)disconnectAllXLets
 {
-    for (NKNodeXLetView *XLet in self.XLets) 
+    for (NKNodeXLet *XLet in self.XLets) 
     {
         [XLet disconnectAllConnections];
     }
