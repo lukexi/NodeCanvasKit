@@ -9,7 +9,7 @@
 #import "NKNodeInletView.h"
 
 #define kNKNodeInletLeftMargin 5
-
+#define kNKNodeInletLabelColor [UIColor colorWithRed:0.822 green:1.000 blue:0.020 alpha:1.000]
 @implementation NKNodeInletView
 @synthesize slider;
 @synthesize label;
@@ -25,17 +25,32 @@
     self = [super initWithFrame:frame];
     if (self) 
     {
-        CGFloat thirds = floor((frame.size.width - kNKNodeInletLeftMargin) / 3);
-        self.slider = [[[UISlider alloc] initWithFrame:CGRectMake(kNKNodeInletLeftMargin, 0, 2 * thirds, frame.size.height)] autorelease];
-        self.slider.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleRightMargin;
-        self.label = [[[UILabel alloc] initWithFrame:CGRectMake(kNKNodeInletLeftMargin + 2 * thirds, 0, 1 * thirds, frame.size.height)] autorelease];
-        self.label.backgroundColor = [UIColor clearColor];
-        self.label.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleLeftMargin;
-        
-        [self addSubview:self.slider];
-        [self addSubview:self.label];
+        [self setupControls];
     }
     return self;
+}
+
+- (void)setupControls
+{
+    CGFloat thirds = floor((self.frame.size.width - kNKNodeInletLeftMargin) / 3);
+    self.slider = [[[UISlider alloc] initWithFrame:CGRectMake(kNKNodeInletLeftMargin, 
+                                                              0, 
+                                                              2 * thirds, 
+                                                              self.frame.size.height)] autorelease];
+    self.slider.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleRightMargin;
+    self.label = [[[UILabel alloc] initWithFrame:CGRectMake(kNKNodeInletLeftMargin + 2 * thirds, 
+                                                            0, 
+                                                            1 * thirds, 
+                                                            self.frame.size.height)] autorelease];
+    self.label.backgroundColor = [UIColor clearColor];
+    self.label.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleLeftMargin;
+    self.label.font = [UIFont boldSystemFontOfSize:11];
+    self.label.textColor = kNKNodeInletLabelColor;
+    self.label.shadowColor = [UIColor blackColor];
+    self.label.shadowOffset = CGSizeMake(0, -1);
+    
+    [self addSubview:self.slider];
+    [self addSubview:self.label];
 }
 
 /*

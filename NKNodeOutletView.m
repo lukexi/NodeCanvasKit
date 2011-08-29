@@ -23,8 +23,12 @@
 - (void)drawRect:(CGRect)rect
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
+    CGRect insetRect = CGRectInset(self.bounds, 5, 5);
     [[UIColor greenColor] set];
-    CGContextFillEllipseInRect(context, self.bounds);
+    CGContextFillEllipseInRect(context, insetRect);
+    [[UIColor blackColor] set];
+    CGContextSetLineWidth(context, 2);
+    CGContextStrokeEllipseInRect(context, insetRect);
 }
 
 

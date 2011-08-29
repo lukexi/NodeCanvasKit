@@ -10,8 +10,6 @@
 #import "NKNodeInletView.h"
 #import "NKNodeOutletView.h"
 
-#define kNKNodeXLetHeight 44
-
 @interface NKNodeViewController ()
 
 @property (nonatomic) CGPoint movingOffset;
@@ -21,6 +19,7 @@
 @property (nonatomic, retain) NSMutableArray *XLets;
 
 - (void)setupXLets;
+- (void)updateXLetContainerSizes;
 - (void)setupInlets;
 - (void)setupOutlets;
 
@@ -54,19 +53,19 @@
     [super dealloc];
 }
 
-+ (NKNodeViewController *)node
++ (id)node
 {
     return [self nodeWithName:nil inletNames:nil];
 }
 
-+ (NKNodeViewController *)nodeWithName:(NSString *)name inletNames:(NSArray *)inletNames
++ (id)nodeWithName:(NSString *)name inletNames:(NSArray *)inletNames
 {
     return [self nodeWithName:name inletNames:inletNames outletNames:[NSArray arrayWithObject:@"Out"]];
 }
 
-+ (NKNodeViewController *)nodeWithName:(NSString *)name inletNames:(NSArray *)inletNames outletNames:(NSArray *)outletNames
++ (id)nodeWithName:(NSString *)name inletNames:(NSArray *)inletNames outletNames:(NSArray *)outletNames
 {
-    NKNodeViewController *nodeViewController = [[[self alloc] initWithNibName:@"NKNodeViewController" bundle:nil] autorelease];
+    NKNodeViewController *nodeViewController = [[[self alloc] initWithNibName:nil bundle:nil] autorelease];
     nodeViewController.name = name;
     nodeViewController.inletNames = inletNames;
     nodeViewController.outletNames = outletNames;
@@ -84,6 +83,7 @@
     UILongPressGestureRecognizer *moveRecognizer = [[[UILongPressGestureRecognizer alloc] initWithTarget:self 
                                                                                                   action:@selector(handleMove:)] autorelease];
     moveRecognizer.minimumPressDuration = 0;
+    moveRecognizer.delegate = self;
     [self.view addGestureRecognizer:moveRecognizer];
     
     self.nameLabel.text = self.name;
@@ -91,12 +91,41 @@
     [self setupXLets];
 }
 
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    // Not sure if this is the best way to do this...
+    if ([[touch view] isKindOfClass:[UIControl class]]) 
+    {
+        return NO;
+    }
+    return YES;
+}
+
 - (void)setupXLets
 {
     [self.XLets makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [self.XLets removeAllObjects];
+    [self updateXLetContainerSizes];
     [self setupInlets];
     [self setupOutlets];
+}
+
+- (void)updateXLetContainerSizes
+{
+    NSUInteger maxXLets = MAX([self.inletNames count], [self.outletNames count]);
+    CGFloat XLetHeight = maxXLets * [[self class] nodeXLetHeight];
+    
+    CGRect inletsFrame = self.inletsView.frame;
+    inletsFrame.size.height = XLetHeight;
+    self.inletsView.frame = inletsFrame;
+    
+    CGRect outletsFrame = self.outletsView.frame;
+    outletsFrame.size.height = XLetHeight;
+    self.outletsView.frame = outletsFrame;
+    
+    CGRect viewFrame = self.view.frame;
+    viewFrame.size.height = self.headerView.frame.size.height + XLetHeight;
+    self.view.frame = viewFrame;
 }
 
 - (void)setupInlets
@@ -106,9 +135,9 @@
     NSUInteger index = 0;
     for (NSString *inletName in self.inletNames) 
     {
-        CGRect inletRect = CGRectMake(0, index * kNKNodeXLetHeight, 
-                                      self.inletsView.bounds.size.width, kNKNodeXLetHeight);
-        NKNodeInletView *inletView = [NKNodeInletView XLetForNode:self withFrame:inletRect];
+        CGRect inletRect = CGRectMake(0, index * [[self class] nodeXLetHeight], 
+                                      self.inletsView.bounds.size.width, [[self class] nodeXLetHeight]);
+        NKNodeInletView *inletView = [[[self class] inletViewClass] XLetForNode:self withFrame:inletRect];
         inletView.label.text = inletName;
         [self.inletsView addSubview:inletView];
         [self.inletViews addObject:inletView];
@@ -121,12 +150,16 @@
 {
     [self.outletViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [self.outletViews removeAllObjects];
+    
+    CGFloat totalOutletHeight = [self.outletNames count] * [[self class] nodeXLetHeight];
+    CGFloat yCenteringOffset = floor((self.outletsView.frame.size.height - totalOutletHeight) / 2);
+    
     NSUInteger index = 0;
     for (NSString *outletName in self.outletNames) 
     {
-        CGRect outletRect = CGRectMake(0, index * kNKNodeXLetHeight, 
-                                       self.outletsView.bounds.size.width, kNKNodeXLetHeight);
-        NKNodeOutletView *outletView = [NKNodeOutletView XLetForNode:self withFrame:outletRect];
+        CGRect outletRect = CGRectMake(0, index * [[self class] nodeXLetHeight] + yCenteringOffset, 
+                                       self.outletsView.bounds.size.width, [[self class] nodeXLetHeight]);
+        NKNodeOutletView *outletView = [[[self class] outletViewClass] XLetForNode:self withFrame:outletRect];
         [self.outletsView addSubview:outletView];
         [self.outletViews addObject:outletView];
         [self.XLets addObject:outletView];
@@ -137,6 +170,21 @@
         [outletView addGestureRecognizer:outletRecognizer];
         index++;
     }
+}
+
++ (Class)inletViewClass
+{
+    return [NKNodeInletView class];
+}
+
++ (Class)outletViewClass
+{
+    return [NKNodeOutletView class];
+}
+
++ (CGFloat)nodeXLetHeight
+{
+    return 44;
 }
 
 - (void)handleOutletDrag:(UILongPressGestureRecognizer *)gestureRecognizer

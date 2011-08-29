@@ -18,11 +18,16 @@
 
 @end
 
-@interface NKNodeViewController : UIViewController
+@interface NKNodeViewController : UIViewController <UIGestureRecognizerDelegate>
 
-+ (NKNodeViewController *)node;
-+ (NKNodeViewController *)nodeWithName:(NSString *)name inletNames:(NSArray *)inletNames;
-+ (NKNodeViewController *)nodeWithName:(NSString *)name inletNames:(NSArray *)inletNames outletNames:(NSArray *)outletNames;
++ (id)node;
++ (id)nodeWithName:(NSString *)name inletNames:(NSArray *)inletNames;
++ (id)nodeWithName:(NSString *)name inletNames:(NSArray *)inletNames outletNames:(NSArray *)outletNames;
+
+// Override if desired
++ (CGFloat)nodeXLetHeight;
++ (Class)inletViewClass;
++ (Class)outletViewClass;
 
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSArray *inletNames;
@@ -33,8 +38,6 @@
 @property (nonatomic, retain) IBOutlet UILabel *nameLabel;
 @property (nonatomic, retain) IBOutlet UIView *inletsView;
 @property (nonatomic, retain) IBOutlet UIView *outletsView;
-
-+ (NKNodeViewController *)node;
 
 @property (nonatomic, assign) id <NKNodeViewControllerDelegate> delegate;
 

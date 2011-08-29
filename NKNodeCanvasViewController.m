@@ -7,6 +7,8 @@
 //
 
 #import "NKNodeCanvasViewController.h"
+#import "NKOutNodeViewController.h"
+#import "NKNodeOutletView.h"
 
 @interface NKNodeCanvasViewController ()
 
@@ -15,6 +17,8 @@
 @property (nonatomic) CGPoint movingNodeOffset;
 @property (nonatomic, retain) NKWireView *draggingWire;
 @property (nonatomic, retain) NKWireView *selectedWire;
+
+- (void)addNode:(NKNodeViewController *)node atCenterPoint:(CGPoint)centerPoint;
 
 @end
 
@@ -64,24 +68,31 @@
 - (void)viewDidLoad 
 {
     [super viewDidLoad];
+    
+    NKOutNodeViewController *outletNode = [NKOutNodeViewController outNode];
+    
+    CGPoint outletCenter = CGPointMake(self.view.center.x, 
+                                       self.canvasView.bounds.size.height - (outletNode.view.bounds.size.height/2) - 44);
+    
+    [self addNode:outletNode atCenterPoint:outletCenter];
 }
 
 - (IBAction)addNode:(id)sender
 {
     NKNodeViewController *node = [[[self class] nodeClass] nodeWithName:@"SinOsc" 
-                                                             inletNames:[NSArray arrayWithObjects:@"Freq", @"Phase", nil]];
+                                                             inletNames:[NSArray arrayWithObjects:@"Freq", @"Phase", @"Width", nil]];
+    
+    CGPoint nodeCenter = CGPointMake(self.canvasView.bounds.size.width / 2, 
+                                     self.canvasView.bounds.size.height / 2);
+    [self addNode:node atCenterPoint:nodeCenter];
+}
+
+- (void)addNode:(NKNodeViewController *)node atCenterPoint:(CGPoint)centerPoint
+{
+    node.view.center = centerPoint;
     [self.nodeViewControllers addObject:node];
     node.delegate = self;
-    
-    node.view.backgroundColor = [UIColor colorWithHue:((arc4random() % 100) / 100.0) 
-                                           saturation:0.9 
-                                           brightness:0.9 
-                                                alpha:1.0];
-    
-    node.view.center = CGPointMake([self canvasView].bounds.size.width / 2, 
-                                   [self canvasView].bounds.size.height / 2);
-    
-    [[self canvasView] addSubview:node.view];
+    [self.canvasView addSubview:node.view];
 }
 
 - (void)node:(NKNodeViewController *)node didMove:(UILongPressGestureRecognizer *)gestureRecognizer
@@ -106,6 +117,10 @@
                 NKNodeInletView *foundInlet = [nodeViewController inletForPointInSuperview:locationInView];
                 if (foundInlet)
                 {
+                    if (nodeViewController == outlet.parentNode) 
+                    {
+                        NSLog(@"Self-feedback connections are not yet supported.");
+                    }
                     [self connectOutlet:outlet toInlet:foundInlet];
                 }
             }

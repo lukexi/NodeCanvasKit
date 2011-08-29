@@ -18,6 +18,18 @@
 		C2E0D841140B1EEB000B1F73 /* NKNodeXLetView.h in Headers */ = {isa = PBXBuildFile; fileRef = C2E0D83F140B1EEB000B1F73 /* NKNodeXLetView.h */; };
 		C2E0D842140B1EEB000B1F73 /* NKNodeXLetView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D840140B1EEB000B1F73 /* NKNodeXLetView.m */; };
 		C2E0D843140B1EEB000B1F73 /* NKNodeXLetView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D840140B1EEB000B1F73 /* NKNodeXLetView.m */; };
+		C2E0D846140B2C0B000B1F73 /* NKSpiralView.h in Headers */ = {isa = PBXBuildFile; fileRef = C2E0D844140B2C0B000B1F73 /* NKSpiralView.h */; };
+		C2E0D847140B2C0B000B1F73 /* NKSpiralView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D845140B2C0B000B1F73 /* NKSpiralView.m */; };
+		C2E0D848140B2C0B000B1F73 /* NKSpiralView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D845140B2C0B000B1F73 /* NKSpiralView.m */; };
+		C2E0D84F140B3214000B1F73 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2E0D84E140B3214000B1F73 /* QuartzCore.framework */; };
+		C2E0D851140B321B000B1F73 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2E0D850140B321A000B1F73 /* QuartzCore.framework */; };
+		C2E0D855140B3316000B1F73 /* NKOutNodeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C2E0D852140B3313000B1F73 /* NKOutNodeViewController.h */; };
+		C2E0D856140B3316000B1F73 /* NKOutNodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D853140B3314000B1F73 /* NKOutNodeViewController.m */; };
+		C2E0D857140B3316000B1F73 /* NKOutNodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D853140B3314000B1F73 /* NKOutNodeViewController.m */; };
+		C2E0D858140B3316000B1F73 /* NKOutNodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2E0D854140B3315000B1F73 /* NKOutNodeViewController.xib */; };
+		C2E0D85B140B37A3000B1F73 /* NKOutNodeInletView.h in Headers */ = {isa = PBXBuildFile; fileRef = C2E0D859140B37A2000B1F73 /* NKOutNodeInletView.h */; };
+		C2E0D85C140B37A3000B1F73 /* NKOutNodeInletView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D85A140B37A3000B1F73 /* NKOutNodeInletView.m */; };
+		C2E0D85D140B37A3000B1F73 /* NKOutNodeInletView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D85A140B37A3000B1F73 /* NKOutNodeInletView.m */; };
 		C2FFA8F31403729000DCBDD4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2FFA8F21403729000DCBDD4 /* UIKit.framework */; };
 		C2FFA8F51403729000DCBDD4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2FFA8F41403729000DCBDD4 /* Foundation.framework */; };
 		C2FFA8F71403729000DCBDD4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2FFA8F61403729000DCBDD4 /* CoreGraphics.framework */; };
@@ -51,6 +63,15 @@
 		C2E0D82F140B0797000B1F73 /* NKNodeOutletView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKNodeOutletView.m; sourceTree = "<group>"; };
 		C2E0D83F140B1EEB000B1F73 /* NKNodeXLetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKNodeXLetView.h; sourceTree = "<group>"; };
 		C2E0D840140B1EEB000B1F73 /* NKNodeXLetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKNodeXLetView.m; sourceTree = "<group>"; };
+		C2E0D844140B2C0B000B1F73 /* NKSpiralView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKSpiralView.h; sourceTree = "<group>"; };
+		C2E0D845140B2C0B000B1F73 /* NKSpiralView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKSpiralView.m; sourceTree = "<group>"; };
+		C2E0D84E140B3214000B1F73 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C2E0D850140B321A000B1F73 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C2E0D852140B3313000B1F73 /* NKOutNodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKOutNodeViewController.h; sourceTree = "<group>"; };
+		C2E0D853140B3314000B1F73 /* NKOutNodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKOutNodeViewController.m; sourceTree = "<group>"; };
+		C2E0D854140B3315000B1F73 /* NKOutNodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NKOutNodeViewController.xib; sourceTree = "<group>"; };
+		C2E0D859140B37A2000B1F73 /* NKOutNodeInletView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKOutNodeInletView.h; sourceTree = "<group>"; };
+		C2E0D85A140B37A3000B1F73 /* NKOutNodeInletView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKOutNodeInletView.m; sourceTree = "<group>"; };
 		C2FFA8EE1403729000DCBDD4 /* NodeCanvasKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NodeCanvasKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2FFA8F21403729000DCBDD4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C2FFA8F41403729000DCBDD4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -84,6 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2E0D84F140B3214000B1F73 /* QuartzCore.framework in Frameworks */,
 				C2FFA8F31403729000DCBDD4 /* UIKit.framework in Frameworks */,
 				C2FFA8F51403729000DCBDD4 /* Foundation.framework in Frameworks */,
 				C2FFA8F71403729000DCBDD4 /* CoreGraphics.framework in Frameworks */,
@@ -94,6 +116,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2E0D851140B321B000B1F73 /* QuartzCore.framework in Frameworks */,
 				C2FFA917140372D800DCBDD4 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -101,6 +124,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C2E0D85E140B37B3000B1F73 /* Master Out Node */ = {
+			isa = PBXGroup;
+			children = (
+				C2E0D859140B37A2000B1F73 /* NKOutNodeInletView.h */,
+				C2E0D85A140B37A3000B1F73 /* NKOutNodeInletView.m */,
+				C2E0D852140B3313000B1F73 /* NKOutNodeViewController.h */,
+				C2E0D853140B3314000B1F73 /* NKOutNodeViewController.m */,
+				C2E0D854140B3315000B1F73 /* NKOutNodeViewController.xib */,
+				C2E0D844140B2C0B000B1F73 /* NKSpiralView.h */,
+				C2E0D845140B2C0B000B1F73 /* NKSpiralView.m */,
+			);
+			name = "Master Out Node";
+			sourceTree = "<group>";
+		};
+		C2E0D85F140B3D6D000B1F73 /* Nodes */ = {
+			isa = PBXGroup;
+			children = (
+				C2FFA9241403731F00DCBDD4 /* NKNodeViewController.h */,
+				C2FFA9251403731F00DCBDD4 /* NKNodeViewController.m */,
+				C2FFA9261403731F00DCBDD4 /* NKNodeViewController.xib */,
+				C2E0D824140A6B46000B1F73 /* NKNodeBackgroundView.h */,
+				C2E0D825140A6B47000B1F73 /* NKNodeBackgroundView.m */,
+				C2E0D83F140B1EEB000B1F73 /* NKNodeXLetView.h */,
+				C2E0D840140B1EEB000B1F73 /* NKNodeXLetView.m */,
+				C2E0D829140AF956000B1F73 /* NKNodeInletView.h */,
+				C2E0D82A140AF956000B1F73 /* NKNodeInletView.m */,
+				C2E0D82E140B0797000B1F73 /* NKNodeOutletView.h */,
+				C2E0D82F140B0797000B1F73 /* NKNodeOutletView.m */,
+			);
+			name = Nodes;
+			sourceTree = "<group>";
+		};
 		C2FFA8E31403729000DCBDD4 = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +179,8 @@
 		C2FFA8F11403729000DCBDD4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C2E0D850140B321A000B1F73 /* QuartzCore.framework */,
+				C2E0D84E140B3214000B1F73 /* QuartzCore.framework */,
 				C2FFA8F21403729000DCBDD4 /* UIKit.framework */,
 				C2FFA8F41403729000DCBDD4 /* Foundation.framework */,
 				C2FFA8F61403729000DCBDD4 /* CoreGraphics.framework */,
@@ -180,19 +237,10 @@
 				C2FFA9211403731F00DCBDD4 /* NKNodeCanvasViewController.h */,
 				C2FFA9221403731F00DCBDD4 /* NKNodeCanvasViewController.m */,
 				C2FFA9231403731F00DCBDD4 /* NKNodeCanvasViewController.xib */,
-				C2FFA9241403731F00DCBDD4 /* NKNodeViewController.h */,
-				C2FFA9251403731F00DCBDD4 /* NKNodeViewController.m */,
-				C2FFA9261403731F00DCBDD4 /* NKNodeViewController.xib */,
-				C2E0D824140A6B46000B1F73 /* NKNodeBackgroundView.h */,
-				C2E0D825140A6B47000B1F73 /* NKNodeBackgroundView.m */,
-				C2E0D83F140B1EEB000B1F73 /* NKNodeXLetView.h */,
-				C2E0D840140B1EEB000B1F73 /* NKNodeXLetView.m */,
-				C2E0D829140AF956000B1F73 /* NKNodeInletView.h */,
-				C2E0D82A140AF956000B1F73 /* NKNodeInletView.m */,
-				C2E0D82E140B0797000B1F73 /* NKNodeOutletView.h */,
-				C2E0D82F140B0797000B1F73 /* NKNodeOutletView.m */,
 				C2FFA9271403731F00DCBDD4 /* NKWireView.h */,
 				C2FFA9281403731F00DCBDD4 /* NKWireView.m */,
+				C2E0D85F140B3D6D000B1F73 /* Nodes */,
+				C2E0D85E140B37B3000B1F73 /* Master Out Node */,
 			);
 			name = NodeCanvasKit;
 			sourceTree = "<group>";
@@ -210,6 +258,9 @@
 				C2E0D82B140AF956000B1F73 /* NKNodeInletView.h in Headers */,
 				C2E0D830140B0797000B1F73 /* NKNodeOutletView.h in Headers */,
 				C2E0D841140B1EEB000B1F73 /* NKNodeXLetView.h in Headers */,
+				C2E0D846140B2C0B000B1F73 /* NKSpiralView.h in Headers */,
+				C2E0D855140B3316000B1F73 /* NKOutNodeViewController.h in Headers */,
+				C2E0D85B140B37A3000B1F73 /* NKOutNodeInletView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +338,7 @@
 				C2FFA90C1403729100DCBDD4 /* NodeCanvasDemoViewController.xib in Resources */,
 				C2FFA92D1403731F00DCBDD4 /* NKNodeCanvasViewController.xib in Resources */,
 				C2FFA9311403731F00DCBDD4 /* NKNodeViewController.xib in Resources */,
+				C2E0D858140B3316000B1F73 /* NKOutNodeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,6 +359,9 @@
 				C2E0D82C140AF956000B1F73 /* NKNodeInletView.m in Sources */,
 				C2E0D831140B0797000B1F73 /* NKNodeOutletView.m in Sources */,
 				C2E0D842140B1EEB000B1F73 /* NKNodeXLetView.m in Sources */,
+				C2E0D847140B2C0B000B1F73 /* NKSpiralView.m in Sources */,
+				C2E0D856140B3316000B1F73 /* NKOutNodeViewController.m in Sources */,
+				C2E0D85C140B37A3000B1F73 /* NKOutNodeInletView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +377,9 @@
 				C2E0D82D140AF956000B1F73 /* NKNodeInletView.m in Sources */,
 				C2E0D832140B0797000B1F73 /* NKNodeOutletView.m in Sources */,
 				C2E0D843140B1EEB000B1F73 /* NKNodeXLetView.m in Sources */,
+				C2E0D848140B2C0B000B1F73 /* NKSpiralView.m in Sources */,
+				C2E0D857140B3316000B1F73 /* NKOutNodeViewController.m in Sources */,
+				C2E0D85D140B37A3000B1F73 /* NKOutNodeInletView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

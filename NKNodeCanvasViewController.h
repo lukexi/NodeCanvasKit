@@ -17,7 +17,8 @@
 }
 
 + (Class)nodeClass;
-- (UIView *)canvasView;
+
+@property (nonatomic, readonly) UIView *canvasView;
 
 - (IBAction)addNode:(id)sender;
 - (void)connectOutlet:(NKNodeOutletView *)outlet toInlet:(NKNodeInletView *)inlet;
