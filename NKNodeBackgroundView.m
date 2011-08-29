@@ -21,6 +21,8 @@
 + (CGGradientRef)backgroundGradient;
 + (UIBezierPath *)decorativeTrianglePath;
 
+- (void)commonInit;
+
 @end
 
 @implementation NKNodeBackgroundView
@@ -34,10 +36,27 @@
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
+    if (self) 
+    {
+        [self commonInit];
     }
     return self;
+}
+
+- (id)initWithCoder:(NSCoder *)coder {
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (void)commonInit
+{
+    self.layer.shadowPath = [[self class] roundedRectPathForRect:self.bounds].CGPath;
+    self.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.layer.shadowRadius = 10;
+    self.layer.shadowOpacity = 0.5;
 }
 
 - (void)drawRect:(CGRect)rect
