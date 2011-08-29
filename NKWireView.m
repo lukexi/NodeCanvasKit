@@ -10,8 +10,7 @@
 
 @interface NKWireView ()
 
-- (UIBezierPath *)cachedArrowPath;
-
++ (UIBezierPath *)cachedArrowPath;
 
 @property (nonatomic, retain) UIBezierPath *wirePath;
 @property (nonatomic, retain) UIBezierPath *arrowPath;
@@ -99,13 +98,13 @@
 
     [self.wirePath addLineToPoint:outPosition];
     
-    self.arrowPath = [self cachedArrowPath];
+    self.arrowPath = [[self class] cachedArrowPath];
     CGFloat angle = -atan2(outPosition.x - inPosition.x, outPosition.y - inPosition.y);
     [self.arrowPath applyTransform:CGAffineTransformMakeRotation(angle)];
     [self.arrowPath applyTransform:CGAffineTransformMakeTranslation(outPosition.x, outPosition.y)];
 }
 
-- (UIBezierPath *)cachedArrowPath
++ (UIBezierPath *)cachedArrowPath
 {
     static UIBezierPath *cachedArrowPath = nil;
     if (!cachedArrowPath) 

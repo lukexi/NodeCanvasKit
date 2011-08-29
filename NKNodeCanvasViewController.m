@@ -12,6 +12,7 @@
 
 - (void)commonInit;
 
+@property (nonatomic) CGPoint movingNodeOffset;
 @property (nonatomic, retain) NKWireView *draggingWire;
 @property (nonatomic, retain) NKWireView *selectedWire;
 
@@ -22,6 +23,7 @@
 @synthesize nodeViewControllers;
 @synthesize wires;
 @synthesize connectingNode, draggingWire, selectedWire;
+@synthesize movingNodeOffset;
 
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil 
@@ -55,12 +57,10 @@
 
 - (void)commonInit
 {
-	self.nodeViewControllers = [NSMutableSet setWithCapacity:100];
-    self.wires = [NSMutableSet setWithCapacity:100];
+	self.nodeViewControllers = [NSMutableSet set];
+    self.wires = [NSMutableSet set];
 }
 
-
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
 {
     [super viewDidLoad];
@@ -68,7 +68,8 @@
 
 - (IBAction)addNode:(id)sender
 {
-    NKNodeViewController *node = [[[self class] nodeClass] node];
+    NKNodeViewController *node = [[[self class] nodeClass] nodeWithName:@"SinOsc" 
+                                                             inletNames:[NSArray arrayWithObjects:@"Freq", @"Phase", nil]];
     [self.nodeViewControllers addObject:node];
     node.delegate = self;
     
@@ -77,14 +78,13 @@
                                            brightness:0.9 
                                                 alpha:1.0];
     
-    
     node.view.center = CGPointMake([self canvasView].bounds.size.width / 2, 
                                    [self canvasView].bounds.size.height / 2);
     
     [[self canvasView] addSubview:node.view];
 }
 
-- (void)node:(NKNodeViewController *)node didDrag:(UILongPressGestureRecognizer *)gestureRecognizer
+- (void)node:(NKNodeViewController *)node didMove:(UILongPressGestureRecognizer *)gestureRecognizer
 {
     switch (gestureRecognizer.state)
     {
@@ -111,11 +111,10 @@
             }
             node.view.layer.borderColor = [UIColor whiteColor].CGColor;
             break;
-
         default:
             break;
     }
-    gestureRecognizer.view.center = [gestureRecognizer locationInView:[self canvasView]];
+    [node moveToTouchAdjustedPoint:[gestureRecognizer locationInView:[self canvasView]]];
 }
 
 - (void)node:(NKNodeViewController *)node didDragFromOutlet:(UILongPressGestureRecognizer *)gestureRecognizer
