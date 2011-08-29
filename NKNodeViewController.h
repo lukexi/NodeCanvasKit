@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @class NKNodeViewController;
+@class NKNodeOutletView;
+@class NKNodeInletView;
 @protocol NKNodeViewControllerDelegate <NSObject>
 
 - (void)node:(NKNodeViewController *)node didMove:(UILongPressGestureRecognizer *)gestureRecognizer;
-- (void)node:(NKNodeViewController *)node didDragFromOutlet:(UILongPressGestureRecognizer *)gestureRecognizer;
+- (void)outlet:(NKNodeOutletView *)outlet didDrag:(UILongPressGestureRecognizer *)gestureRecognizer;
 
 @end
 
@@ -21,9 +23,6 @@
 + (NKNodeViewController *)node;
 + (NKNodeViewController *)nodeWithName:(NSString *)name inletNames:(NSArray *)inletNames;
 + (NKNodeViewController *)nodeWithName:(NSString *)name inletNames:(NSArray *)inletNames outletNames:(NSArray *)outletNames;
-
-@property (nonatomic, retain) NSMutableArray *inConnections;
-@property (nonatomic, retain) NSMutableArray *outConnections;
 
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSArray *inletNames;
@@ -40,5 +39,6 @@
 @property (nonatomic, assign) id <NKNodeViewControllerDelegate> delegate;
 
 - (void)moveToTouchAdjustedPoint:(CGPoint)point;
+- (NKNodeInletView *)inletForPointInSuperview:(CGPoint)point;
 
 @end

@@ -18,7 +18,9 @@
 
 @property (nonatomic, retain) NSMutableArray *inletViews;
 @property (nonatomic, retain) NSMutableArray *outletViews;
+@property (nonatomic, retain) NSMutableArray *XLets;
 
+- (void)setupXLets;
 - (void)setupInlets;
 - (void)setupOutlets;
 
@@ -26,12 +28,10 @@
 
 @implementation NKNodeViewController
 @synthesize name, inletNames, outletNames;
-@synthesize inletViews, outletViews;
+@synthesize inletViews, outletViews, XLets;
 @synthesize movingOffset;
 
 @synthesize delegate;
-@synthesize inConnections;
-@synthesize outConnections;
 
 // IBOutlets
 @synthesize headerView;
@@ -41,13 +41,12 @@
 
 - (void)dealloc 
 {
-    [inConnections release];
-    [outConnections release];
     [inletNames release];
     [outletNames release];
     [name release];
     [inletViews release];
     [outletViews release];
+    [XLets release];
     [headerView release];
     [nameLabel release];
     [inletsView release];
@@ -78,11 +77,9 @@
 {
     [super viewDidLoad];
     
-    self.inConnections = [NSMutableArray arrayWithCapacity:10];
-    self.outConnections = [NSMutableArray arrayWithCapacity:10];
-    
     self.inletViews = [NSMutableArray array];
     self.outletViews = [NSMutableArray array];
+    self.XLets = [NSMutableArray array];
     
     UILongPressGestureRecognizer *moveRecognizer = [[[UILongPressGestureRecognizer alloc] initWithTarget:self 
                                                                                                   action:@selector(handleMove:)] autorelease];
@@ -91,6 +88,13 @@
     
     self.nameLabel.text = self.name;
     
+    [self setupXLets];
+}
+
+- (void)setupXLets
+{
+    [self.XLets makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [self.XLets removeAllObjects];
     [self setupInlets];
     [self setupOutlets];
 }
@@ -98,16 +102,17 @@
 - (void)setupInlets
 {
     [self.inletViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [self.inletViews removeAllObjects];
     NSUInteger index = 0;
     for (NSString *inletName in self.inletNames) 
     {
-        NKNodeInletView *inletView = [[[NKNodeInletView alloc] initWithFrame:CGRectMake(0, 
-                                                                                        index * kNKNodeXLetHeight, 
-                                                                                        self.inletsView.bounds.size.width, 
-                                                                                        kNKNodeXLetHeight)] autorelease];
+        CGRect inletRect = CGRectMake(0, index * kNKNodeXLetHeight, 
+                                      self.inletsView.bounds.size.width, kNKNodeXLetHeight);
+        NKNodeInletView *inletView = [NKNodeInletView XLetForNode:self withFrame:inletRect];
         inletView.label.text = inletName;
         [self.inletsView addSubview:inletView];
         [self.inletViews addObject:inletView];
+        [self.XLets addObject:inletView];
         index++;
     }
 }
@@ -115,15 +120,16 @@
 - (void)setupOutlets
 {
     [self.outletViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [self.outletViews removeAllObjects];
     NSUInteger index = 0;
     for (NSString *outletName in self.outletNames) 
     {
-        NKNodeOutletView *outletView = [[[NKNodeOutletView alloc] initWithFrame:CGRectMake(0, 
-                                                                                           index * kNKNodeXLetHeight, 
-                                                                                           self.outletsView.bounds.size.width, 
-                                                                                           kNKNodeXLetHeight)] autorelease];
+        CGRect outletRect = CGRectMake(0, index * kNKNodeXLetHeight, 
+                                       self.outletsView.bounds.size.width, kNKNodeXLetHeight);
+        NKNodeOutletView *outletView = [NKNodeOutletView XLetForNode:self withFrame:outletRect];
         [self.outletsView addSubview:outletView];
         [self.outletViews addObject:outletView];
+        [self.XLets addObject:outletView];
         
         UILongPressGestureRecognizer *outletRecognizer = [[[UILongPressGestureRecognizer alloc] initWithTarget:self 
                                                                                                         action:@selector(handleOutletDrag:)] autorelease];
@@ -135,7 +141,8 @@
 
 - (void)handleOutletDrag:(UILongPressGestureRecognizer *)gestureRecognizer
 {
-    [self.delegate node:self didDragFromOutlet:gestureRecognizer];
+    NKNodeOutletView *outlet = (NKNodeOutletView *)[gestureRecognizer view];
+    [self.delegate outlet:outlet didDrag:gestureRecognizer];
 }
 
 - (void)handleMove:(UILongPressGestureRecognizer *)gestureRecognizer
@@ -147,8 +154,7 @@
         self.movingOffset = CGPointMake(localCenter.x - touchLocation.x, localCenter.y - touchLocation.y);
     }
     
-    [self.inConnections makeObjectsPerformSelector:@selector(update)];
-    [self.outConnections makeObjectsPerformSelector:@selector(update)];
+    [self.XLets makeObjectsPerformSelector:@selector(updateConnections)];
     
     [self.delegate node:self didMove:gestureRecognizer];
 }
@@ -156,6 +162,19 @@
 - (void)moveToTouchAdjustedPoint:(CGPoint)point
 {
     self.view.center = CGPointMake(point.x + self.movingOffset.x, point.y + self.movingOffset.y);
+}
+
+- (NKNodeInletView *)inletForPointInSuperview:(CGPoint)point
+{
+    CGPoint localPoint = [self.inletsView convertPoint:point fromView:self.view.superview];
+    for (NKNodeInletView *inlet in self.inletViews) 
+    {
+        if (CGRectContainsPoint(inlet.frame, localPoint)) 
+        {
+            return inlet;
+        }
+    }
+    return nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 

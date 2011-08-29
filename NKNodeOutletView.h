@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NKNodeXLetView.h"
 
-@interface NKNodeOutletView : UIView
+@interface NKNodeOutletView : NKNodeXLetView
 
 @end

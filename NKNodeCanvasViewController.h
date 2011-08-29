@@ -20,11 +20,10 @@
 - (UIView *)canvasView;
 
 - (IBAction)addNode:(id)sender;
-- (void)connectNode:(NKNodeViewController *)fromNode toNode:(NKNodeViewController *)toNode;
+- (void)connectOutlet:(NKNodeOutletView *)outlet toInlet:(NKNodeInletView *)inlet;
 - (void)disconnectWire:(NKWireView *)wire;
 
 @property (nonatomic, retain) NSMutableSet *nodeViewControllers;
 @property (nonatomic, retain) NSMutableSet *wires;
-@property (nonatomic, retain) NKNodeViewController *connectingNode;
 
 @end

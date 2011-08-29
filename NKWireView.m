@@ -21,29 +21,37 @@
 @end
 
 @implementation NKWireView
-@synthesize inNode;
-@synthesize outNode;
+@synthesize fromOutlet;
+@synthesize toInlet;
 @synthesize endPoint;
 @synthesize wirePath, arrowPath;
 @synthesize hitPath;
 @synthesize delegate;
 
-+ (NKWireView *)wireWithDelegate:(id <NKWireViewDelegate>)delegate;
++ (NKWireView *)wireWithDelegate:(UIViewController <NKWireViewDelegate> *)delegate;
 {
     NKWireView *wire = [[[self alloc] initWithFrame:CGRectZero] autorelease];
     wire.delegate = delegate;
     return wire;
 }
 
-+ (NKWireView *)wireFrom:(NKNodeViewController *)fromNode to:(NKNodeViewController *)toNode delegate:(id <NKWireViewDelegate>)delegate;
++ (NKWireView *)wireFrom:(NKNodeOutletView *)fromOutlet 
+                      to:(NKNodeInletView *)toInlet 
+                delegate:(UIViewController <NKWireViewDelegate> *)delegate;
 {
     NKWireView *wire = [self wireWithDelegate:delegate];
     
-    wire.inNode = fromNode;
-    [fromNode.outConnections addObject:wire];
-    
-    wire.outNode = toNode;
-    [toNode.inConnections addObject:wire];
+    if (fromOutlet) 
+    {
+        wire.fromOutlet = fromOutlet;
+        [fromOutlet addConnection:wire];
+    }
+
+    if (toInlet) 
+    {
+        wire.toInlet = toInlet;
+        [toInlet addConnection:wire];
+    }
     
     [wire update];
     
@@ -70,9 +78,9 @@
 
 - (void)update
 {
-    CGPoint inCenter = self.inNode.view.center;
-    CGPoint outCenter = self.outNode.view.center;;
-    if (!self.outNode) 
+    CGPoint inCenter = [self.fromOutlet connectionPointInView:self.delegate.view];
+    CGPoint outCenter = [self.toInlet connectionPointInView:self.delegate.view];
+    if (!self.toInlet)
     {
         outCenter = self.endPoint;
     }
@@ -95,13 +103,19 @@
     self.wirePath.lineCapStyle = kCGLineCapRound;
     
     [self.wirePath moveToPoint:inPosition];
-
+    
     [self.wirePath addLineToPoint:outPosition];
     
     self.arrowPath = [[self class] cachedArrowPath];
     CGFloat angle = -atan2(outPosition.x - inPosition.x, outPosition.y - inPosition.y);
     [self.arrowPath applyTransform:CGAffineTransformMakeRotation(angle)];
     [self.arrowPath applyTransform:CGAffineTransformMakeTranslation(outPosition.x, outPosition.y)];
+}
+
+- (void)disconnect
+{
+    [self.fromOutlet removeConnection:self];
+    [self.toInlet removeConnection:self];
 }
 
 + (UIBezierPath *)cachedArrowPath
@@ -123,8 +137,8 @@
     CGPathRelease(hitPath);
     [wirePath release];
     [arrowPath release];
-    [inNode release];
-    [outNode release];
+    [fromOutlet release];
+    [toInlet release];
     [super dealloc];
 }
 

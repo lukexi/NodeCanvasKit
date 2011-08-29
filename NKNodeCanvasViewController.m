@@ -22,7 +22,7 @@
 @implementation NKNodeCanvasViewController
 @synthesize nodeViewControllers;
 @synthesize wires;
-@synthesize connectingNode, draggingWire, selectedWire;
+@synthesize draggingWire, selectedWire;
 @synthesize movingNodeOffset;
 
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -86,44 +86,15 @@
 
 - (void)node:(NKNodeViewController *)node didMove:(UILongPressGestureRecognizer *)gestureRecognizer
 {
-    switch (gestureRecognizer.state)
-    {
-        case UIGestureRecognizerStateBegan:
-            if (!self.connectingNode)
-            {
-                self.connectingNode = node;
-                node.view.layer.borderColor = [UIColor orangeColor].CGColor;
-            }
-            else
-            {
-                if (![[self.connectingNode.outConnections valueForKey:@"outNode"] containsObject:node])
-                {
-                    node.view.layer.borderColor = [UIColor blueColor].CGColor;
-                    [self connectNode:self.connectingNode toNode:node];
-                }
-            }
-            break;
-        case UIGestureRecognizerStateEnded:
-        case UIGestureRecognizerStateCancelled:
-            if (node == connectingNode)
-            {
-                self.connectingNode = nil;
-            }
-            node.view.layer.borderColor = [UIColor whiteColor].CGColor;
-            break;
-        default:
-            break;
-    }
     [node moveToTouchAdjustedPoint:[gestureRecognizer locationInView:[self canvasView]]];
 }
 
-- (void)node:(NKNodeViewController *)node didDragFromOutlet:(UILongPressGestureRecognizer *)gestureRecognizer
+- (void)outlet:(NKNodeOutletView *)outlet didDrag:(UILongPressGestureRecognizer *)gestureRecognizer
 {
     CGPoint locationInView = [gestureRecognizer locationInView:[self canvasView]];
     switch (gestureRecognizer.state) {
         case UIGestureRecognizerStateBegan:
-            self.draggingWire = [NKWireView wireWithDelegate:nil];
-            self.draggingWire.inNode = node;
+            self.draggingWire = [NKWireView wireFrom:outlet to:nil delegate:self];
             [[self canvasView] addSubview:self.draggingWire];
         case UIGestureRecognizerStateChanged:
             self.draggingWire.endPoint = locationInView;
@@ -132,9 +103,10 @@
         case UIGestureRecognizerStateEnded:
             for (NKNodeViewController *nodeViewController in self.nodeViewControllers) 
             {
-                if (CGRectContainsPoint(nodeViewController.view.frame, locationInView)) 
+                NKNodeInletView *foundInlet = [nodeViewController inletForPointInSuperview:locationInView];
+                if (foundInlet)
                 {
-                    [self connectNode:node toNode:nodeViewController];
+                    [self connectOutlet:outlet toInlet:foundInlet];
                 }
             }
         case UIGestureRecognizerStateCancelled:
@@ -145,9 +117,9 @@
     }
 }
 
-- (void)connectNode:(NKNodeViewController *)fromNode toNode:(NKNodeViewController *)toNode
+- (void)connectOutlet:(NKNodeOutletView *)outlet toInlet:(NKNodeInletView *)inlet
 {
-    NKWireView *wire = [NKWireView wireFrom:fromNode to:toNode delegate:self];
+    NKWireView *wire = [NKWireView wireFrom:outlet to:inlet delegate:self];
     [self.wires addObject:wire];
     [[self canvasView] addSubview:wire];
 }
@@ -155,8 +127,7 @@
 - (void)disconnectWire:(NKWireView *)wire
 {
     [[wire retain] autorelease];
-    [wire.inNode.outConnections removeObject:wire];
-    [wire.outNode.inConnections removeObject:wire];
+    [wire disconnect];
     [self.wires removeObject:wire];
     [UIView animateWithDuration:0.5 animations:^(void) {
         wire.alpha = 0;
@@ -191,8 +162,10 @@
     self.selectedWire = nil;
 }
 
-- (BOOL)canPerformAction:(SEL)selector withSender:(id) sender {
-    if (selector == @selector(delete:)) {
+- (BOOL)canPerformAction:(SEL)selector withSender:(id) sender 
+{
+    if (selector == @selector(delete:)) 
+    {
         return YES;
     }
     return NO;
@@ -230,7 +203,6 @@
 - (void)dealloc 
 {
     [draggingWire release];
-    [connectingNode release];
     [nodeViewControllers release];
     [wires release];
     [super dealloc];
