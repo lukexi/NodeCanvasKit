@@ -9,7 +9,8 @@
 #import "NKNodeInlet.h"
 
 #define kNKNodeInletLeftMargin 5
-#define kNKNodeInletLabelColor [UIColor colorWithRed:0.822 green:1.000 blue:0.020 alpha:1.000]
+#define kNKNodeInletLabelColor [UIColor colorWithRed:0.903 green:0.571 blue:0.146 alpha:1.000]
+
 @implementation NKNodeInlet
 @synthesize slider;
 @synthesize label;

@@ -182,6 +182,11 @@
 
 - (void)drawRect:(CGRect)rect
 {
+    [[UIColor blackColor] set];
+    self.wirePath.lineWidth = 6;
+    [self.wirePath stroke];
+    self.wirePath.lineWidth = 4;
+    [self.arrowPath stroke];
     [[UIColor purpleColor] set];
     [self.wirePath stroke];
     [self.arrowPath fill];

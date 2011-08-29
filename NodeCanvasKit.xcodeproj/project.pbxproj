@@ -30,6 +30,9 @@
 		C2E0D85B140B37A3000B1F73 /* NKOutNodeInletView.h in Headers */ = {isa = PBXBuildFile; fileRef = C2E0D859140B37A2000B1F73 /* NKOutNodeInletView.h */; };
 		C2E0D85C140B37A3000B1F73 /* NKOutNodeInletView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D85A140B37A3000B1F73 /* NKOutNodeInletView.m */; };
 		C2E0D85D140B37A3000B1F73 /* NKOutNodeInletView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D85A140B37A3000B1F73 /* NKOutNodeInletView.m */; };
+		C2E0D862140B9E01000B1F73 /* NKGridView.h in Headers */ = {isa = PBXBuildFile; fileRef = C2E0D860140B9DFF000B1F73 /* NKGridView.h */; };
+		C2E0D863140B9E01000B1F73 /* NKGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D861140B9E00000B1F73 /* NKGridView.m */; };
+		C2E0D864140B9E01000B1F73 /* NKGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D861140B9E00000B1F73 /* NKGridView.m */; };
 		C2FFA8F31403729000DCBDD4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2FFA8F21403729000DCBDD4 /* UIKit.framework */; };
 		C2FFA8F51403729000DCBDD4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2FFA8F41403729000DCBDD4 /* Foundation.framework */; };
 		C2FFA8F71403729000DCBDD4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2FFA8F61403729000DCBDD4 /* CoreGraphics.framework */; };
@@ -72,6 +75,8 @@
 		C2E0D854140B3315000B1F73 /* NKOutNodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NKOutNodeViewController.xib; sourceTree = "<group>"; };
 		C2E0D859140B37A2000B1F73 /* NKOutNodeInletView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKOutNodeInletView.h; sourceTree = "<group>"; };
 		C2E0D85A140B37A3000B1F73 /* NKOutNodeInletView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKOutNodeInletView.m; sourceTree = "<group>"; };
+		C2E0D860140B9DFF000B1F73 /* NKGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKGridView.h; sourceTree = "<group>"; };
+		C2E0D861140B9E00000B1F73 /* NKGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKGridView.m; sourceTree = "<group>"; };
 		C2FFA8EE1403729000DCBDD4 /* NodeCanvasKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NodeCanvasKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2FFA8F21403729000DCBDD4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C2FFA8F41403729000DCBDD4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -237,6 +242,8 @@
 				C2FFA9211403731F00DCBDD4 /* NKNodeCanvasViewController.h */,
 				C2FFA9221403731F00DCBDD4 /* NKNodeCanvasViewController.m */,
 				C2FFA9231403731F00DCBDD4 /* NKNodeCanvasViewController.xib */,
+				C2E0D860140B9DFF000B1F73 /* NKGridView.h */,
+				C2E0D861140B9E00000B1F73 /* NKGridView.m */,
 				C2FFA9271403731F00DCBDD4 /* NKWireView.h */,
 				C2FFA9281403731F00DCBDD4 /* NKWireView.m */,
 				C2E0D85F140B3D6D000B1F73 /* Nodes */,
@@ -261,6 +268,7 @@
 				C2E0D846140B2C0B000B1F73 /* NKSpiralView.h in Headers */,
 				C2E0D855140B3316000B1F73 /* NKOutNodeViewController.h in Headers */,
 				C2E0D85B140B37A3000B1F73 /* NKOutNodeInletView.h in Headers */,
+				C2E0D862140B9E01000B1F73 /* NKGridView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +370,7 @@
 				C2E0D847140B2C0B000B1F73 /* NKSpiralView.m in Sources */,
 				C2E0D856140B3316000B1F73 /* NKOutNodeViewController.m in Sources */,
 				C2E0D85C140B37A3000B1F73 /* NKOutNodeInletView.m in Sources */,
+				C2E0D863140B9E01000B1F73 /* NKGridView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,6 +389,7 @@
 				C2E0D848140B2C0B000B1F73 /* NKSpiralView.m in Sources */,
 				C2E0D857140B3316000B1F73 /* NKOutNodeViewController.m in Sources */,
 				C2E0D85D140B37A3000B1F73 /* NKOutNodeInletView.m in Sources */,
+				C2E0D864140B9E01000B1F73 /* NKGridView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

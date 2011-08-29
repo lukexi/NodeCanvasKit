@@ -8,6 +8,8 @@
 
 #import "NKNodeOutlet.h"
 
+#define kNKNodeOutletColor [UIColor colorWithRed:0.105 green:0.674 blue:0.337 alpha:1.000]
+
 @implementation NKNodeOutlet
 
 - (id)initWithFrame:(CGRect)frame
@@ -24,7 +26,7 @@
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGRect insetRect = CGRectInset(self.bounds, 5, 5);
-    [[UIColor greenColor] set];
+    [kNKNodeOutletColor set];
     CGContextFillEllipseInRect(context, insetRect);
     [[UIColor blackColor] set];
     CGContextSetLineWidth(context, 2);
