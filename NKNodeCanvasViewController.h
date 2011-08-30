@@ -22,6 +22,13 @@
 disconnectedOutlet:(NKNodeOutlet *)outlet 
          fromInlet:(NKNodeInlet *)inlet;
 
+// Extended Node Canvas
+- (void)nodeCanvas:(NKNodeCanvasViewController *)aNodeCanvas
+inletDidChangeValue:(NKNodeInlet *)inlet;
+
+- (void)nodeCanvas:(NKNodeCanvasViewController *)aNodeCanvas
+inletDidChangeRange:(NKNodeInlet *)inlet;
+
 @end
 
 @interface NKNodeCanvasViewController : UIViewController <NKNodeViewControllerDelegate, NKWireViewDelegate>
@@ -29,6 +36,8 @@ disconnectedOutlet:(NKNodeOutlet *)outlet
 + (Class)nodeClass;
 
 @property (nonatomic, readonly) UIView *canvasView;
+
+@property (nonatomic, assign) id <NKNodeCanvasViewControllerDelegate> delegate;
 
 - (IBAction)addNode:(id)sender;
 

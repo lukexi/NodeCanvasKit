@@ -16,6 +16,7 @@
 
 @property (nonatomic, assign, readonly) NKNodeViewController *parentNode;
 @property (nonatomic, readonly) NSArray *connections;
+@property (nonatomic, retain) NSString *name;
 
 - (void)addConnection:(NKWireView *)connection;
 - (void)removeConnection:(NKWireView *)connection;

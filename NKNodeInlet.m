@@ -8,59 +8,20 @@
 
 #import "NKNodeInlet.h"
 
-#define kNKNodeInletLeftMargin 5
-#define kNKNodeInletLabelColor [UIColor colorWithRed:0.903 green:0.571 blue:0.146 alpha:1.000]
+#define kNKNodeInletColor [UIColor colorWithRed:0.000 green:0.286 blue:0.647 alpha:1.000]
 
 @implementation NKNodeInlet
-@synthesize slider;
-@synthesize label;
 
-- (void)dealloc 
-{
-    [slider release];
-    [label release];
-    [super dealloc];
-}
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) 
-    {
-        [self setupControls];
-    }
-    return self;
-}
-
-- (void)setupControls
-{
-    CGFloat thirds = floor((self.frame.size.width - kNKNodeInletLeftMargin) / 3);
-    self.slider = [[[UISlider alloc] initWithFrame:CGRectMake(kNKNodeInletLeftMargin, 
-                                                              0, 
-                                                              2 * thirds, 
-                                                              self.frame.size.height)] autorelease];
-    self.slider.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleRightMargin;
-    self.label = [[[UILabel alloc] initWithFrame:CGRectMake(kNKNodeInletLeftMargin + 2 * thirds, 
-                                                            0, 
-                                                            1 * thirds, 
-                                                            self.frame.size.height)] autorelease];
-    self.label.backgroundColor = [UIColor clearColor];
-    self.label.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleLeftMargin;
-    self.label.font = [UIFont boldSystemFontOfSize:11];
-    self.label.textColor = kNKNodeInletLabelColor;
-    self.label.shadowColor = [UIColor blackColor];
-    self.label.shadowOffset = CGSizeMake(0, -1);
-    
-    [self addSubview:self.slider];
-    [self addSubview:self.label];
-}
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
-    // Drawing code
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGRect insetRect = CGRectInset(self.bounds, 5, 5);
+    [kNKNodeInletColor set];
+    CGContextFillEllipseInRect(context, insetRect);
+    [[UIColor blackColor] set];
+    CGContextSetLineWidth(context, 2);
+    CGContextStrokeEllipseInRect(context, insetRect);
 }
-*/
+
 
 @end

@@ -20,9 +20,11 @@
 @implementation NKNodeXLet
 @synthesize mutableConnections;
 @synthesize parentNode;
+@synthesize name;
 
 - (void)dealloc 
 {
+    [name release];
     [mutableConnections release];
     [super dealloc];
 }

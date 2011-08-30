@@ -10,6 +10,7 @@
 #import "NKNodeInlet.h"
 #import "NKNodeOutlet.h"
 #import "NKWireView.h"
+#import "NKSliderNodeInlet.h"
 
 @interface NKNodeViewController ()
 
@@ -146,13 +147,36 @@
     {
         CGRect inletRect = CGRectMake(0, index * [[self class] nodeXLetHeight], 
                                       self.inletsView.bounds.size.width, [[self class] nodeXLetHeight]);
-        NKNodeInlet *inletView = [[[self class] inletViewClass] XLetForNode:self withFrame:inletRect];
-        inletView.label.text = inletName;
-        [self.inletsView addSubview:inletView];
-        [self.inletViews addObject:inletView];
-        [self.XLets addObject:inletView];
+        NKNodeInlet *inlet = [[[self class] inletViewClass] XLetForNode:self withFrame:inletRect];
+        inlet.name = inletName;
+        [self configureInlet:inlet];
+        [self.inletsView addSubview:inlet];
+        [self.inletViews addObject:inlet];
+        [self.XLets addObject:inlet];
         index++;
     }
+}
+
+// Should be moved to subclass — shouldn't assume NKSliderNodeInlet
+- (void)configureInlet:(NKNodeInlet *)inlet
+{
+    if ([inlet isKindOfClass:[NKSliderNodeInlet class]]) 
+    {
+        NKSliderNodeInlet *sliderInlet = (NKSliderNodeInlet *)inlet;
+        sliderInlet.label.text = sliderInlet.name;
+        sliderInlet.delegate = self;
+    }
+}
+
+#pragma mark - NKSliderNodeInletDelegate
+- (void)sliderInletDidChangeValue:(NKSliderNodeInlet *)aSliderNodeInlet
+{
+    [self.delegate inletDidChangeValue:aSliderNodeInlet];
+}
+
+- (void)sliderInletDidChangeRange:(NKSliderNodeInlet *)aSliderNodeInlet
+{
+    [self.delegate inletDidChangeRange:aSliderNodeInlet];
 }
 
 - (void)setupOutlets
@@ -181,9 +205,10 @@
     }
 }
 
+// Should be moved to subclass — should use NKNodeInlet as the default
 + (Class)inletViewClass
 {
-    return [NKNodeInlet class];
+    return [NKSliderNodeInlet class];
 }
 
 + (Class)outletViewClass

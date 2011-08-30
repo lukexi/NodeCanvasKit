@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C22E89F7140CD1DD003DF1B0 /* NKSliderNodeInlet.h in Headers */ = {isa = PBXBuildFile; fileRef = C22E89F5140CD1DC003DF1B0 /* NKSliderNodeInlet.h */; };
+		C22E89F8140CD1DD003DF1B0 /* NKSliderNodeInlet.m in Sources */ = {isa = PBXBuildFile; fileRef = C22E89F6140CD1DD003DF1B0 /* NKSliderNodeInlet.m */; };
+		C22E89F9140CD1DD003DF1B0 /* NKSliderNodeInlet.m in Sources */ = {isa = PBXBuildFile; fileRef = C22E89F6140CD1DD003DF1B0 /* NKSliderNodeInlet.m */; };
+		C2D047C4140C9D5D004446A2 /* NKSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = C2D047C2140C9D5D004446A2 /* NKSlider.h */; };
+		C2D047C5140C9D5D004446A2 /* NKSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D047C3140C9D5D004446A2 /* NKSlider.m */; };
+		C2D047C6140C9D5D004446A2 /* NKSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D047C3140C9D5D004446A2 /* NKSlider.m */; };
+		C2D047C8140C9D84004446A2 /* NKSlider.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2D047C7140C9D84004446A2 /* NKSlider.xib */; };
 		C2E0D826140A6B47000B1F73 /* NKNodeBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D825140A6B47000B1F73 /* NKNodeBackgroundView.m */; };
 		C2E0D828140A6B4C000B1F73 /* NKNodeBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D825140A6B47000B1F73 /* NKNodeBackgroundView.m */; };
 		C2E0D82B140AF956000B1F73 /* NKNodeInlet.h in Headers */ = {isa = PBXBuildFile; fileRef = C2E0D829140AF956000B1F73 /* NKNodeInlet.h */; };
@@ -27,9 +34,9 @@
 		C2E0D856140B3316000B1F73 /* NKOutNodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D853140B3314000B1F73 /* NKOutNodeViewController.m */; };
 		C2E0D857140B3316000B1F73 /* NKOutNodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D853140B3314000B1F73 /* NKOutNodeViewController.m */; };
 		C2E0D858140B3316000B1F73 /* NKOutNodeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2E0D854140B3315000B1F73 /* NKOutNodeViewController.xib */; };
-		C2E0D85B140B37A3000B1F73 /* NKOutNodeInletView.h in Headers */ = {isa = PBXBuildFile; fileRef = C2E0D859140B37A2000B1F73 /* NKOutNodeInletView.h */; };
-		C2E0D85C140B37A3000B1F73 /* NKOutNodeInletView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D85A140B37A3000B1F73 /* NKOutNodeInletView.m */; };
-		C2E0D85D140B37A3000B1F73 /* NKOutNodeInletView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D85A140B37A3000B1F73 /* NKOutNodeInletView.m */; };
+		C2E0D85B140B37A3000B1F73 /* NKOutNodeInlet.h in Headers */ = {isa = PBXBuildFile; fileRef = C2E0D859140B37A2000B1F73 /* NKOutNodeInlet.h */; };
+		C2E0D85C140B37A3000B1F73 /* NKOutNodeInlet.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D85A140B37A3000B1F73 /* NKOutNodeInlet.m */; };
+		C2E0D85D140B37A3000B1F73 /* NKOutNodeInlet.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D85A140B37A3000B1F73 /* NKOutNodeInlet.m */; };
 		C2E0D862140B9E01000B1F73 /* NKGridView.h in Headers */ = {isa = PBXBuildFile; fileRef = C2E0D860140B9DFF000B1F73 /* NKGridView.h */; };
 		C2E0D863140B9E01000B1F73 /* NKGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D861140B9E00000B1F73 /* NKGridView.m */; };
 		C2E0D864140B9E01000B1F73 /* NKGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E0D861140B9E00000B1F73 /* NKGridView.m */; };
@@ -58,6 +65,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C22E89F5140CD1DC003DF1B0 /* NKSliderNodeInlet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKSliderNodeInlet.h; sourceTree = "<group>"; };
+		C22E89F6140CD1DD003DF1B0 /* NKSliderNodeInlet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKSliderNodeInlet.m; sourceTree = "<group>"; };
+		C2D047C2140C9D5D004446A2 /* NKSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKSlider.h; sourceTree = "<group>"; };
+		C2D047C3140C9D5D004446A2 /* NKSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKSlider.m; sourceTree = "<group>"; };
+		C2D047C7140C9D84004446A2 /* NKSlider.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NKSlider.xib; sourceTree = "<group>"; };
 		C2E0D824140A6B46000B1F73 /* NKNodeBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKNodeBackgroundView.h; sourceTree = "<group>"; };
 		C2E0D825140A6B47000B1F73 /* NKNodeBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKNodeBackgroundView.m; sourceTree = "<group>"; };
 		C2E0D829140AF956000B1F73 /* NKNodeInlet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKNodeInlet.h; sourceTree = "<group>"; };
@@ -73,8 +85,8 @@
 		C2E0D852140B3313000B1F73 /* NKOutNodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKOutNodeViewController.h; sourceTree = "<group>"; };
 		C2E0D853140B3314000B1F73 /* NKOutNodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKOutNodeViewController.m; sourceTree = "<group>"; };
 		C2E0D854140B3315000B1F73 /* NKOutNodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NKOutNodeViewController.xib; sourceTree = "<group>"; };
-		C2E0D859140B37A2000B1F73 /* NKOutNodeInletView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKOutNodeInletView.h; sourceTree = "<group>"; };
-		C2E0D85A140B37A3000B1F73 /* NKOutNodeInletView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKOutNodeInletView.m; sourceTree = "<group>"; };
+		C2E0D859140B37A2000B1F73 /* NKOutNodeInlet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKOutNodeInlet.h; sourceTree = "<group>"; };
+		C2E0D85A140B37A3000B1F73 /* NKOutNodeInlet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKOutNodeInlet.m; sourceTree = "<group>"; };
 		C2E0D860140B9DFF000B1F73 /* NKGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKGridView.h; sourceTree = "<group>"; };
 		C2E0D861140B9E00000B1F73 /* NKGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKGridView.m; sourceTree = "<group>"; };
 		C2FFA8EE1403729000DCBDD4 /* NodeCanvasKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NodeCanvasKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -132,8 +144,8 @@
 		C2E0D85E140B37B3000B1F73 /* Master Out Node */ = {
 			isa = PBXGroup;
 			children = (
-				C2E0D859140B37A2000B1F73 /* NKOutNodeInletView.h */,
-				C2E0D85A140B37A3000B1F73 /* NKOutNodeInletView.m */,
+				C2E0D859140B37A2000B1F73 /* NKOutNodeInlet.h */,
+				C2E0D85A140B37A3000B1F73 /* NKOutNodeInlet.m */,
 				C2E0D852140B3313000B1F73 /* NKOutNodeViewController.h */,
 				C2E0D853140B3314000B1F73 /* NKOutNodeViewController.m */,
 				C2E0D854140B3315000B1F73 /* NKOutNodeViewController.xib */,
@@ -157,6 +169,11 @@
 				C2E0D82A140AF956000B1F73 /* NKNodeInlet.m */,
 				C2E0D82E140B0797000B1F73 /* NKNodeOutlet.h */,
 				C2E0D82F140B0797000B1F73 /* NKNodeOutlet.m */,
+				C2D047C2140C9D5D004446A2 /* NKSlider.h */,
+				C2D047C3140C9D5D004446A2 /* NKSlider.m */,
+				C2D047C7140C9D84004446A2 /* NKSlider.xib */,
+				C22E89F5140CD1DC003DF1B0 /* NKSliderNodeInlet.h */,
+				C22E89F6140CD1DD003DF1B0 /* NKSliderNodeInlet.m */,
 			);
 			name = Nodes;
 			sourceTree = "<group>";
@@ -267,8 +284,10 @@
 				C2E0D841140B1EEB000B1F73 /* NKNodeXLet.h in Headers */,
 				C2E0D846140B2C0B000B1F73 /* NKSpiralView.h in Headers */,
 				C2E0D855140B3316000B1F73 /* NKOutNodeViewController.h in Headers */,
-				C2E0D85B140B37A3000B1F73 /* NKOutNodeInletView.h in Headers */,
+				C2E0D85B140B37A3000B1F73 /* NKOutNodeInlet.h in Headers */,
 				C2E0D862140B9E01000B1F73 /* NKGridView.h in Headers */,
+				C2D047C4140C9D5D004446A2 /* NKSlider.h in Headers */,
+				C22E89F7140CD1DD003DF1B0 /* NKSliderNodeInlet.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,6 +366,7 @@
 				C2FFA92D1403731F00DCBDD4 /* NKNodeCanvasViewController.xib in Resources */,
 				C2FFA9311403731F00DCBDD4 /* NKNodeViewController.xib in Resources */,
 				C2E0D858140B3316000B1F73 /* NKOutNodeViewController.xib in Resources */,
+				C2D047C8140C9D84004446A2 /* NKSlider.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,8 +389,10 @@
 				C2E0D842140B1EEB000B1F73 /* NKNodeXLet.m in Sources */,
 				C2E0D847140B2C0B000B1F73 /* NKSpiralView.m in Sources */,
 				C2E0D856140B3316000B1F73 /* NKOutNodeViewController.m in Sources */,
-				C2E0D85C140B37A3000B1F73 /* NKOutNodeInletView.m in Sources */,
+				C2E0D85C140B37A3000B1F73 /* NKOutNodeInlet.m in Sources */,
 				C2E0D863140B9E01000B1F73 /* NKGridView.m in Sources */,
+				C2D047C5140C9D5D004446A2 /* NKSlider.m in Sources */,
+				C22E89F8140CD1DD003DF1B0 /* NKSliderNodeInlet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,8 +410,10 @@
 				C2E0D843140B1EEB000B1F73 /* NKNodeXLet.m in Sources */,
 				C2E0D848140B2C0B000B1F73 /* NKSpiralView.m in Sources */,
 				C2E0D857140B3316000B1F73 /* NKOutNodeViewController.m in Sources */,
-				C2E0D85D140B37A3000B1F73 /* NKOutNodeInletView.m in Sources */,
+				C2E0D85D140B37A3000B1F73 /* NKOutNodeInlet.m in Sources */,
 				C2E0D864140B9E01000B1F73 /* NKGridView.m in Sources */,
+				C2D047C6140C9D5D004446A2 /* NKSlider.m in Sources */,
+				C22E89F9140CD1DD003DF1B0 /* NKSliderNodeInlet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

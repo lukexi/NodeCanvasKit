@@ -8,6 +8,6 @@
 
 #import "NKNodeInlet.h"
 
-@interface NKOutNodeInletView : NKNodeInlet
+@interface NKOutNodeInlet : NKNodeInlet
 
 @end

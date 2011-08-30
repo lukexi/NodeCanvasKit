@@ -11,9 +11,6 @@
 
 @interface NKNodeInlet : NKNodeXLet
 
-@property (nonatomic, retain) UISlider *slider;
-@property (nonatomic, retain) UILabel *label;
 
-- (void)setupControls;
 
 @end

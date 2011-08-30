@@ -7,7 +7,7 @@
 //
 
 #import "NKOutNodeViewController.h"
-#import "NKOutNodeInletView.h"
+#import "NKOutNodeInlet.h"
 @implementation NKOutNodeViewController
 
 + (NKOutNodeViewController *)outNode
@@ -24,7 +24,12 @@
 
 + (Class)inletViewClass
 {
-    return [NKOutNodeInletView class];
+    return [NKOutNodeInlet class];
+}
+
+- (void)configureInlet:(NKNodeInlet *)inlet withName:(NSString *)name
+{
+    // Don't do anything
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

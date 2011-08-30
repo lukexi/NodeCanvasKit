@@ -6,9 +6,9 @@
 //  Copyright 2011 Eeoo. All rights reserved.
 //
 
-#import "NKOutNodeInletView.h"
+#import "NKOutNodeInlet.h"
 
-@implementation NKOutNodeInletView
+@implementation NKOutNodeInlet
 
 - (void)setupControls
 {

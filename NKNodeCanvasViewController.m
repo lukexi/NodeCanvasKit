@@ -26,6 +26,7 @@
 @synthesize wires;
 @synthesize draggingWire, selectedWire;
 @synthesize selectedNode;
+@synthesize delegate;
 
 - (void)dealloc 
 {
@@ -149,6 +150,16 @@
     }
 }
 
+- (void)inletDidChangeValue:(NKNodeInlet *)inlet
+{
+    [self.delegate nodeCanvas:self inletDidChangeValue:inlet];
+}
+
+- (void)inletDidChangeRange:(NKNodeInlet *)inlet
+{
+    [self.delegate nodeCanvas:self inletDidChangeRange:inlet];
+}
+
 - (void)connectOutlet:(NKNodeOutlet *)outlet toInlet:(NKNodeInlet *)inlet
 {
     NKWireView *wire = [NKWireView wireFrom:outlet to:inlet delegate:self];
@@ -194,13 +205,6 @@
     
     self.selectedNode = nil;
     self.selectedWire = aWireView;
-//    for (NKWireView *wire in self.wires) 
-//    {
-//        if (wire == aWireView) 
-//        {
-//            self.selectedWire = wire;
-//        }
-//    }
 }
 
 

@@ -74,8 +74,6 @@
                                 CGPointMake(halfWidth, 0), 
                                 CGPointMake(halfWidth, self.bounds.size.height), 
                                 kCGGradientDrawsBeforeStartLocation|kCGGradientDrawsAfterEndLocation);
-//    [kNKNodeBackgroundViewBottomGradientColor set];
-//    CGContextFillRect(context, self.bounds);
     
     [KNKNodeBackgroundViewHeaderColor set];
     

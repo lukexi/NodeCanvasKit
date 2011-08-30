@@ -11,16 +11,21 @@
 @class NKNodeViewController;
 @class NKNodeOutlet;
 @class NKNodeInlet;
+@class NKSliderNodeInlet;
+
+@protocol NKSliderNodeInletDelegate;
 
 @protocol NKNodeViewControllerDelegate <NSObject>
 
 - (void)node:(NKNodeViewController *)node wasTapped:(UITapGestureRecognizer *)gestureRecognizer;
 - (void)node:(NKNodeViewController *)node didMove:(UILongPressGestureRecognizer *)gestureRecognizer;
 - (void)outlet:(NKNodeOutlet *)outlet didDrag:(UILongPressGestureRecognizer *)gestureRecognizer;
+- (void)inletDidChangeValue:(NKNodeInlet *)inlet;
+- (void)inletDidChangeRange:(NKNodeInlet *)inlet;
 
 @end
 
-@interface NKNodeViewController : UIViewController <UIGestureRecognizerDelegate>
+@interface NKNodeViewController : UIViewController <UIGestureRecognizerDelegate, NKSliderNodeInletDelegate>
 
 + (id)node;
 + (id)nodeWithName:(NSString *)name inletNames:(NSArray *)inletNames;
@@ -30,6 +35,7 @@
 + (CGFloat)nodeXLetHeight;
 + (Class)inletViewClass;
 + (Class)outletViewClass;
+- (void)configureInlet:(NKNodeInlet *)inlet; // To do further configuration of an inlet just after its creation
 
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSArray *inletNames;
