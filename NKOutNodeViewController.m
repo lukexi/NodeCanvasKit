@@ -12,9 +12,10 @@
 
 + (NKOutNodeViewController *)outNode
 {
-    return [super nodeWithName:@"Out" 
-                    inletNames:[NSArray arrayWithObjects:@"a_in", nil] 
-                   outletNames:nil];
+    return [super nodeWithID:@"Out"
+                        name:@"RSOut" 
+                  inletNames:[NSArray arrayWithObjects:@"a_in", nil] 
+                 outletNames:nil];
 }
 
 + (CGFloat)nodeXLetHeight

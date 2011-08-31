@@ -50,6 +50,29 @@ disconnectedOutletNamed:(NSString *)outletName
 @property (nonatomic, assign) IBOutlet id <NKNodeCanvasViewDelegate> delegate;
 
 - (void)addOutNode;
-- (void)addNodeNamed:(NSString *)nodeName withInlets:(NSArray *)inletNames animated:(BOOL)animated;
+- (void)addNodeWithID:(NSString *)nodeID
+                named:(NSString *)nodeName
+           withInlets:(NSArray *)inletNames
+              atPoint:(CGPoint)point
+             animated:(BOOL)animated;
+
+// Add to center
+- (void)addNodeWithID:(NSString *)nodeID
+                named:(NSString *)nodeName
+           withInlets:(NSArray *)inletNames
+             animated:(BOOL)animated;
+
+- (void)connectOutletNamed:(NSString *)inletName
+              ofNodeWithID:(NSString *)inletParentNodeID
+              toInletNamed:(NSString *)inletName
+              ofNodeWithID:(NSString *)outletParentNodeID;
+
+- (void)setValueOfInletNamed:(NSString *)inletName 
+                ofNodeWithID:(NSString *)nodeID 
+                          to:(CGFloat)value;
+
+- (void)setRangeOfInletNamed:(NSString *)inletName 
+                ofNodeWithID:(NSString *)nodeID 
+                          to:(CGFloat)range;
 
 @end

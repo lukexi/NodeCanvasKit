@@ -16,8 +16,8 @@
 
 @property (nonatomic) CGPoint movingOffset;
 
-@property (nonatomic, retain) NSMutableArray *inletViews;
-@property (nonatomic, retain) NSMutableArray *outletViews;
+@property (nonatomic, retain) NSMutableDictionary *inletsByName;
+@property (nonatomic, retain) NSMutableDictionary *outletsByName;
 @property (nonatomic, retain) NSMutableArray *XLets;
 
 - (void)setupXLets;
@@ -28,10 +28,10 @@
 @end
 
 @implementation NKNodeViewController
+@synthesize nodeID;
 @synthesize name, inletNames, outletNames;
-@synthesize inletViews, outletViews, XLets;
+@synthesize inletsByName, outletsByName, XLets;
 @synthesize movingOffset;
-
 @synthesize delegate;
 
 // IBOutlets
@@ -42,11 +42,12 @@
 
 - (void)dealloc 
 {
+    [nodeID release];
     [inletNames release];
     [outletNames release];
     [name release];
-    [inletViews release];
-    [outletViews release];
+    [inletsByName release];
+    [outletsByName release];
     [XLets release];
     [headerView release];
     [nameLabel release];
@@ -55,31 +56,32 @@
     [super dealloc];
 }
 
-+ (id)node
++ (id)nodeWithID:(NSString *)nodeID
 {
-    return [self nodeWithName:nil inletNames:nil];
+    return [self nodeWithID:nodeID name:nil inletNames:nil];
 }
 
-+ (id)nodeWithName:(NSString *)name inletNames:(NSArray *)inletNames
++ (id)nodeWithID:(NSString *)nodeID name:(NSString *)name inletNames:(NSArray *)inletNames
 {
-    return [self nodeWithName:name inletNames:inletNames outletNames:[NSArray arrayWithObject:@"Out"]];
+    return [self nodeWithID:nodeID name:name inletNames:inletNames outletNames:[NSArray arrayWithObject:@"Out"]];
 }
 
-+ (id)nodeWithName:(NSString *)name inletNames:(NSArray *)inletNames outletNames:(NSArray *)outletNames
++ (id)nodeWithID:(NSString *)nodeID name:(NSString *)name inletNames:(NSArray *)inletNames outletNames:(NSArray *)outletNames
 {
-    NKNodeViewController *nodeViewController = [[[self alloc] initWithNibName:nil bundle:nil] autorelease];
-    nodeViewController.name = name;
-    nodeViewController.inletNames = inletNames;
-    nodeViewController.outletNames = outletNames;
-    return nodeViewController;
+    NKNodeViewController *node = [[[self alloc] initWithNibName:nil bundle:nil] autorelease];
+    node.nodeID = nodeID;
+    node.name = name;
+    node.inletNames = inletNames;
+    node.outletNames = outletNames;
+    return node;
 }
 
 - (void)viewDidLoad 
 {
     [super viewDidLoad];
     
-    self.inletViews = [NSMutableArray array];
-    self.outletViews = [NSMutableArray array];
+    self.inletsByName = [NSMutableDictionary dictionary];
+    self.outletsByName = [NSMutableDictionary dictionary];
     self.XLets = [NSMutableArray array];
     
     UILongPressGestureRecognizer *moveRecognizer = [[[UILongPressGestureRecognizer alloc] initWithTarget:self 
@@ -124,7 +126,7 @@
 {
     NSUInteger maxXLets = MAX([self.inletNames count], [self.outletNames count]);
     CGFloat XLetHeight = maxXLets * [[self class] nodeXLetHeight];
-    
+    /* // stretching the view stretches these in the current implementation
     CGRect inletsFrame = self.inletsView.frame;
     inletsFrame.size.height = XLetHeight;
     self.inletsView.frame = inletsFrame;
@@ -132,18 +134,17 @@
     CGRect outletsFrame = self.outletsView.frame;
     outletsFrame.size.height = XLetHeight;
     self.outletsView.frame = outletsFrame;
+     */
     
     CGRect viewFrame = self.view.frame;
     viewFrame.size.height = self.headerView.frame.size.height + XLetHeight;
     self.view.frame = viewFrame;
-    
-
 }
 
 - (void)setupInlets
 {
-    [self.inletViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    [self.inletViews removeAllObjects];
+    [[self.inletsByName allValues] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [self.inletsByName removeAllObjects];
     NSUInteger index = 0;
     for (NSString *inletName in self.inletNames) 
     {
@@ -153,7 +154,7 @@
         inlet.name = inletName;
         [self configureInlet:inlet];
         [self.inletsView addSubview:inlet];
-        [self.inletViews addObject:inlet];
+        [self.inletsByName setObject:inlet forKey:inletName];
         [self.XLets addObject:inlet];
         index++;
     }
@@ -181,10 +182,20 @@
     [self.delegate inletDidChangeRange:aSliderNodeInlet];
 }
 
+- (NKNodeInlet *)inletNamed:(NSString *)inletName
+{
+    return [self.inletsByName objectForKey:inletName];
+}
+
+- (NKNodeOutlet *)outletNamed:(NSString *)outletName
+{
+    return [self.outletsByName objectForKey:outletName];
+}
+
 - (void)setupOutlets
 {
-    [self.outletViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    [self.outletViews removeAllObjects];
+    [[self.outletsByName allValues] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [self.outletsByName removeAllObjects];
     
     CGFloat totalOutletHeight = [self.outletNames count] * [[self class] nodeXLetHeight];
     CGFloat yCenteringOffset = floor((self.outletsView.frame.size.height - totalOutletHeight) / 2);
@@ -196,7 +207,7 @@
                                        self.outletsView.bounds.size.width, [[self class] nodeXLetHeight]);
         NKNodeOutlet *outletView = [[[self class] outletViewClass] XLetForNode:self withFrame:outletRect];
         [self.outletsView addSubview:outletView];
-        [self.outletViews addObject:outletView];
+        [self.outletsByName setObject:outletView forKey:outletName];
         [self.XLets addObject:outletView];
         
         UILongPressGestureRecognizer *outletRecognizer = [[[UILongPressGestureRecognizer alloc] initWithTarget:self 
@@ -256,7 +267,7 @@
 - (NKNodeInlet *)inletForPointInSuperview:(CGPoint)point
 {
     CGPoint localPoint = [self.inletsView convertPoint:point fromView:self.view.superview];
-    for (NKNodeInlet *inlet in self.inletViews) 
+    for (NKNodeInlet *inlet in [self.inletsByName allValues]) 
     {
         if (CGRectContainsPoint(inlet.frame, localPoint)) 
         {

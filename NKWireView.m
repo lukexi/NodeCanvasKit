@@ -68,10 +68,10 @@
                                                                                          action:@selector(wireTapped:)] autorelease];
         [self addGestureRecognizer:tapRecognizer];
         
-        UIButton *editButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
-        editButton.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
-        [self addSubview:editButton];
-        editButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
+//        UIButton *editButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
+//        editButton.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
+//        [self addSubview:editButton];
+//        editButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
     }
     return self;
 }

@@ -26,9 +26,9 @@
 
 @interface NKNodeViewController : UIViewController <UIGestureRecognizerDelegate, NKSliderNodeInletDelegate>
 
-+ (id)node;
-+ (id)nodeWithName:(NSString *)name inletNames:(NSArray *)inletNames;
-+ (id)nodeWithName:(NSString *)name inletNames:(NSArray *)inletNames outletNames:(NSArray *)outletNames;
++ (id)nodeWithID:(NSString *)nodeID;
++ (id)nodeWithID:(NSString *)nodeID name:(NSString *)name inletNames:(NSArray *)inletNames;
++ (id)nodeWithID:(NSString *)nodeID name:(NSString *)name inletNames:(NSArray *)inletNames outletNames:(NSArray *)outletNames;
 
 // Override if desired
 + (CGFloat)nodeXLetHeight;
@@ -36,6 +36,7 @@
 + (Class)outletViewClass;
 - (void)configureInlet:(NKNodeInlet *)inlet; // To do further configuration of an inlet just after its creation
 
+@property (nonatomic, retain) NSString *nodeID;
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSArray *inletNames;
 @property (nonatomic, retain) NSArray *outletNames;
@@ -52,5 +53,8 @@
 - (NKNodeInlet *)inletForPointInSuperview:(CGPoint)point;
 
 - (void)disconnectAllXLets;
+
+- (NKNodeInlet *)inletNamed:(NSString *)inletName;
+- (NKNodeOutlet *)outletNamed:(NSString *)outletName;
 
 @end

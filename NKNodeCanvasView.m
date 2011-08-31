@@ -20,7 +20,7 @@
 - (void)addNode:(NKNodeViewController *)node atCenterPoint:(CGPoint)centerPoint;
 - (void)removeNode:(NKNodeViewController *)node;
 
-@property (nonatomic, retain) NSMutableSet *nodeViewControllers;
+@property (nonatomic, retain) NSMutableDictionary *nodesByID;
 @property (nonatomic, retain) NSMutableSet *wires;
 
 @property (nonatomic, retain) NKWireView *draggingWire;
@@ -31,7 +31,7 @@
 
 
 @implementation NKNodeCanvasView
-@synthesize nodeViewControllers;
+@synthesize nodesByID;
 @synthesize wires;
 @synthesize draggingWire, selectedWire;
 @synthesize selectedNode;
@@ -42,7 +42,7 @@
     [selectedNode release];
     [selectedWire release];
     [draggingWire release];
-    [nodeViewControllers release];
+    [nodesByID release];
     [wires release];
     [super dealloc];
 }
@@ -74,19 +74,35 @@
 
 - (void)commonInit
 {
-	self.nodeViewControllers = [NSMutableSet set];
+	self.nodesByID = [NSMutableDictionary dictionary];
     self.wires = [NSMutableSet set];
 }
 
-- (void)addNodeNamed:(NSString *)nodeName withInlets:(NSArray *)inletNames animated:(BOOL)animated
+- (void)addNodeWithID:(NSString *)nodeID
+                named:(NSString *)nodeName
+           withInlets:(NSArray *)inletNames
+             animated:(BOOL)animated
 {
-    NKNodeViewController *node = [[[self class] nodeClass] nodeWithName:nodeName
-                                                             inletNames:inletNames];
-    
     CGPoint nodeCenter = CGPointMake(self.bounds.size.width / 2, 
                                      self.bounds.size.height / 2);
+    [self addNodeWithID:nodeID
+                  named:nodeName 
+             withInlets:inletNames 
+                atPoint:nodeCenter 
+               animated:animated];
+}
+
+- (void)addNodeWithID:(NSString *)nodeID
+                named:(NSString *)nodeName
+           withInlets:(NSArray *)inletNames
+              atPoint:(CGPoint)point
+             animated:(BOOL)animated
+{
+    NKNodeViewController *node = [[[self class] nodeClass] nodeWithID:nodeID
+                                                                 name:nodeName
+                                                           inletNames:inletNames];
     
-    [self addNode:node atCenterPoint:nodeCenter];
+    [self addNode:node atCenterPoint:point];
     
     if (animated) 
     {
@@ -101,10 +117,50 @@
     }
 }
 
+- (void)connectOutletNamed:(NSString *)outletName
+              ofNodeWithID:(NSString *)outletParentNodeID
+              toInletNamed:(NSString *)inletName
+              ofNodeWithID:(NSString *)inletParentNodeID
+{
+    NKNodeViewController *outletParentNode = [self.nodesByID objectForKey:outletParentNodeID];
+    NKNodeViewController *inletParentNode = [self.nodesByID objectForKey:inletParentNodeID];
+    
+    [self connectOutlet:[outletParentNode outletNamed:outletName] 
+                toInlet:[inletParentNode inletNamed:inletName]];
+}
+
+- (void)setValueOfInletNamed:(NSString *)inletName 
+                ofNodeWithID:(NSString *)nodeID 
+                          to:(CGFloat)value
+{
+    NKNodeViewController *node = [self.nodesByID objectForKey:nodeID];
+    NKNodeInlet *inlet = [node inletNamed:inletName];
+    
+    if ([inlet isKindOfClass:[NKSliderNodeInlet class]]) 
+    {
+        NKSliderNodeInlet *sliderInlet = (NKSliderNodeInlet *)inlet;
+        sliderInlet.slider.value = value;
+    }
+}
+
+- (void)setRangeOfInletNamed:(NSString *)inletName 
+                ofNodeWithID:(NSString *)nodeID 
+                          to:(CGFloat)range
+{
+    NKNodeViewController *node = [self.nodesByID objectForKey:nodeID];
+    NKNodeInlet *inlet = [node inletNamed:inletName];
+    
+    if ([inlet isKindOfClass:[NKSliderNodeInlet class]]) 
+    {
+        NKSliderNodeInlet *sliderInlet = (NKSliderNodeInlet *)inlet;
+        sliderInlet.slider.range = range;
+    }
+}
+
 - (void)addNode:(NKNodeViewController *)node atCenterPoint:(CGPoint)centerPoint
 {
     node.view.center = centerPoint;
-    [self.nodeViewControllers addObject:node];
+    [self.nodesByID setObject:node forKey:node.nodeID];
     node.delegate = self;
     [self addSubview:node.view];
 }
@@ -145,7 +201,7 @@
             [self.draggingWire update];
             break;
         case UIGestureRecognizerStateEnded:
-            for (NKNodeViewController *nodeViewController in self.nodeViewControllers) 
+            for (NKNodeViewController *nodeViewController in [self.nodesByID allValues]) 
             {
                 NKNodeInlet *foundInlet = [nodeViewController inletForPointInSuperview:locationInView];
                 if (foundInlet)
@@ -211,7 +267,7 @@
 {
     [[node retain] autorelease];
     [node disconnectAllXLets];
-    [self.nodeViewControllers removeObject:node];
+    [self.nodesByID removeObjectForKey:node.nodeID];
     [UIView animateWithDuration:0.5 animations:^(void) {
         node.view.alpha = 0;
         node.view.transform = CGAffineTransformMakeScale(0.1, 0.1);
