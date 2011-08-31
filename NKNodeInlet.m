@@ -10,7 +10,36 @@
 
 #define kNKNodeInletColor [UIColor colorWithRed:0.000 green:0.286 blue:0.647 alpha:1.000]
 
+@interface NKNodeInlet ()
+
+- (void)commonInit;
+
+@end
+
 @implementation NKNodeInlet
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) 
+    {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)coder {
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self commonInit];
+    }
+    return self;
+}
+
+- (void)commonInit
+{
+    self.backgroundColor = [UIColor clearColor];
+}
 
 - (void)drawRect:(CGRect)rect
 {
@@ -22,6 +51,5 @@
     CGContextSetLineWidth(context, 2);
     CGContextStrokeEllipseInRect(context, insetRect);
 }
-
 
 @end

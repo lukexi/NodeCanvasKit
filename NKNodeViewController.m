@@ -136,6 +136,8 @@
     CGRect viewFrame = self.view.frame;
     viewFrame.size.height = self.headerView.frame.size.height + XLetHeight;
     self.view.frame = viewFrame;
+    
+
 }
 
 - (void)setupInlets

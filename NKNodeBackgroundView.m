@@ -23,10 +23,12 @@
 
 - (void)commonInit;
 
+@property (nonatomic) CGSize currentSize;
+
 @end
 
 @implementation NKNodeBackgroundView
-
+@synthesize currentSize;
 - (void)dealloc 
 {
     
@@ -53,10 +55,19 @@
 
 - (void)commonInit
 {
-    self.layer.shadowPath = [[self class] roundedRectPathForRect:self.bounds].CGPath;
     self.layer.shadowColor = [UIColor blackColor].CGColor;
     self.layer.shadowRadius = 10;
     self.layer.shadowOpacity = 0.5;
+}
+
+- (void)setFrame:(CGRect)frame
+{
+    [super setFrame:frame];
+    if (!CGSizeEqualToSize(frame.size, self.currentSize)) 
+    {
+        self.layer.shadowPath = [[self class] roundedRectPathForRect:self.bounds].CGPath;
+        self.currentSize = frame.size;
+    }
 }
 
 - (void)drawRect:(CGRect)rect
@@ -93,12 +104,7 @@
 
 + (UIBezierPath *)roundedRectPathForRect:(CGRect)rect
 {
-    static UIBezierPath *backgroundPath = nil;
-    if (!backgroundPath) 
-    {
-        backgroundPath = [[UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:15] retain];
-    }
-    return backgroundPath;
+    return [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:15];
 }
 
 + (UIBezierPath *)decorativeTrianglePath

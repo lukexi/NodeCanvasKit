@@ -74,4 +74,9 @@
     [self.delegate sliderInletDidChangeRange:self];
 }
 
+- (void)drawRect:(CGRect)rect
+{
+    // remove the default drawRect of our superclass
+}
+
 @end

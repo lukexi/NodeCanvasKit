@@ -78,13 +78,6 @@
     self.wires = [NSMutableSet set];
 }
 
-- (IBAction)addNode:(id)sender
-{
-    [self addNodeNamed:@"SinOsc" 
-            withInlets:[NSArray arrayWithObjects:@"Freq", @"Phase", @"Width", nil] 
-              animated:YES];
-}
-
 - (void)addNodeNamed:(NSString *)nodeName withInlets:(NSArray *)inletNames animated:(BOOL)animated
 {
     NKNodeViewController *node = [[[self class] nodeClass] nodeWithName:nodeName

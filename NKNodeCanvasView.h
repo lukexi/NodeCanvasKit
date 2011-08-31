@@ -49,8 +49,6 @@ disconnectedOutletNamed:(NSString *)outletName
 
 @property (nonatomic, assign) IBOutlet id <NKNodeCanvasViewDelegate> delegate;
 
-- (IBAction)addNode:(id)sender;
-
 - (void)addOutNode;
 - (void)addNodeNamed:(NSString *)nodeName withInlets:(NSArray *)inletNames animated:(BOOL)animated;
 
