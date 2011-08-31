@@ -51,10 +51,9 @@
 		C2FFA90C1403729100DCBDD4 /* NodeCanvasDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2FFA90A1403729100DCBDD4 /* NodeCanvasDemoViewController.xib */; };
 		C2FFA917140372D800DCBDD4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2FFA8F41403729000DCBDD4 /* Foundation.framework */; };
 		C2FFA91D140372D800DCBDD4 /* NodeCanvasKit.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FFA91C140372D800DCBDD4 /* NodeCanvasKit.m */; };
-		C2FFA92A1403731F00DCBDD4 /* NKNodeCanvasViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C2FFA9211403731F00DCBDD4 /* NKNodeCanvasViewController.h */; };
-		C2FFA92B1403731F00DCBDD4 /* NKNodeCanvasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FFA9221403731F00DCBDD4 /* NKNodeCanvasViewController.m */; };
-		C2FFA92C1403731F00DCBDD4 /* NKNodeCanvasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FFA9221403731F00DCBDD4 /* NKNodeCanvasViewController.m */; };
-		C2FFA92D1403731F00DCBDD4 /* NKNodeCanvasViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2FFA9231403731F00DCBDD4 /* NKNodeCanvasViewController.xib */; };
+		C2FFA92A1403731F00DCBDD4 /* NKNodeCanvasView.h in Headers */ = {isa = PBXBuildFile; fileRef = C2FFA9211403731F00DCBDD4 /* NKNodeCanvasView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C2FFA92B1403731F00DCBDD4 /* NKNodeCanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FFA9221403731F00DCBDD4 /* NKNodeCanvasView.m */; };
+		C2FFA92C1403731F00DCBDD4 /* NKNodeCanvasView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FFA9221403731F00DCBDD4 /* NKNodeCanvasView.m */; };
 		C2FFA92E1403731F00DCBDD4 /* NKNodeViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C2FFA9241403731F00DCBDD4 /* NKNodeViewController.h */; };
 		C2FFA92F1403731F00DCBDD4 /* NKNodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FFA9251403731F00DCBDD4 /* NKNodeViewController.m */; };
 		C2FFA9301403731F00DCBDD4 /* NKNodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2FFA9251403731F00DCBDD4 /* NKNodeViewController.m */; };
@@ -107,9 +106,8 @@
 		C2FFA91A140372D800DCBDD4 /* NodeCanvasKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NodeCanvasKit-Prefix.pch"; sourceTree = "<group>"; };
 		C2FFA91B140372D800DCBDD4 /* NodeCanvasKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NodeCanvasKit.h; sourceTree = "<group>"; };
 		C2FFA91C140372D800DCBDD4 /* NodeCanvasKit.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NodeCanvasKit.m; sourceTree = "<group>"; };
-		C2FFA9211403731F00DCBDD4 /* NKNodeCanvasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKNodeCanvasViewController.h; sourceTree = "<group>"; };
-		C2FFA9221403731F00DCBDD4 /* NKNodeCanvasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKNodeCanvasViewController.m; sourceTree = "<group>"; };
-		C2FFA9231403731F00DCBDD4 /* NKNodeCanvasViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NKNodeCanvasViewController.xib; sourceTree = "<group>"; };
+		C2FFA9211403731F00DCBDD4 /* NKNodeCanvasView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKNodeCanvasView.h; sourceTree = "<group>"; };
+		C2FFA9221403731F00DCBDD4 /* NKNodeCanvasView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKNodeCanvasView.m; sourceTree = "<group>"; };
 		C2FFA9241403731F00DCBDD4 /* NKNodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKNodeViewController.h; sourceTree = "<group>"; };
 		C2FFA9251403731F00DCBDD4 /* NKNodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKNodeViewController.m; sourceTree = "<group>"; };
 		C2FFA9261403731F00DCBDD4 /* NKNodeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NKNodeViewController.xib; sourceTree = "<group>"; };
@@ -256,9 +254,8 @@
 		C2FFA9361403732C00DCBDD4 /* NodeCanvasKit */ = {
 			isa = PBXGroup;
 			children = (
-				C2FFA9211403731F00DCBDD4 /* NKNodeCanvasViewController.h */,
-				C2FFA9221403731F00DCBDD4 /* NKNodeCanvasViewController.m */,
-				C2FFA9231403731F00DCBDD4 /* NKNodeCanvasViewController.xib */,
+				C2FFA9211403731F00DCBDD4 /* NKNodeCanvasView.h */,
+				C2FFA9221403731F00DCBDD4 /* NKNodeCanvasView.m */,
 				C2E0D860140B9DFF000B1F73 /* NKGridView.h */,
 				C2E0D861140B9E00000B1F73 /* NKGridView.m */,
 				C2FFA9271403731F00DCBDD4 /* NKWireView.h */,
@@ -276,7 +273,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2FFA92A1403731F00DCBDD4 /* NKNodeCanvasViewController.h in Headers */,
+				C2FFA92A1403731F00DCBDD4 /* NKNodeCanvasView.h in Headers */,
 				C2FFA92E1403731F00DCBDD4 /* NKNodeViewController.h in Headers */,
 				C2FFA9321403731F00DCBDD4 /* NKWireView.h in Headers */,
 				C2E0D82B140AF956000B1F73 /* NKNodeInlet.h in Headers */,
@@ -363,7 +360,6 @@
 				C2FFA8FD1403729100DCBDD4 /* InfoPlist.strings in Resources */,
 				C2FFA9061403729100DCBDD4 /* MainWindow.xib in Resources */,
 				C2FFA90C1403729100DCBDD4 /* NodeCanvasDemoViewController.xib in Resources */,
-				C2FFA92D1403731F00DCBDD4 /* NKNodeCanvasViewController.xib in Resources */,
 				C2FFA9311403731F00DCBDD4 /* NKNodeViewController.xib in Resources */,
 				C2E0D858140B3316000B1F73 /* NKOutNodeViewController.xib in Resources */,
 				C2D047C8140C9D84004446A2 /* NKSlider.xib in Resources */,
@@ -380,7 +376,7 @@
 				C2FFA8FF1403729100DCBDD4 /* main.m in Sources */,
 				C2FFA9031403729100DCBDD4 /* NodeCanvasDemoAppDelegate.m in Sources */,
 				C2FFA9091403729100DCBDD4 /* NodeCanvasDemoViewController.m in Sources */,
-				C2FFA92B1403731F00DCBDD4 /* NKNodeCanvasViewController.m in Sources */,
+				C2FFA92B1403731F00DCBDD4 /* NKNodeCanvasView.m in Sources */,
 				C2FFA92F1403731F00DCBDD4 /* NKNodeViewController.m in Sources */,
 				C2FFA9331403731F00DCBDD4 /* NKWireView.m in Sources */,
 				C2E0D826140A6B47000B1F73 /* NKNodeBackgroundView.m in Sources */,
@@ -401,7 +397,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C2FFA91D140372D800DCBDD4 /* NodeCanvasKit.m in Sources */,
-				C2FFA92C1403731F00DCBDD4 /* NKNodeCanvasViewController.m in Sources */,
+				C2FFA92C1403731F00DCBDD4 /* NKNodeCanvasView.m in Sources */,
 				C2FFA9301403731F00DCBDD4 /* NKNodeViewController.m in Sources */,
 				C2FFA9341403731F00DCBDD4 /* NKWireView.m in Sources */,
 				C2E0D828140A6B4C000B1F73 /* NKNodeBackgroundView.m in Sources */,

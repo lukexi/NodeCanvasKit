@@ -9,7 +9,13 @@
 #import "NodeCanvasDemoViewController.h"
 
 @implementation NodeCanvasDemoViewController
-@synthesize outNodeViewController;
+@synthesize nodeCanvasView;
+
+- (void)dealloc 
+{
+    [nodeCanvasView release];
+    [super dealloc];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -27,16 +33,6 @@
 {
     [super viewDidLoad];
     
-    // viewDidLoad is called twice due to xcode4 bug, workaround is to make sure things are only initialized once.
-    if (!self.outNodeViewController) 
-    {
-        self.outNodeViewController = [NKOutNodeViewController outNode];
-        
-        CGPoint outletCenter = CGPointMake(self.view.center.x, 
-                                           self.canvasView.bounds.size.height - (self.outNodeViewController.view.bounds.size.height/2) - 44);
-        
-        [self addNode:self.outNodeViewController atCenterPoint:outletCenter];
-    }
 }
 
 

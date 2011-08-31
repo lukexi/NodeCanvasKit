@@ -6,13 +6,22 @@
 //  Copyright 2010 Hello, Chair Inc. All rights reserved.
 //
 
-#import "NKNodeCanvasViewController.h"
+#import "NKNodeCanvasView.h"
 #import "NKOutNodeViewController.h"
 #import "NKNodeOutlet.h"
 
-@interface NKNodeCanvasViewController ()
+@interface NKNodeCanvasView ()
 
 - (void)commonInit;
+
+- (void)connectOutlet:(NKNodeOutlet *)outlet toInlet:(NKNodeInlet *)inlet;
+- (void)disconnectWire:(NKWireView *)wire;
+
+- (void)addNode:(NKNodeViewController *)node atCenterPoint:(CGPoint)centerPoint;
+- (void)removeNode:(NKNodeViewController *)node;
+
+@property (nonatomic, retain) NSMutableSet *nodeViewControllers;
+@property (nonatomic, retain) NSMutableSet *wires;
 
 @property (nonatomic, retain) NKWireView *draggingWire;
 @property (nonatomic, retain) NKWireView *selectedWire;
@@ -21,7 +30,7 @@
 @end
 
 
-@implementation NKNodeCanvasViewController
+@implementation NKNodeCanvasView
 @synthesize nodeViewControllers;
 @synthesize wires;
 @synthesize draggingWire, selectedWire;
@@ -38,23 +47,19 @@
     [super dealloc];
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil 
-{
-    if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) 
-    {
-        [self commonInit];
-    }
-    return self;
-}
-
 + (Class)nodeClass
 {
     return [NKNodeViewController class];
 }
 
-- (UIView *)canvasView
+- (id)initWithFrame:(CGRect)frame 
 {
-    return self.view;
+    self = [super initWithFrame:frame];
+    if (self) 
+    {
+        [self commonInit];
+    }
+    return self;
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -73,27 +78,34 @@
     self.wires = [NSMutableSet set];
 }
 
-- (void)viewDidLoad 
-{
-    [super viewDidLoad];
-}
-
 - (IBAction)addNode:(id)sender
 {
-    NKNodeViewController *node = [[[self class] nodeClass] nodeWithName:@"SinOsc" 
-                                                             inletNames:[NSArray arrayWithObjects:@"Freq", @"Phase", @"Width", nil]];
+    [self addNodeNamed:@"SinOsc" 
+            withInlets:[NSArray arrayWithObjects:@"Freq", @"Phase", @"Width", nil] 
+              animated:YES];
+}
+
+- (void)addNodeNamed:(NSString *)nodeName withInlets:(NSArray *)inletNames animated:(BOOL)animated
+{
+    NKNodeViewController *node = [[[self class] nodeClass] nodeWithName:nodeName
+                                                             inletNames:inletNames];
     
-    CGPoint nodeCenter = CGPointMake(self.canvasView.bounds.size.width / 2, 
-                                     self.canvasView.bounds.size.height / 2);
+    CGPoint nodeCenter = CGPointMake(self.bounds.size.width / 2, 
+                                     self.bounds.size.height / 2);
+    
     [self addNode:node atCenterPoint:nodeCenter];
-    node.view.transform = CGAffineTransformMakeScale(0.1, 0.1);
-    [UIView animateWithDuration:0.3 animations:^(void) {
-        node.view.transform = CGAffineTransformMakeScale(1.1, 1.1);
-    } completion:^(BOOL finished) {
+    
+    if (animated) 
+    {
+        node.view.transform = CGAffineTransformMakeScale(0.1, 0.1);
         [UIView animateWithDuration:0.3 animations:^(void) {
-            node.view.transform = CGAffineTransformIdentity;
+            node.view.transform = CGAffineTransformMakeScale(1.1, 1.1);
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.3 animations:^(void) {
+                node.view.transform = CGAffineTransformIdentity;
+            }];
         }];
-    }];
+    }
 }
 
 - (void)addNode:(NKNodeViewController *)node atCenterPoint:(CGPoint)centerPoint
@@ -101,13 +113,23 @@
     node.view.center = centerPoint;
     [self.nodeViewControllers addObject:node];
     node.delegate = self;
-    [self.canvasView addSubview:node.view];
+    [self addSubview:node.view];
+}
+
+- (void)addOutNode
+{
+    NKOutNodeViewController *outNode = [NKOutNodeViewController outNode];
+    
+    CGPoint outletCenter = CGPointMake(CGRectGetMidX(self.bounds), 
+                                       self.bounds.size.height - (outNode.view.bounds.size.height/2) - 44);
+    
+    [self addNode:outNode atCenterPoint:outletCenter];
 }
 
 - (void)node:(NKNodeViewController *)node wasTapped:(UITapGestureRecognizer *)gestureRecognizer
 {
     [self becomeFirstResponder];
-    [[UIMenuController sharedMenuController] setTargetRect:node.view.frame inView:self.canvasView];
+    [[UIMenuController sharedMenuController] setTargetRect:node.view.frame inView:self];
     [[UIMenuController sharedMenuController] setMenuVisible:YES animated:YES];
     self.selectedNode = node;
     self.selectedWire = nil;
@@ -115,16 +137,16 @@
 
 - (void)node:(NKNodeViewController *)node didMove:(UILongPressGestureRecognizer *)gestureRecognizer
 {
-    [node moveToTouchAdjustedPoint:[gestureRecognizer locationInView:[self canvasView]]];
+    [node moveToTouchAdjustedPoint:[gestureRecognizer locationInView:self]];
 }
 
 - (void)outlet:(NKNodeOutlet *)outlet didDrag:(UILongPressGestureRecognizer *)gestureRecognizer
 {
-    CGPoint locationInView = [gestureRecognizer locationInView:[self canvasView]];
+    CGPoint locationInView = [gestureRecognizer locationInView:self];
     switch (gestureRecognizer.state) {
         case UIGestureRecognizerStateBegan:
             self.draggingWire = [NKWireView wireFrom:outlet to:nil delegate:self];
-            [[self canvasView] addSubview:self.draggingWire];
+            [self addSubview:self.draggingWire];
         case UIGestureRecognizerStateChanged:
             self.draggingWire.endPoint = locationInView;
             [self.draggingWire update];
@@ -140,6 +162,12 @@
                         NSLog(@"Self-feedback connections are not yet supported.");
                     }
                     [self connectOutlet:outlet toInlet:foundInlet];
+                    
+                    [self.delegate nodeCanvas:self 
+                         connectedOutletNamed:outlet.name
+                                  ofNodeNamed:outlet.parentNode.name 
+                                 toInletNamed:foundInlet.name 
+                                  ofNodeNamed:foundInlet.parentNode.name];
                 }
             }
         case UIGestureRecognizerStateCancelled:
@@ -150,21 +178,27 @@
     }
 }
 
-- (void)inletDidChangeValue:(NKNodeInlet *)inlet
+- (void)inletDidChangeValue:(NKSliderNodeInlet *)inlet
 {
-    [self.delegate nodeCanvas:self inletDidChangeValue:inlet];
+    [self.delegate nodeCanvas:self 
+                   inletNamed:inlet.name 
+                  ofNodeNamed:inlet.parentNode.name
+             didChangeValueTo:inlet.slider.value];
 }
 
-- (void)inletDidChangeRange:(NKNodeInlet *)inlet
+- (void)inletDidChangeRange:(NKSliderNodeInlet *)inlet
 {
-    [self.delegate nodeCanvas:self inletDidChangeRange:inlet];
+    [self.delegate nodeCanvas:self 
+                   inletNamed:inlet.name 
+                  ofNodeNamed:inlet.parentNode.name
+             didChangeRangeTo:inlet.slider.range];
 }
 
 - (void)connectOutlet:(NKNodeOutlet *)outlet toInlet:(NKNodeInlet *)inlet
 {
     NKWireView *wire = [NKWireView wireFrom:outlet to:inlet delegate:self];
     [self.wires addObject:wire];
-    [[self canvasView] addSubview:wire];
+    [self addSubview:wire];
 }
 
 - (void)disconnectWire:(NKWireView *)wire
@@ -200,25 +234,29 @@
     CGFloat halfHeight = frame.size.height / 2;
     frame.origin.y += halfHeight;
     frame.size.height = halfHeight;
-    [[UIMenuController sharedMenuController] setTargetRect:frame inView:self.canvasView];
+    [[UIMenuController sharedMenuController] setTargetRect:frame inView:self];
     [[UIMenuController sharedMenuController] setMenuVisible:YES animated:YES];
     
     self.selectedNode = nil;
     self.selectedWire = aWireView;
 }
 
-
-
 - (void)delete:(id)sender
 {
     if (self.selectedWire) 
     {
         [self disconnectWire:self.selectedWire];
+        [self.delegate nodeCanvas:self 
+          disconnectedOutletNamed:self.selectedWire.fromOutlet.name 
+                      ofNodeNamed:self.selectedWire.fromOutlet.parentNode.name 
+                   fromInletNamed:self.selectedWire.toInlet.name 
+                      ofNodeNamed:self.selectedWire.toInlet.parentNode.name];
         self.selectedWire = nil;
     }
     else if (self.selectedNode)
     {
         [self removeNode:self.selectedNode];
+        [self.delegate nodeCanvas:self removedNodeNamed:self.selectedNode.name];
         self.selectedNode = nil;
     }
 }
@@ -236,32 +274,6 @@
 {
     return YES;
 }
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
-{
-    // Overriden to allow any orientation.
-    return YES;
-}
-
-
-- (void)didReceiveMemoryWarning 
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-
-- (void)viewDidUnload 
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-
-
 
 
 @end

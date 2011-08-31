@@ -21,12 +21,12 @@
 
 @interface NKWireView : UIView
 
-+ (NKWireView *)wireWithDelegate:(UIViewController <NKWireViewDelegate> *)delegate;
++ (NKWireView *)wireWithDelegate:(UIView <NKWireViewDelegate> *)delegate;
 + (NKWireView *)wireFrom:(NKNodeOutlet *)fromOutlet 
                       to:(NKNodeInlet *)toInlet 
-                delegate:(UIViewController <NKWireViewDelegate> *)delegate;
+                delegate:(UIView <NKWireViewDelegate> *)delegate;
 
-@property (nonatomic, assign) UIViewController <NKWireViewDelegate> *delegate;
+@property (nonatomic, assign) UIView <NKWireViewDelegate> *delegate;
 @property (nonatomic, retain) NKNodeOutlet *fromOutlet;
 @property (nonatomic, retain) NKNodeInlet *toInlet;
 @property (nonatomic) CGPoint endPoint;

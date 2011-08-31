@@ -28,7 +28,7 @@
 @synthesize hitPath;
 @synthesize delegate;
 
-+ (NKWireView *)wireWithDelegate:(UIViewController <NKWireViewDelegate> *)delegate;
++ (NKWireView *)wireWithDelegate:(UIView <NKWireViewDelegate> *)delegate;
 {
     NKWireView *wire = [[[self alloc] initWithFrame:CGRectZero] autorelease];
     wire.delegate = delegate;
@@ -37,7 +37,7 @@
 
 + (NKWireView *)wireFrom:(NKNodeOutlet *)fromOutlet 
                       to:(NKNodeInlet *)toInlet 
-                delegate:(UIViewController <NKWireViewDelegate> *)delegate;
+                delegate:(UIView <NKWireViewDelegate> *)delegate;
 {
     NKWireView *wire = [self wireWithDelegate:delegate];
     
@@ -83,8 +83,8 @@
 
 - (void)update
 {
-    CGPoint inCenter = [self.fromOutlet connectionPointInView:self.delegate.view];
-    CGPoint outCenter = [self.toInlet connectionPointInView:self.delegate.view];
+    CGPoint inCenter = [self.fromOutlet connectionPointInView:self.delegate];
+    CGPoint outCenter = [self.toInlet connectionPointInView:self.delegate];
     if (!self.toInlet)
     {
         outCenter = self.endPoint;

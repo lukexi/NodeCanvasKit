@@ -1,27 +1,26 @@
 //
-//  FFNode.h
-//  Flowerfield
+//  NKNodeViewController.h
+//  NodeCanvasKit
 //
 //  Created by Luke Iannini on 10/26/10.
 //  Copyright 2010 Hello, Chair Inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import "NKSliderNodeInlet.h"
 
 @class NKNodeViewController;
 @class NKNodeOutlet;
 @class NKNodeInlet;
-@class NKSliderNodeInlet;
-
-@protocol NKSliderNodeInletDelegate;
 
 @protocol NKNodeViewControllerDelegate <NSObject>
 
 - (void)node:(NKNodeViewController *)node wasTapped:(UITapGestureRecognizer *)gestureRecognizer;
 - (void)node:(NKNodeViewController *)node didMove:(UILongPressGestureRecognizer *)gestureRecognizer;
 - (void)outlet:(NKNodeOutlet *)outlet didDrag:(UILongPressGestureRecognizer *)gestureRecognizer;
-- (void)inletDidChangeValue:(NKNodeInlet *)inlet;
-- (void)inletDidChangeRange:(NKNodeInlet *)inlet;
+
+- (void)inletDidChangeValue:(NKSliderNodeInlet *)inlet;
+- (void)inletDidChangeRange:(NKSliderNodeInlet *)inlet;
 
 @end
 
