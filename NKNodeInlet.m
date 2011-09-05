@@ -44,12 +44,13 @@
 - (void)drawRect:(CGRect)rect
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
-    CGRect insetRect = CGRectInset(self.bounds, 5, 5);
+    CGFloat inletSize = self.bounds.size.height - 10;
+    CGRect inletRect = CGRectMake(5, 5, inletSize, inletSize);
     [kNKNodeInletColor set];
-    CGContextFillEllipseInRect(context, insetRect);
+    CGContextFillEllipseInRect(context, inletRect);
     [[UIColor blackColor] set];
     CGContextSetLineWidth(context, 2);
-    CGContextStrokeEllipseInRect(context, insetRect);
+    CGContextStrokeEllipseInRect(context, inletRect);
 }
 
 @end

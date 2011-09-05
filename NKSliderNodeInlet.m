@@ -41,15 +41,16 @@
 
 - (void)setupControls
 {
-    CGFloat thirds = floor((self.frame.size.width - kNKNodeInletLeftMargin) / 3);
-    self.slider = [[[NKSlider alloc] initWithFrame:CGRectMake(kNKNodeInletLeftMargin, 
+    CGFloat margin = kNKNodeInletLeftMargin + (self.bounds.size.height - 10);
+    CGFloat thirds = floor((self.bounds.size.width - margin) / 3);
+    self.slider = [[[NKSlider alloc] initWithFrame:CGRectMake(margin, 
                                                               0, 
                                                               2 * thirds, 
                                                               self.frame.size.height)] autorelease];
     self.slider.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleRightMargin;
     self.slider.delegate = self;
     
-    self.label = [[[UILabel alloc] initWithFrame:CGRectMake(kNKNodeInletLeftMargin + 2 * thirds, 
+    self.label = [[[UILabel alloc] initWithFrame:CGRectMake(margin + 2 * thirds, 
                                                             0, 
                                                             1 * thirds, 
                                                             self.frame.size.height)] autorelease];
@@ -74,9 +75,10 @@
     [self.delegate sliderInletDidChangeRange:self];
 }
 
-- (void)drawRect:(CGRect)rect
+- (CGPoint)connectionPointInView:(UIView *)aView
 {
-    // remove the default drawRect of our superclass
+    CGFloat inletCircleCenterX = (self.bounds.size.height - 10) / 2 + 5;
+    return [aView convertPoint:CGPointMake(inletCircleCenterX, CGRectGetMidY(self.bounds)) fromView:self];
 }
 
 @end

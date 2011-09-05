@@ -11,39 +11,51 @@
 #import "NKNodeViewController.h"
 #import "NKWireView.h"
 #import "NKGridView.h"
+#import "NKWireEditorViewController.h"
 
 @class NKNodeCanvasView;
 @protocol NKNodeCanvasViewDelegate <NSObject>
 
 - (void)nodeCanvas:(NKNodeCanvasView *)aNodeCanvas 
 connectedOutletNamed:(NSString *)outletName
-       ofNodeNamed:(NSString *)outletParentNodeName
+      ofNodeWithID:(NSString *)outletParentNodeID
       toInletNamed:(NSString *)inlet
-       ofNodeNamed:(NSString *)inletParentNodeName;
+      ofNodeWithID:(NSString *)inletParentNodeID;
 
 - (void)nodeCanvas:(NKNodeCanvasView *)aNodeCanvas 
 disconnectedOutletNamed:(NSString *)outletName
-       ofNodeNamed:(NSString *)outletParentNodeName
+      ofNodeWithID:(NSString *)outletParentNodeID
     fromInletNamed:(NSString *)inlet
-       ofNodeNamed:(NSString *)inletParentNodeName;
+      ofNodeWithID:(NSString *)inletParentNodeID;
 
 - (void)nodeCanvas:(NKNodeCanvasView *)aNodeCanvas
-  removedNodeNamed:(NSString *)nodeName;
+removedNodeWidthID:(NSString *)nodeID;
+
+- (void)nodeCanvas:(NKNodeCanvasView *)aNodeCanvas
+   movedNodeWithID:(NSString *)nodeID
+           toPoint:(CGPoint)point;
 
 // Things to move to subclasses
 - (void)nodeCanvas:(NKNodeCanvasView *)aNodeCanvas
         inletNamed:(NSString *)inletName 
-       ofNodeNamed:(NSString *)nodeName
+      ofNodeWithID:(NSString *)nodeID
   didChangeValueTo:(CGFloat)value;
 
 - (void)nodeCanvas:(NKNodeCanvasView *)aNodeCanvas
         inletNamed:(NSString *)inletName 
-       ofNodeNamed:(NSString *)nodeName
+      ofNodeWithID:(NSString *)nodeID
   didChangeRangeTo:(CGFloat)range;
+
+- (void)nodeCanvas:(NKNodeCanvasView *)aNodeCanvas 
+connectionOfOutletNamed:(NSString *)outletName
+      ofNodeWithID:(NSString *)outletParentNodeID
+      toInletNamed:(NSString *)inlet
+      ofNodeWithID:(NSString *)inletParentNodeID
+    didChangeAmpTo:(CGFloat)amp;
 
 @end
 
-@interface NKNodeCanvasView : NKGridView <NKNodeViewControllerDelegate, NKWireViewDelegate>
+@interface NKNodeCanvasView : NKGridView <NKNodeViewControllerDelegate, NKWireViewDelegate, NKWireEditorViewControllerDelegate>
 
 + (Class)nodeClass;
 
@@ -65,7 +77,8 @@ disconnectedOutletNamed:(NSString *)outletName
 - (void)connectOutletNamed:(NSString *)inletName
               ofNodeWithID:(NSString *)inletParentNodeID
               toInletNamed:(NSString *)inletName
-              ofNodeWithID:(NSString *)outletParentNodeID;
+              ofNodeWithID:(NSString *)outletParentNodeID
+                     atAmp:(CGFloat)amp;
 
 - (void)setValueOfInletNamed:(NSString *)inletName 
                 ofNodeWithID:(NSString *)nodeID 

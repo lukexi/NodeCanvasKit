@@ -14,7 +14,7 @@
 
 - (void)commonInit;
 
-- (void)connectOutlet:(NKNodeOutlet *)outlet toInlet:(NKNodeInlet *)inlet;
+- (void)connectOutlet:(NKNodeOutlet *)outlet toInlet:(NKNodeInlet *)inlet atAmp:(CGFloat)amp;
 - (void)disconnectWire:(NKWireView *)wire;
 
 - (void)addNode:(NKNodeViewController *)node atCenterPoint:(CGPoint)centerPoint;
@@ -26,6 +26,10 @@
 @property (nonatomic, retain) NKWireView *draggingWire;
 @property (nonatomic, retain) NKWireView *selectedWire;
 @property (nonatomic, retain) NKNodeViewController *selectedNode;
+@property (nonatomic, retain) UIPopoverController *currentPopoverController;
+
+- (void)showPopover:(UIPopoverController *)popoverController fromRect:(CGRect)rect;
+- (void)dismissCurrentPopover;
 
 @end
 
@@ -36,6 +40,7 @@
 @synthesize draggingWire, selectedWire;
 @synthesize selectedNode;
 @synthesize delegate;
+@synthesize currentPopoverController;
 
 - (void)dealloc 
 {
@@ -44,6 +49,7 @@
     [draggingWire release];
     [nodesByID release];
     [wires release];
+    [currentPopoverController release];
     [super dealloc];
 }
 
@@ -76,6 +82,17 @@
 {
 	self.nodesByID = [NSMutableDictionary dictionary];
     self.wires = [NSMutableSet set];
+    
+    UITapGestureRecognizer *recognizer = [[[UITapGestureRecognizer alloc] initWithTarget:self 
+                                                                                  action:@selector(handleSingleTap:)] 
+                                          autorelease];
+    [self addGestureRecognizer:recognizer];
+}
+
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer
+{
+    [[UIMenuController sharedMenuController] setMenuVisible:NO 
+                                                   animated:YES];
 }
 
 - (void)addNodeWithID:(NSString *)nodeID
@@ -121,12 +138,14 @@
               ofNodeWithID:(NSString *)outletParentNodeID
               toInletNamed:(NSString *)inletName
               ofNodeWithID:(NSString *)inletParentNodeID
+                     atAmp:(CGFloat)amp;
 {
     NKNodeViewController *outletParentNode = [self.nodesByID objectForKey:outletParentNodeID];
     NKNodeViewController *inletParentNode = [self.nodesByID objectForKey:inletParentNodeID];
     
     [self connectOutlet:[outletParentNode outletNamed:outletName] 
-                toInlet:[inletParentNode inletNamed:inletName]];
+                toInlet:[inletParentNode inletNamed:inletName]
+                  atAmp:amp];
 }
 
 - (void)setValueOfInletNamed:(NSString *)inletName 
@@ -187,6 +206,13 @@
 - (void)node:(NKNodeViewController *)node didMove:(UILongPressGestureRecognizer *)gestureRecognizer
 {
     [node moveToTouchAdjustedPoint:[gestureRecognizer locationInView:self]];
+    
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) 
+    {
+        [self.delegate nodeCanvas:self 
+                  movedNodeWithID:node.nodeID 
+                          toPoint:node.view.center];
+    }
 }
 
 - (void)outlet:(NKNodeOutlet *)outlet didDrag:(UILongPressGestureRecognizer *)gestureRecognizer
@@ -194,7 +220,7 @@
     CGPoint locationInView = [gestureRecognizer locationInView:self];
     switch (gestureRecognizer.state) {
         case UIGestureRecognizerStateBegan:
-            self.draggingWire = [NKWireView wireFrom:outlet to:nil delegate:self];
+            self.draggingWire = [NKWireView wireFrom:outlet to:nil atAmp:0 delegate:self];
             [self addSubview:self.draggingWire];
         case UIGestureRecognizerStateChanged:
             self.draggingWire.endPoint = locationInView;
@@ -210,13 +236,13 @@
                     {
                         NSLog(@"Self-feedback connections are not yet supported.");
                     }
-                    [self connectOutlet:outlet toInlet:foundInlet];
+                    [self connectOutlet:outlet toInlet:foundInlet atAmp:1];
                     
                     [self.delegate nodeCanvas:self 
                          connectedOutletNamed:outlet.name
-                                  ofNodeNamed:outlet.parentNode.name 
+                                 ofNodeWithID:outlet.parentNode.nodeID 
                                  toInletNamed:foundInlet.name 
-                                  ofNodeNamed:foundInlet.parentNode.name];
+                                 ofNodeWithID:foundInlet.parentNode.nodeID];
                 }
             }
         case UIGestureRecognizerStateCancelled:
@@ -231,7 +257,7 @@
 {
     [self.delegate nodeCanvas:self 
                    inletNamed:inlet.name 
-                  ofNodeNamed:inlet.parentNode.name
+                 ofNodeWithID:inlet.parentNode.nodeID
              didChangeValueTo:inlet.slider.value];
 }
 
@@ -239,13 +265,13 @@
 {
     [self.delegate nodeCanvas:self 
                    inletNamed:inlet.name 
-                  ofNodeNamed:inlet.parentNode.name
+                 ofNodeWithID:inlet.parentNode.nodeID
              didChangeRangeTo:inlet.slider.range];
 }
 
-- (void)connectOutlet:(NKNodeOutlet *)outlet toInlet:(NKNodeInlet *)inlet
+- (void)connectOutlet:(NKNodeOutlet *)outlet toInlet:(NKNodeInlet *)inlet atAmp:(CGFloat)amp
 {
-    NKWireView *wire = [NKWireView wireFrom:outlet to:inlet delegate:self];
+    NKWireView *wire = [NKWireView wireFrom:outlet to:inlet atAmp:amp delegate:self];
     [self.wires addObject:wire];
     [self addSubview:wire];
 }
@@ -278,16 +304,38 @@
 
 - (void)wireViewTapped:(NKWireView *)aWireView
 {
-    [self becomeFirstResponder];
     CGRect frame = aWireView.frame;
     CGFloat halfHeight = frame.size.height / 2;
     frame.origin.y += halfHeight;
     frame.size.height = halfHeight;
-    [[UIMenuController sharedMenuController] setTargetRect:frame inView:self];
-    [[UIMenuController sharedMenuController] setMenuVisible:YES animated:YES];
+    
+    UIPopoverController *popover = [[[UIPopoverController alloc] initWithContentViewController:[NKWireEditorViewController wireEditorViewControllerWithDelegate:self value:1.0 multiplier:aWireView.amp inNavController:YES]] autorelease];
+    
+    [self showPopover:popover fromRect:frame];
+    
+//    [self becomeFirstResponder];
+//    [[UIMenuController sharedMenuController] setTargetRect:frame inView:self];
+//    [[UIMenuController sharedMenuController] setMenuVisible:YES animated:YES];
     
     self.selectedNode = nil;
     self.selectedWire = aWireView;
+}
+
+- (void)showPopover:(UIPopoverController *)popoverController fromRect:(CGRect)rect
+{
+    [self.currentPopoverController dismissPopoverAnimated:YES];
+    
+    [popoverController presentPopoverFromRect:rect 
+                                       inView:self 
+                     permittedArrowDirections:UIPopoverArrowDirectionAny 
+                                     animated:YES];
+    self.currentPopoverController = popoverController;
+}
+
+- (void)dismissCurrentPopover
+{
+    [self.currentPopoverController dismissPopoverAnimated:YES];
+    self.currentPopoverController = nil;
 }
 
 - (void)delete:(id)sender
@@ -297,15 +345,15 @@
         [self disconnectWire:self.selectedWire];
         [self.delegate nodeCanvas:self 
           disconnectedOutletNamed:self.selectedWire.fromOutlet.name 
-                      ofNodeNamed:self.selectedWire.fromOutlet.parentNode.name 
+                     ofNodeWithID:self.selectedWire.fromOutlet.parentNode.nodeID 
                    fromInletNamed:self.selectedWire.toInlet.name 
-                      ofNodeNamed:self.selectedWire.toInlet.parentNode.name];
+                     ofNodeWithID:self.selectedWire.toInlet.parentNode.nodeID];
         self.selectedWire = nil;
     }
     else if (self.selectedNode)
     {
         [self removeNode:self.selectedNode];
-        [self.delegate nodeCanvas:self removedNodeNamed:self.selectedNode.name];
+        [self.delegate nodeCanvas:self removedNodeWidthID:self.selectedNode.nodeID];
         self.selectedNode = nil;
     }
 }
@@ -324,5 +372,23 @@
     return YES;
 }
 
+#pragma mark - NKWireEditorViewControllerDelegate
+- (void)wireEditorTappedDelete:(NKWireEditorViewController *)editor
+{
+    [self dismissCurrentPopover];
+    [self delete:editor];
+}
+
+- (void)wireEditor:(NKWireEditorViewController *)editor changedAmpTo:(CGFloat)amp
+{
+    self.selectedWire.amp = amp;
+    
+    [self.delegate nodeCanvas:self 
+      connectionOfOutletNamed:self.selectedWire.fromOutlet.name 
+                 ofNodeWithID:self.selectedWire.fromOutlet.parentNode.nodeID 
+                 toInletNamed:self.selectedWire.toInlet.name 
+                 ofNodeWithID:self.selectedWire.toInlet.parentNode.nodeID 
+               didChangeAmpTo:amp];
+}
 
 @end

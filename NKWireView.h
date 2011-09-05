@@ -23,12 +23,14 @@
 
 + (NKWireView *)wireWithDelegate:(UIView <NKWireViewDelegate> *)delegate;
 + (NKWireView *)wireFrom:(NKNodeOutlet *)fromOutlet 
-                      to:(NKNodeInlet *)toInlet 
+                      to:(NKNodeInlet *)toInlet
+                   atAmp:(CGFloat)amp
                 delegate:(UIView <NKWireViewDelegate> *)delegate;
 
 @property (nonatomic, assign) UIView <NKWireViewDelegate> *delegate;
 @property (nonatomic, retain) NKNodeOutlet *fromOutlet;
 @property (nonatomic, retain) NKNodeInlet *toInlet;
+@property (nonatomic) CGFloat amp;
 @property (nonatomic) CGPoint endPoint;
 
 - (void)update;

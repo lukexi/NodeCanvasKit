@@ -10,6 +10,10 @@
 		C22E89F7140CD1DD003DF1B0 /* NKSliderNodeInlet.h in Headers */ = {isa = PBXBuildFile; fileRef = C22E89F5140CD1DC003DF1B0 /* NKSliderNodeInlet.h */; };
 		C22E89F8140CD1DD003DF1B0 /* NKSliderNodeInlet.m in Sources */ = {isa = PBXBuildFile; fileRef = C22E89F6140CD1DD003DF1B0 /* NKSliderNodeInlet.m */; };
 		C22E89F9140CD1DD003DF1B0 /* NKSliderNodeInlet.m in Sources */ = {isa = PBXBuildFile; fileRef = C22E89F6140CD1DD003DF1B0 /* NKSliderNodeInlet.m */; };
+		C271E5471410765500D90BE3 /* NKWireEditorViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C271E5451410765500D90BE3 /* NKWireEditorViewController.h */; };
+		C271E5481410765500D90BE3 /* NKWireEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C271E5461410765500D90BE3 /* NKWireEditorViewController.m */; };
+		C271E5491410765500D90BE3 /* NKWireEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C271E5461410765500D90BE3 /* NKWireEditorViewController.m */; };
+		C271E54C1410771600D90BE3 /* NKWireEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C271E54B1410771600D90BE3 /* NKWireEditorViewController.xib */; };
 		C2D047C4140C9D5D004446A2 /* NKSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = C2D047C2140C9D5D004446A2 /* NKSlider.h */; };
 		C2D047C5140C9D5D004446A2 /* NKSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D047C3140C9D5D004446A2 /* NKSlider.m */; };
 		C2D047C6140C9D5D004446A2 /* NKSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = C2D047C3140C9D5D004446A2 /* NKSlider.m */; };
@@ -66,6 +70,9 @@
 /* Begin PBXFileReference section */
 		C22E89F5140CD1DC003DF1B0 /* NKSliderNodeInlet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKSliderNodeInlet.h; sourceTree = "<group>"; };
 		C22E89F6140CD1DD003DF1B0 /* NKSliderNodeInlet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKSliderNodeInlet.m; sourceTree = "<group>"; };
+		C271E5451410765500D90BE3 /* NKWireEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKWireEditorViewController.h; sourceTree = "<group>"; };
+		C271E5461410765500D90BE3 /* NKWireEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKWireEditorViewController.m; sourceTree = "<group>"; };
+		C271E54B1410771600D90BE3 /* NKWireEditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NKWireEditorViewController.xib; sourceTree = "<group>"; };
 		C2D047C2140C9D5D004446A2 /* NKSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKSlider.h; sourceTree = "<group>"; };
 		C2D047C3140C9D5D004446A2 /* NKSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKSlider.m; sourceTree = "<group>"; };
 		C2D047C7140C9D84004446A2 /* NKSlider.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NKSlider.xib; sourceTree = "<group>"; };
@@ -260,6 +267,9 @@
 				C2E0D861140B9E00000B1F73 /* NKGridView.m */,
 				C2FFA9271403731F00DCBDD4 /* NKWireView.h */,
 				C2FFA9281403731F00DCBDD4 /* NKWireView.m */,
+				C271E5451410765500D90BE3 /* NKWireEditorViewController.h */,
+				C271E5461410765500D90BE3 /* NKWireEditorViewController.m */,
+				C271E54B1410771600D90BE3 /* NKWireEditorViewController.xib */,
 				C2E0D85F140B3D6D000B1F73 /* Nodes */,
 				C2E0D85E140B37B3000B1F73 /* Master Out Node */,
 			);
@@ -285,6 +295,7 @@
 				C2E0D862140B9E01000B1F73 /* NKGridView.h in Headers */,
 				C2D047C4140C9D5D004446A2 /* NKSlider.h in Headers */,
 				C22E89F7140CD1DD003DF1B0 /* NKSliderNodeInlet.h in Headers */,
+				C271E5471410765500D90BE3 /* NKWireEditorViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +374,7 @@
 				C2FFA9311403731F00DCBDD4 /* NKNodeViewController.xib in Resources */,
 				C2E0D858140B3316000B1F73 /* NKOutNodeViewController.xib in Resources */,
 				C2D047C8140C9D84004446A2 /* NKSlider.xib in Resources */,
+				C271E54C1410771600D90BE3 /* NKWireEditorViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,6 +401,7 @@
 				C2E0D863140B9E01000B1F73 /* NKGridView.m in Sources */,
 				C2D047C5140C9D5D004446A2 /* NKSlider.m in Sources */,
 				C22E89F8140CD1DD003DF1B0 /* NKSliderNodeInlet.m in Sources */,
+				C271E5481410765500D90BE3 /* NKWireEditorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,6 +423,7 @@
 				C2E0D864140B9E01000B1F73 /* NKGridView.m in Sources */,
 				C2D047C6140C9D5D004446A2 /* NKSlider.m in Sources */,
 				C22E89F9140CD1DD003DF1B0 /* NKSliderNodeInlet.m in Sources */,
+				C271E5491410765500D90BE3 /* NKWireEditorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

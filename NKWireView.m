@@ -20,6 +20,9 @@
 
 @end
 
+#define KNKWireArrowSize 24.0f
+#define KNKWireWidth 4.0f
+
 @implementation NKWireView
 @synthesize fromOutlet;
 @synthesize toInlet;
@@ -27,7 +30,7 @@
 @synthesize wirePath, arrowPath;
 @synthesize hitPath;
 @synthesize delegate;
-
+@synthesize amp;
 + (NKWireView *)wireWithDelegate:(UIView <NKWireViewDelegate> *)delegate;
 {
     NKWireView *wire = [[[self alloc] initWithFrame:CGRectZero] autorelease];
@@ -37,6 +40,7 @@
 
 + (NKWireView *)wireFrom:(NKNodeOutlet *)fromOutlet 
                       to:(NKNodeInlet *)toInlet 
+                   atAmp:(CGFloat)amp
                 delegate:(UIView <NKWireViewDelegate> *)delegate;
 {
     NKWireView *wire = [self wireWithDelegate:delegate];
@@ -52,6 +56,7 @@
         wire.toInlet = toInlet;
         [toInlet addConnection:wire];
     }
+    wire.amp = amp;
     
     [wire update];
     
@@ -68,10 +73,13 @@
                                                                                          action:@selector(wireTapped:)] autorelease];
         [self addGestureRecognizer:tapRecognizer];
         
+        // For debugging:
+        //self.view.backgroundColor = [[UIColor magentaColor] colorWithAlphaComponent:0.5];
+        
 //        UIButton *editButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
 //        editButton.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
 //        [self addSubview:editButton];
-//        editButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleRightMargin;
+//        editButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleRightMargin;
     }
     return self;
 }
@@ -90,25 +98,22 @@
         outCenter = self.endPoint;
     }
     
-    CGFloat frameOutset = 30; // account for wire thickness and triangle thickness
+    CGFloat frameOutset = KNKWireWidth + KNKWireArrowSize;
     CGRect centersFrame = CGRectMake(MIN(inCenter.x, outCenter.x), MIN(inCenter.y, outCenter.y), 
                                      ABS(inCenter.x - outCenter.x), ABS(inCenter.y - outCenter.y));
     self.frame = CGRectInset(centersFrame, -frameOutset, -frameOutset);
-    //self.view.backgroundColor = [[UIColor orangeColor] colorWithAlphaComponent:0.5];
-    //self.view.userInteractionEnabled = NO;
     
-    CGPoint inPosition = CGPointMake(inCenter.x < outCenter.x ? frameOutset : self.bounds.size.width - frameOutset,
-                                     inCenter.y < outCenter.y ? frameOutset : self.bounds.size.height - frameOutset);
+    CGPoint inPosition = CGPointMake(inCenter.x < outCenter.x ? frameOutset : (self.bounds.size.width - frameOutset),
+                                     inCenter.y < outCenter.y ? frameOutset : (self.bounds.size.height - frameOutset));
     
-    CGPoint outPosition = CGPointMake(inCenter.x < outCenter.x ? self.bounds.size.width - frameOutset : frameOutset,
-                                      inCenter.y < outCenter.y ? self.bounds.size.height - frameOutset : frameOutset);
+    CGPoint outPosition = CGPointMake(inCenter.x < outCenter.x ? (self.bounds.size.width - frameOutset) : frameOutset,
+                                      inCenter.y < outCenter.y ? (self.bounds.size.height - frameOutset) : frameOutset);
     
     self.wirePath = [UIBezierPath bezierPath];
-    self.wirePath.lineWidth = 4;
+    self.wirePath.lineWidth = KNKWireWidth;
     self.wirePath.lineCapStyle = kCGLineCapRound;
     
     [self.wirePath moveToPoint:inPosition];
-    
     [self.wirePath addLineToPoint:outPosition];
     
     self.arrowPath = [[self class] cachedArrowPath];
@@ -128,9 +133,10 @@
     static UIBezierPath *cachedArrowPath = nil;
     if (!cachedArrowPath) 
     {
+        CGFloat halfArrowSize = KNKWireArrowSize / 2;
         cachedArrowPath = [[UIBezierPath bezierPath] retain];
-        [cachedArrowPath moveToPoint:CGPointMake(-25, -50)];
-        [cachedArrowPath addLineToPoint:CGPointMake(25, -50)];
+        [cachedArrowPath moveToPoint:CGPointMake(-halfArrowSize, -KNKWireArrowSize)];
+        [cachedArrowPath addLineToPoint:CGPointMake(halfArrowSize, -KNKWireArrowSize)];
         [cachedArrowPath addLineToPoint:CGPointMake(0, 0)];
         [cachedArrowPath closePath];
     }
