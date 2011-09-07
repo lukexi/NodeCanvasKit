@@ -33,7 +33,7 @@
 @synthesize inletsByName, outletsByName, XLets;
 @synthesize movingOffset;
 @synthesize delegate;
-
+@synthesize representedObject;
 // IBOutlets
 @synthesize headerView;
 @synthesize nameLabel;
@@ -42,6 +42,7 @@
 
 - (void)dealloc 
 {
+    [representedObject release];
     [nodeID release];
     [inletNames release];
     [outletNames release];

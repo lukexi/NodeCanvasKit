@@ -24,6 +24,7 @@
 #define KNKWireWidth 4.0f
 
 @implementation NKWireView
+@synthesize representedObject;
 @synthesize fromOutlet;
 @synthesize toInlet;
 @synthesize endPoint;
@@ -31,6 +32,7 @@
 @synthesize hitPath;
 @synthesize delegate;
 @synthesize amp;
+
 + (NKWireView *)wireWithDelegate:(UIView <NKWireViewDelegate> *)delegate;
 {
     NKWireView *wire = [[[self alloc] initWithFrame:CGRectZero] autorelease];
@@ -146,6 +148,7 @@
 - (void)dealloc 
 {
     CGPathRelease(hitPath);
+    [representedObject release];
     [wirePath release];
     [arrowPath release];
     [fromOutlet release];

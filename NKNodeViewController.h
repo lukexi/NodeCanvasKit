@@ -36,6 +36,7 @@
 + (Class)outletViewClass;
 - (void)configureInlet:(NKNodeInlet *)inlet; // To do further configuration of an inlet just after its creation
 
+@property (nonatomic, retain) id representedObject;
 @property (nonatomic, retain) NSString *nodeID;
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSArray *inletNames;

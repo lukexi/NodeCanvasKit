@@ -61,6 +61,8 @@ connectionOfOutletNamed:(NSString *)outletName
 
 @property (nonatomic, assign) IBOutlet id <NKNodeCanvasViewDelegate> delegate;
 
+- (void)removeAllNodes;
+
 - (void)addOutNode;
 - (void)addNodeWithID:(NSString *)nodeID
                 named:(NSString *)nodeName

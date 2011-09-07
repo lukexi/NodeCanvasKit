@@ -26,7 +26,7 @@
                       to:(NKNodeInlet *)toInlet
                    atAmp:(CGFloat)amp
                 delegate:(UIView <NKWireViewDelegate> *)delegate;
-
+@property (nonatomic, retain) id representedObject;
 @property (nonatomic, assign) UIView <NKWireViewDelegate> *delegate;
 @property (nonatomic, retain) NKNodeOutlet *fromOutlet;
 @property (nonatomic, retain) NKNodeInlet *toInlet;

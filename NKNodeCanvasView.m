@@ -302,6 +302,14 @@
     }];
 }
 
+- (void)removeAllNodes
+{
+    for (NKNodeViewController *node in [[[[self nodesByID] allValues] copy] autorelease])
+    {
+        [self removeNode:node];
+    }
+}
+
 - (void)wireViewTapped:(NKWireView *)aWireView
 {
     CGRect frame = aWireView.frame;
