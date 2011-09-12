@@ -50,7 +50,7 @@
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteAction:)] autorelease];
     
     self.ampSlider.value = self.value;
-    self.multiplierField.text = [NSString stringWithFormat:@"%01f", self.multiplier];
+    self.multiplierField.text = [NSString stringWithFormat:@"%.2f", self.multiplier];
 }
 
 - (IBAction)deleteAction:(id)sender

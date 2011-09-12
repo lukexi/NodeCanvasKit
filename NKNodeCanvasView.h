@@ -35,7 +35,11 @@ removedNodeWidthID:(NSString *)nodeID;
    movedNodeWithID:(NSString *)nodeID
            toPoint:(CGPoint)point;
 
-// Things to move to subclasses
+- (Class)nodeCanvas:(NKNodeCanvasView *)aNodeCanvas
+  classOfInletNamed:(NSString *)inletName
+      forNodeWithID:(NSString *)nodeID;
+
+// Things to factor out
 - (void)nodeCanvas:(NKNodeCanvasView *)aNodeCanvas
         inletNamed:(NSString *)inletName 
       ofNodeWithID:(NSString *)nodeID

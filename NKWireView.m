@@ -10,26 +10,27 @@
 
 @interface NKWireView ()
 
-+ (UIBezierPath *)cachedArrowPath;
++ (UIBezierPath *)arrowPath;
++ (UIBezierPath *)dotPath;
 
+@property (nonatomic, retain) UIBezierPath *dotPath;
 @property (nonatomic, retain) UIBezierPath *wirePath;
 @property (nonatomic, retain) UIBezierPath *arrowPath;
-@property (nonatomic) CGPathRef hitPath;
 
-- (void)updateHitPath;
+- (CGRect)centeredRectOfSize:(CGFloat)size;
 
 @end
 
 #define KNKWireArrowSize 24.0f
 #define KNKWireWidth 4.0f
+#define KNKWireDotSize 20.0f
 
 @implementation NKWireView
 @synthesize representedObject;
 @synthesize fromOutlet;
 @synthesize toInlet;
 @synthesize endPoint;
-@synthesize wirePath, arrowPath;
-@synthesize hitPath;
+@synthesize wirePath, arrowPath, dotPath;
 @synthesize delegate;
 @synthesize amp;
 
@@ -77,11 +78,6 @@
         
         // For debugging:
         //self.view.backgroundColor = [[UIColor magentaColor] colorWithAlphaComponent:0.5];
-        
-//        UIButton *editButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
-//        editButton.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
-//        [self addSubview:editButton];
-//        editButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleRightMargin;
     }
     return self;
 }
@@ -100,16 +96,16 @@
         outCenter = self.endPoint;
     }
     
-    CGFloat frameOutset = KNKWireWidth + KNKWireArrowSize;
+    CGFloat frameInset = KNKWireWidth + KNKWireArrowSize;
     CGRect centersFrame = CGRectMake(MIN(inCenter.x, outCenter.x), MIN(inCenter.y, outCenter.y), 
                                      ABS(inCenter.x - outCenter.x), ABS(inCenter.y - outCenter.y));
-    self.frame = CGRectInset(centersFrame, -frameOutset, -frameOutset);
+    self.frame = CGRectInset(centersFrame, -frameInset, -frameInset);
     
-    CGPoint inPosition = CGPointMake(inCenter.x < outCenter.x ? frameOutset : (self.bounds.size.width - frameOutset),
-                                     inCenter.y < outCenter.y ? frameOutset : (self.bounds.size.height - frameOutset));
+    CGPoint inPosition = CGPointMake(inCenter.x < outCenter.x ? frameInset : (self.bounds.size.width - frameInset),
+                                     inCenter.y < outCenter.y ? frameInset : (self.bounds.size.height - frameInset));
     
-    CGPoint outPosition = CGPointMake(inCenter.x < outCenter.x ? (self.bounds.size.width - frameOutset) : frameOutset,
-                                      inCenter.y < outCenter.y ? (self.bounds.size.height - frameOutset) : frameOutset);
+    CGPoint outPosition = CGPointMake(inCenter.x < outCenter.x ? (self.bounds.size.width - frameInset) : frameInset,
+                                      inCenter.y < outCenter.y ? (self.bounds.size.height - frameInset) : frameInset);
     
     self.wirePath = [UIBezierPath bezierPath];
     self.wirePath.lineWidth = KNKWireWidth;
@@ -118,10 +114,22 @@
     [self.wirePath moveToPoint:inPosition];
     [self.wirePath addLineToPoint:outPosition];
     
-    self.arrowPath = [[self class] cachedArrowPath];
+    self.arrowPath = [[self class] arrowPath];
     CGFloat angle = -atan2(outPosition.x - inPosition.x, outPosition.y - inPosition.y);
     [self.arrowPath applyTransform:CGAffineTransformMakeRotation(angle)];
     [self.arrowPath applyTransform:CGAffineTransformMakeTranslation(outPosition.x, outPosition.y)];
+    
+    self.dotPath = [[self class] dotPath];
+    CGRect dotRect = [self centeredRectOfSize:KNKWireDotSize];
+    [self.dotPath applyTransform:CGAffineTransformMakeTranslation(dotRect.origin.x, dotRect.origin.y)];
+}
+
+- (CGRect)centeredRectOfSize:(CGFloat)size
+{
+    CGFloat halfSize = size / 2.0;
+    CGFloat midX = CGRectGetMidX(self.bounds);
+    CGFloat midY = CGRectGetMidY(self.bounds);
+    return CGRectMake(midX - halfSize, midY - halfSize, size, size);
 }
 
 - (void)disconnect
@@ -130,7 +138,7 @@
     [self.toInlet removeConnection:self];
 }
 
-+ (UIBezierPath *)cachedArrowPath
++ (UIBezierPath *)arrowPath
 {
     static UIBezierPath *cachedArrowPath = nil;
     if (!cachedArrowPath) 
@@ -145,10 +153,20 @@
     return [[cachedArrowPath copy] autorelease];
 }
 
++ (UIBezierPath *)dotPath
+{
+    static UIBezierPath *dotPath = nil;
+    if (!dotPath) 
+    {
+        dotPath = [[UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, KNKWireDotSize, KNKWireDotSize)] retain];
+    }
+    return [[dotPath copy] autorelease];
+}
+
 - (void)dealloc 
 {
-    CGPathRelease(hitPath);
     [representedObject release];
+    [dotPath release];
     [wirePath release];
     [arrowPath release];
     [fromOutlet release];
@@ -178,21 +196,9 @@
 
 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event
 {
-    return CGPathContainsPoint(hitPath, NULL, point, NO);
+    return CGRectContainsPoint([self centeredRectOfSize:44], point);
 }
 
-// Must be called from within drawRect so there's a context to use...
-- (void)updateHitPath
-{
-    CGPathRef pathRef = self.wirePath.CGPath;
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextAddPath(context, pathRef);
-    CGContextSetLineWidth(context, 30);
-    CGContextReplacePathWithStrokedPath(context);
-    
-    CGPathRelease(hitPath);
-    hitPath = CGContextCopyPath(context);
-}
 
 - (void)drawRect:(CGRect)rect
 {
@@ -205,7 +211,8 @@
     [self.wirePath stroke];
     [self.arrowPath fill];
     
-    [self updateHitPath];
+    [self.dotPath stroke];
+    [self.dotPath fill];
 }
 
 @end

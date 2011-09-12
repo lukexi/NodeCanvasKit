@@ -24,6 +24,16 @@
 
 @end
 
+@protocol NKNodeViewDataSource <NSObject>
+
+- (NKNodeInlet *)nodeView:(NKNodeViewController *)nodeView inletForInletNamed:(NSString *)inletName ofNodeWithID:(NSString *)nodeID;
+
+// Provide a default implementation that just uses NKNodeOutlet
+@optional
+- (NKNodeInlet *)nodeView:(NKNodeViewController *)nodeView outletForOutletNamed:(NSString *)outletName ofNodeWithID:(NSString *)nodeID;
+
+@end
+
 @interface NKNodeViewController : UIViewController <UIGestureRecognizerDelegate, NKSliderNodeInletDelegate>
 
 + (id)nodeWithID:(NSString *)nodeID;

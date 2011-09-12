@@ -90,26 +90,34 @@
     moveRecognizer.minimumPressDuration = 0;
     moveRecognizer.delegate = self;
     [self.view addGestureRecognizer:moveRecognizer];
+    moveRecognizer.cancelsTouchesInView = NO;
     
     UITapGestureRecognizer *tapRecognizer = [[[UITapGestureRecognizer alloc] initWithTarget:self 
                                                                                      action:@selector(handleTap:)] autorelease];
     tapRecognizer.delegate = self;
     [self.view addGestureRecognizer:tapRecognizer];
     
-    [moveRecognizer requireGestureRecognizerToFail:tapRecognizer];
+    //[moveRecognizer requireGestureRecognizerToFail:tapRecognizer];
     
     self.nameLabel.text = self.name;
     
     [self setupXLets];
 }
 
+#pragma mark - UIGestureRecognizerDelegate
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
     // Not sure if this is the best way to do this...
-    if ([[touch view] isKindOfClass:[UIControl class]]) 
+    if ([[touch view] isKindOfClass:[UIControl class]] || [[touch view] isKindOfClass:[NKNodeXLet class]]) 
     {
         return NO;
     }
+    return YES;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer 
+shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
     return YES;
 }
 
@@ -170,17 +178,6 @@
         sliderInlet.label.text = sliderInlet.name;
         sliderInlet.delegate = self;
     }
-}
-
-#pragma mark - NKSliderNodeInletDelegate
-- (void)sliderInletDidChangeValue:(NKSliderNodeInlet *)aSliderNodeInlet
-{
-    [self.delegate inletDidChangeValue:aSliderNodeInlet];
-}
-
-- (void)sliderInletDidChangeRange:(NKSliderNodeInlet *)aSliderNodeInlet
-{
-    [self.delegate inletDidChangeRange:aSliderNodeInlet];
 }
 
 - (NKNodeInlet *)inletNamed:(NSString *)inletName
@@ -300,7 +297,6 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-
 - (void)viewDidUnload 
 {
     [self setHeaderView:nil];
@@ -312,5 +308,15 @@
     // e.g. self.myOutlet = nil;
 }
 
+#pragma mark - NKSliderNodeInletDelegate
+- (void)sliderInletDidChangeValue:(NKSliderNodeInlet *)aSliderNodeInlet
+{
+    [self.delegate inletDidChangeValue:aSliderNodeInlet];
+}
+
+- (void)sliderInletDidChangeRange:(NKSliderNodeInlet *)aSliderNodeInlet
+{
+    [self.delegate inletDidChangeRange:aSliderNodeInlet];
+}
 
 @end
