@@ -1,0 +1,26 @@
+# xcode noise
+build/
+build/*
+*/build/*
+build_iphone/
+build_iphone/*
+*/build_iphone/*
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+*.xcworkspace/
+xcuserdata/
+
+# OSX noise
+.DS_Store
+profile
+Icon*
+
+# other noise
+*.swp
+.svn
+
+# project files
+*.tmproj
+*.esproj
