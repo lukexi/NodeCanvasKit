@@ -41,6 +41,7 @@
 @synthesize selectedNode;
 @synthesize delegate;
 @synthesize currentPopoverController;
+@synthesize dataSource;
 
 - (void)dealloc 
 {

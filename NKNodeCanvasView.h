@@ -35,10 +35,6 @@ removedNodeWidthID:(NSString *)nodeID;
    movedNodeWithID:(NSString *)nodeID
            toPoint:(CGPoint)point;
 
-- (Class)nodeCanvas:(NKNodeCanvasView *)aNodeCanvas
-  classOfInletNamed:(NSString *)inletName
-      forNodeWithID:(NSString *)nodeID;
-
 // Things to factor out
 - (void)nodeCanvas:(NKNodeCanvasView *)aNodeCanvas
         inletNamed:(NSString *)inletName 
@@ -59,11 +55,26 @@ connectionOfOutletNamed:(NSString *)outletName
 
 @end
 
+@protocol NKNodeCanvasViewDataSource <NKNodeViewDataSource>
+
+- (NKNodeViewController *)nodeCanvas:(NKNodeCanvasView *)aNodeCanvas
+               nodeViewForNodeWithID:(NSString *)nodeID;
+
+// Lets our dataSource configure its own NKWireView subclass, such as one with an amplitude and delegate, etc.
+- (NKWireView *)nodeCanvas:(NKNodeCanvasView *)aNodeCanvas
+wireForConnectionFromOutletNamed:(NSString *)outletName
+              ofNodeWithID:(NSString *)inletParentNodeID
+              toInletNamed:(NSString *)inletName
+              ofNodeWithID:(NSString *)outletParentNodeID;
+
+@end
+
 @interface NKNodeCanvasView : NKGridView <NKNodeViewControllerDelegate, NKWireViewDelegate, NKWireEditorViewControllerDelegate>
 
 + (Class)nodeClass;
 
 @property (nonatomic, assign) IBOutlet id <NKNodeCanvasViewDelegate> delegate;
+@property (nonatomic, assign) IBOutlet id <NKNodeCanvasViewDataSource> dataSource;
 
 - (void)removeAllNodes;
 
