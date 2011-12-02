@@ -7,13 +7,13 @@
 //
 
 #import "NKNodeXLet.h"
-#import "NKNodeViewController.h"
+#import "NKNodeView.h"
 #import "NKWireView.h"
 
 @interface NKNodeXLet ()
 
-@property (nonatomic, retain) NSMutableArray *mutableConnections;
-@property (nonatomic, assign, readwrite) NKNodeViewController *parentNode;
+@property (nonatomic, strong) NSMutableArray *mutableConnections;
+@property (nonatomic, assign, readwrite) NKNodeView *parentNode;
 
 @end
 
@@ -22,16 +22,10 @@
 @synthesize parentNode;
 @synthesize name;
 
-- (void)dealloc 
++ (id)XLetForNode:(NKNodeView *)node
 {
-    [name release];
-    [mutableConnections release];
-    [super dealloc];
-}
-
-+ (id)XLetForNode:(NKNodeViewController *)node withFrame:(CGRect)frame
-{
-    NKNodeXLet *XLet = [[[[self class] alloc] initWithFrame:frame] autorelease];
+    CGSize XLetSize = [[self class] XLetSize];
+    NKNodeXLet *XLet = [[[self class] alloc] initWithFrame:CGRectMake(0, 0, XLetSize.width, XLetSize.height)];
     XLet.parentNode = node;
     return XLet;
 }
@@ -64,7 +58,7 @@
 - (void)disconnectAllConnections
 {
     // Use a copy, because we'll be mutating the array by disconnecting wires
-    NSArray *connectionsCopy = [[self.mutableConnections copy] autorelease];
+    NSArray *connectionsCopy = [self.mutableConnections copy];
     for (NKWireView *connection in connectionsCopy) 
     {
         [connection disconnect];
@@ -75,12 +69,17 @@
 
 - (NSArray *)connections
 {
-    return [[self.mutableConnections copy] autorelease];
+    return [self.mutableConnections copy];
 }
 
 - (void)updateConnections
 {
     [self.connections makeObjectsPerformSelector:@selector(update)];
+}
+
++ (CGSize)XLetSize
+{
+    return CGSizeMake(44, 44);
 }
 
 @end

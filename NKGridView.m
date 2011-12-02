@@ -16,6 +16,7 @@
 + (UIBezierPath *)bezierPathForWidth:(CGFloat)width;
 + (UIBezierPath *)bezierPathForHeight:(CGFloat)height;
 - (void)commonInit;
+
 @end
 
 #define kNKGridSpacing 44
@@ -25,15 +26,18 @@
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
+    if (self) 
+    {
         [self commonInit];
     }
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)coder {
+- (id)initWithCoder:(NSCoder *)coder 
+{
     self = [super initWithCoder:coder];
-    if (self) {
+    if (self) 
+    {
         [self commonInit];
     }
     return self;
@@ -77,7 +81,7 @@
     static CGFloat pathHeight = 0;
     if (!bezierPath || pathHeight != height)
     {
-        bezierPath = [[UIBezierPath bezierPath] retain];
+        bezierPath = [UIBezierPath bezierPath];
         [bezierPath moveToPoint:CGPointMake(0.5, 0)];
         [bezierPath addLineToPoint:CGPointMake(0.5, height)];
         bezierPath.lineWidth = 1;
@@ -92,7 +96,7 @@
     static CGFloat pathWidth = 0;
     if (!bezierPath || pathWidth != width)
     {
-        bezierPath = [[UIBezierPath bezierPath] retain];
+        bezierPath = [UIBezierPath bezierPath];
         [bezierPath moveToPoint:CGPointMake(0, 0.5)];
         [bezierPath addLineToPoint:CGPointMake(width, 0.5)];
         bezierPath.lineWidth = 1;

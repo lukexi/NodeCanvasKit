@@ -18,9 +18,9 @@
 
 @interface NKSlider : UIControl
 
-@property (retain, nonatomic) IBOutlet UIView *sliderView;
-@property (retain, nonatomic) IBOutlet UIView *thumbView;
-@property (retain, nonatomic) IBOutlet UIView *rangeView;
+@property (strong, nonatomic) IBOutlet UIView *sliderView;
+@property (strong, nonatomic) IBOutlet UIView *thumbView;
+@property (strong, nonatomic) IBOutlet UIView *rangeView;
 
 - (IBAction)handlePinch:(id)sender;
 - (IBAction)handleLongPress:(id)sender;
@@ -28,7 +28,7 @@
 @property (nonatomic) CGFloat value;
 @property (nonatomic) CGFloat range;
 
-@property (nonatomic, assign) id <NKSliderDelegate> delegate;
+@property (nonatomic, unsafe_unretained) id <NKSliderDelegate> delegate;
 
 @end
 

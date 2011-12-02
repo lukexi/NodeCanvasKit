@@ -29,11 +29,6 @@
 
 @implementation NKNodeBackgroundView
 @synthesize currentSize;
-- (void)dealloc 
-{
-    
-    [super dealloc];
-}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -112,7 +107,7 @@
     static UIBezierPath *decorativeTrianglePath = nil;
     if (!decorativeTrianglePath) 
     {
-        decorativeTrianglePath = [[UIBezierPath bezierPath] retain];
+        decorativeTrianglePath = [UIBezierPath bezierPath];
         [decorativeTrianglePath moveToPoint:CGPointMake(0, 0)];
         [decorativeTrianglePath addLineToPoint:CGPointMake(kNKNodeBackgroundViewTriangleWidth, 0)];
         [decorativeTrianglePath addLineToPoint:CGPointMake(kNKNodeBackgroundViewTriangleWidth/2, 
@@ -132,7 +127,7 @@
                            (id)kNKNodeBackgroundViewTopGradientColor.CGColor, 
                            (id)kNKNodeBackgroundViewBottomGradientColor.CGColor,
                            nil];
-        gradientRef = CGGradientCreateWithColors(colorSpace, (CFArrayRef)colors, NULL);
+        gradientRef = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)colors, NULL);
         CGColorSpaceRelease(colorSpace);
     }
     return gradientRef;

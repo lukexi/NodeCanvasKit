@@ -7,35 +7,30 @@
 //
 
 #import "NKWireEditorViewController.h"
+#import "NKDragButton.h"
 
 @interface NKWireEditorViewController ()
-
-- (void)updateMultiplierFromTextField;
-- (void)informDelegateOfNewValue;
 
 @end
 
 @implementation NKWireEditorViewController
 @synthesize delegate;
-@synthesize multiplierField;
-@synthesize ampSlider;
-@synthesize value, multiplier;
+@synthesize ampButton;
+@synthesize value;
 
 + (id)wireEditorViewControllerWithDelegate:(id <NKWireEditorViewControllerDelegate>)delegate 
                                      value:(CGFloat)value 
-                                multiplier:(CGFloat)multiplier
                            inNavController:(BOOL)inNavController
 {
-    NKWireEditorViewController *editor = [[[self alloc] initWithNibName:@"NKWireEditorViewController" bundle:nil] autorelease];
+    NKWireEditorViewController *editor = [[self alloc] initWithNibName:@"NKWireEditorViewController" bundle:nil];
     editor.delegate = delegate;
     editor.value = value;
-    editor.multiplier = multiplier;
     
-    editor.contentSizeForViewInPopover = CGSizeMake(323, 62);
+    editor.contentSizeForViewInPopover = CGSizeMake(142, 62);
     
     if (inNavController) 
     {
-        return [[[UINavigationController alloc] initWithRootViewController:editor] autorelease];
+        return [[UINavigationController alloc] initWithRootViewController:editor];
     }
     
     return editor;
@@ -47,10 +42,11 @@
     
     self.title = @"Edit Amp";
     
-    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteAction:)] autorelease];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash 
+                                                                                            target:self 
+                                                                                            action:@selector(deleteAction:)];
     
-    self.ampSlider.value = self.value;
-    self.multiplierField.text = [NSString stringWithFormat:@"%.2f", self.multiplier];
+    self.ampButton.value = self.value;
 }
 
 - (IBAction)deleteAction:(id)sender
@@ -58,42 +54,15 @@
     [self.delegate wireEditorTappedDelete:self];
 }
 
-- (IBAction)sliderValueChanged:(id)sender 
+- (IBAction)buttonValueChanged:(id)sender 
 {
-    self.value = self.ampSlider.value;
-    [self informDelegateOfNewValue];
+    self.value = self.ampButton.value;
+    [self.delegate wireEditor:self changedAmpTo:self.value];
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
+- (void)viewDidUnload 
 {
-    [self updateMultiplierFromTextField];
-}
-
-- (void)updateMultiplierFromTextField
-{
-    self.multiplier = [self.multiplierField.text floatValue];
-    [self informDelegateOfNewValue];
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [self updateMultiplierFromTextField];
-    return YES;
-}
-
-- (void)informDelegateOfNewValue
-{
-    [self.delegate wireEditor:self changedAmpTo:self.value * self.multiplier];
-}
-
-- (void)dealloc {
-    [multiplierField release];
-    [ampSlider release];
-    [super dealloc];
-}
-- (void)viewDidUnload {
-    [self setMultiplierField:nil];
-    [self setAmpSlider:nil];
+    [self setAmpButton:nil];
     [super viewDidUnload];
 }
 @end

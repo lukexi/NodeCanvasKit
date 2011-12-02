@@ -7,7 +7,7 @@
 //
 
 #import "NKNodeCanvasView.h"
-#import "NKOutNodeViewController.h"
+#import "NKOutNodeView.h"
 #import "NKNodeOutlet.h"
 
 @interface NKNodeCanvasView ()
@@ -17,16 +17,16 @@
 - (void)connectOutlet:(NKNodeOutlet *)outlet toInlet:(NKNodeInlet *)inlet atAmp:(CGFloat)amp;
 - (void)disconnectWire:(NKWireView *)wire;
 
-- (void)addNode:(NKNodeViewController *)node atCenterPoint:(CGPoint)centerPoint;
-- (void)removeNode:(NKNodeViewController *)node;
+- (void)addNode:(NKNodeView *)node atCenterPoint:(CGPoint)centerPoint;
+- (void)removeNode:(NKNodeView *)node;
 
-@property (nonatomic, retain) NSMutableDictionary *nodesByID;
-@property (nonatomic, retain) NSMutableSet *wires;
+@property (nonatomic, strong) NSMutableDictionary *nodesByID;
+@property (nonatomic, strong) NSMutableSet *wires;
 
-@property (nonatomic, retain) NKWireView *draggingWire;
-@property (nonatomic, retain) NKWireView *selectedWire;
-@property (nonatomic, retain) NKNodeViewController *selectedNode;
-@property (nonatomic, retain) UIPopoverController *currentPopoverController;
+@property (nonatomic, strong) NKWireView *draggingWire;
+@property (nonatomic, strong) NKWireView *selectedWire;
+@property (nonatomic, strong) NKNodeView *selectedNode;
+@property (nonatomic, strong) UIPopoverController *currentPopoverController;
 
 - (void)showPopover:(UIPopoverController *)popoverController fromRect:(CGRect)rect;
 - (void)dismissCurrentPopover;
@@ -42,22 +42,6 @@
 @synthesize delegate;
 @synthesize currentPopoverController;
 @synthesize dataSource;
-
-- (void)dealloc 
-{
-    [selectedNode release];
-    [selectedWire release];
-    [draggingWire release];
-    [nodesByID release];
-    [wires release];
-    [currentPopoverController release];
-    [super dealloc];
-}
-
-+ (Class)nodeClass
-{
-    return [NKNodeViewController class];
-}
 
 - (id)initWithFrame:(CGRect)frame 
 {
@@ -84,52 +68,54 @@
 	self.nodesByID = [NSMutableDictionary dictionary];
     self.wires = [NSMutableSet set];
     
-    UITapGestureRecognizer *recognizer = [[[UITapGestureRecognizer alloc] initWithTarget:self 
-                                                                                  action:@selector(handleSingleTap:)] 
-                                          autorelease];
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self 
+                                                                                  action:@selector(handleSingleTap:)];
     [self addGestureRecognizer:recognizer];
 }
 
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer
 {
-    [[UIMenuController sharedMenuController] setMenuVisible:NO 
-                                                   animated:YES];
+    // Dismiss delete menu if tapping off the selected node
+    
+    if ([[UIMenuController sharedMenuController] isMenuVisible] && !CGRectContainsPoint(self.selectedNode.frame, 
+                                                                                        [recognizer locationInView:self])) 
+    {
+        [[UIMenuController sharedMenuController] setMenuVisible:NO 
+                                                       animated:YES];
+    }
 }
 
-- (void)addNodeWithID:(NSString *)nodeID
-                named:(NSString *)nodeName
-           withInlets:(NSArray *)inletNames
-             animated:(BOOL)animated
+- (NKNodeView *)nodeViewWithID:(NSString *)nodeID
+{
+    return [self.nodesByID objectForKey:nodeID];
+}
+
+- (void)addNodeInCenterWithID:(NSString *)nodeID
+                     animated:(BOOL)animated;
 {
     CGPoint nodeCenter = CGPointMake(self.bounds.size.width / 2, 
                                      self.bounds.size.height / 2);
     [self addNodeWithID:nodeID
-                  named:nodeName 
-             withInlets:inletNames 
                 atPoint:nodeCenter 
                animated:animated];
 }
 
 - (void)addNodeWithID:(NSString *)nodeID
-                named:(NSString *)nodeName
-           withInlets:(NSArray *)inletNames
               atPoint:(CGPoint)point
              animated:(BOOL)animated
 {
-    NKNodeViewController *node = [[[self class] nodeClass] nodeWithID:nodeID
-                                                                 name:nodeName
-                                                           inletNames:inletNames];
+    NKNodeView *node = [self.dataSource nodeCanvas:self nodeViewForNodeWithID:nodeID];
     
     [self addNode:node atCenterPoint:point];
     
     if (animated) 
     {
-        node.view.transform = CGAffineTransformMakeScale(0.1, 0.1);
+        node.transform = CGAffineTransformMakeScale(0.1, 0.1);
         [UIView animateWithDuration:0.3 animations:^(void) {
-            node.view.transform = CGAffineTransformMakeScale(1.1, 1.1);
+            node.transform = CGAffineTransformMakeScale(1.1, 1.1);
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.3 animations:^(void) {
-                node.view.transform = CGAffineTransformIdentity;
+                node.transform = CGAffineTransformIdentity;
             }];
         }];
     }
@@ -141,78 +127,45 @@
               ofNodeWithID:(NSString *)inletParentNodeID
                      atAmp:(CGFloat)amp;
 {
-    NKNodeViewController *outletParentNode = [self.nodesByID objectForKey:outletParentNodeID];
-    NKNodeViewController *inletParentNode = [self.nodesByID objectForKey:inletParentNodeID];
+    NKNodeView *outletParentNode = [self nodeViewWithID:outletParentNodeID];
+    NKNodeView *inletParentNode = [self nodeViewWithID:inletParentNodeID];
     
     [self connectOutlet:[outletParentNode outletNamed:outletName] 
                 toInlet:[inletParentNode inletNamed:inletName]
                   atAmp:amp];
 }
 
-- (void)setValueOfInletNamed:(NSString *)inletName 
-                ofNodeWithID:(NSString *)nodeID 
-                          to:(CGFloat)value
+- (void)addNode:(NKNodeView *)node atCenterPoint:(CGPoint)centerPoint
 {
-    NKNodeViewController *node = [self.nodesByID objectForKey:nodeID];
-    NKNodeInlet *inlet = [node inletNamed:inletName];
-    
-    if ([inlet isKindOfClass:[NKSliderNodeInlet class]]) 
-    {
-        NKSliderNodeInlet *sliderInlet = (NKSliderNodeInlet *)inlet;
-        sliderInlet.slider.value = value;
-    }
-}
-
-- (void)setRangeOfInletNamed:(NSString *)inletName 
-                ofNodeWithID:(NSString *)nodeID 
-                          to:(CGFloat)range
-{
-    NKNodeViewController *node = [self.nodesByID objectForKey:nodeID];
-    NKNodeInlet *inlet = [node inletNamed:inletName];
-    
-    if ([inlet isKindOfClass:[NKSliderNodeInlet class]]) 
-    {
-        NKSliderNodeInlet *sliderInlet = (NKSliderNodeInlet *)inlet;
-        sliderInlet.slider.range = range;
-    }
-}
-
-- (void)addNode:(NKNodeViewController *)node atCenterPoint:(CGPoint)centerPoint
-{
-    node.view.center = centerPoint;
+    node.center = centerPoint;
     [self.nodesByID setObject:node forKey:node.nodeID];
     node.delegate = self;
-    [self addSubview:node.view];
+    [self addSubview:node];
 }
 
-- (void)addOutNode
-{
-    NKOutNodeViewController *outNode = [NKOutNodeViewController outNode];
-    
-    CGPoint outletCenter = CGPointMake(CGRectGetMidX(self.bounds), 
-                                       self.bounds.size.height - (outNode.view.bounds.size.height/2) - 44);
-    
-    [self addNode:outNode atCenterPoint:outletCenter];
-}
-
-- (void)node:(NKNodeViewController *)node wasTapped:(UITapGestureRecognizer *)gestureRecognizer
+- (void)nodeWasTapped:(NKNodeView *)node
 {
     [self becomeFirstResponder];
-    [[UIMenuController sharedMenuController] setTargetRect:node.view.frame inView:self];
+    [[UIMenuController sharedMenuController] setTargetRect:node.frame inView:self];
     [[UIMenuController sharedMenuController] setMenuVisible:YES animated:YES];
     self.selectedNode = node;
     self.selectedWire = nil;
 }
 
-- (void)node:(NKNodeViewController *)node didMove:(UILongPressGestureRecognizer *)gestureRecognizer
+- (void)node:(NKNodeView *)node didMove:(UILongPressGestureRecognizer *)gestureRecognizer
 {
+    // Constrain to screen edges
+    CGPoint location = [gestureRecognizer locationInView:self];
+    location.x = MAX(0, MIN(location.x, self.bounds.size.width));
+    location.y = MAX(0, MIN(location.y, self.bounds.size.height));
+    
     [node moveToTouchAdjustedPoint:[gestureRecognizer locationInView:self]];
     
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded) 
     {
         [self.delegate nodeCanvas:self 
                   movedNodeWithID:node.nodeID 
-                          toPoint:node.view.center];
+                          toPoint:node.center];
     }
 }
 
@@ -228,7 +181,7 @@
             [self.draggingWire update];
             break;
         case UIGestureRecognizerStateEnded:
-            for (NKNodeViewController *nodeViewController in [self.nodesByID allValues]) 
+            for (NKNodeView *nodeViewController in [self.nodesByID allValues]) 
             {
                 NKNodeInlet *foundInlet = [nodeViewController inletForPointInSuperview:locationInView];
                 if (foundInlet)
@@ -254,22 +207,6 @@
     }
 }
 
-- (void)inletDidChangeValue:(NKSliderNodeInlet *)inlet
-{
-    [self.delegate nodeCanvas:self 
-                   inletNamed:inlet.name 
-                 ofNodeWithID:inlet.parentNode.nodeID
-             didChangeValueTo:inlet.slider.value];
-}
-
-- (void)inletDidChangeRange:(NKSliderNodeInlet *)inlet
-{
-    [self.delegate nodeCanvas:self 
-                   inletNamed:inlet.name 
-                 ofNodeWithID:inlet.parentNode.nodeID
-             didChangeRangeTo:inlet.slider.range];
-}
-
 - (void)connectOutlet:(NKNodeOutlet *)outlet toInlet:(NKNodeInlet *)inlet atAmp:(CGFloat)amp
 {
     NKWireView *wire = [NKWireView wireFrom:outlet to:inlet atAmp:amp delegate:self];
@@ -279,7 +216,6 @@
 
 - (void)disconnectWire:(NKWireView *)wire
 {
-    [[wire retain] autorelease];
     [wire disconnect];
     [self.wires removeObject:wire];
     [UIView animateWithDuration:0.5 animations:^(void) {
@@ -290,22 +226,21 @@
     }];
 }
 
-- (void)removeNode:(NKNodeViewController *)node
+- (void)removeNode:(NKNodeView *)node
 {
-    [[node retain] autorelease];
     [node disconnectAllXLets];
     [self.nodesByID removeObjectForKey:node.nodeID];
     [UIView animateWithDuration:0.5 animations:^(void) {
-        node.view.alpha = 0;
-        node.view.transform = CGAffineTransformMakeScale(0.1, 0.1);
+        node.alpha = 0;
+        node.transform = CGAffineTransformMakeScale(0.1, 0.1);
     } completion:^(BOOL finished) {
-        [node.view removeFromSuperview];
+        [node removeFromSuperview];
     }];
 }
 
 - (void)removeAllNodes
 {
-    for (NKNodeViewController *node in [[[[self nodesByID] allValues] copy] autorelease])
+    for (NKNodeView *node in [[[self nodesByID] allValues] copy])
     {
         [self removeNode:node];
     }
@@ -318,7 +253,7 @@
     frame.origin.y += halfHeight;
     frame.size.height = halfHeight;
     
-    UIPopoverController *popover = [[[UIPopoverController alloc] initWithContentViewController:[NKWireEditorViewController wireEditorViewControllerWithDelegate:self value:1.0 multiplier:aWireView.amp inNavController:YES]] autorelease];
+    UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:[NKWireEditorViewController wireEditorViewControllerWithDelegate:self value:aWireView.amp inNavController:YES]];
     
     [self showPopover:popover fromRect:frame];
     

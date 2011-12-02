@@ -53,14 +53,12 @@
     self.sliderView.frame = self.bounds;
     [self addSubview:self.sliderView];
     
-    UIPinchGestureRecognizer *pinchRecognizer = [[[UIPinchGestureRecognizer alloc] initWithTarget:self 
-                                                                                           action:@selector(handlePinch:)] 
-                                                 autorelease];
+    UIPinchGestureRecognizer *pinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self 
+                                                                                           action:@selector(handlePinch:)];
     [self addGestureRecognizer:pinchRecognizer];
     
-    UILongPressGestureRecognizer *longPressRecognizer = [[[UILongPressGestureRecognizer alloc] initWithTarget:self 
-                                                                                                       action:@selector(handleLongPress:)] 
-                                                         autorelease];
+    UILongPressGestureRecognizer *longPressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self 
+                                                                                                       action:@selector(handleLongPress:)];
     longPressRecognizer.minimumPressDuration = 0;
     [self addGestureRecognizer:longPressRecognizer];
     
@@ -142,13 +140,6 @@
     self.rangeView.center = self.thumbView.center;
 }
 
-- (void)dealloc 
-{
-    [sliderView release];
-    [thumbView release];
-    [rangeView release];
-    [super dealloc];
-}
 @end
 
 @implementation NKSliderThumbView
@@ -158,8 +149,8 @@
     static UIBezierPath *thumbPath = nil;
     if (!thumbPath) 
     {
-        thumbPath = [[UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, size, size) 
-                                                cornerRadius:5] retain];
+        thumbPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, size, size) 
+                                                cornerRadius:5];
     }
     return thumbPath;
 }
@@ -169,7 +160,7 @@
     static UIBezierPath *gripPath = nil;
     if (!gripPath) 
     {
-        gripPath = [[UIBezierPath bezierPath] retain];
+        gripPath = [UIBezierPath bezierPath];
         [gripPath moveToPoint:CGPointMake(0, 0)];
         [gripPath addLineToPoint:CGPointMake(0, height)];
         //gripPath.lineCapStyle = kCGLineCapRound;
@@ -221,7 +212,7 @@
                            (id)kNKSliderThumbTopGradientColor.CGColor, 
                            (id)kNKSliderThumbBottomGradientColor.CGColor,
                            nil];
-        gradientRef = CGGradientCreateWithColors(colorSpace, (CFArrayRef)colors, NULL);
+        gradientRef = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)colors, NULL);
         CGColorSpaceRelease(colorSpace);
     }
     return gradientRef;
@@ -237,8 +228,8 @@
     static CGFloat lastWidth = 0;
     if (!trackPath || lastWidth != width) 
     {
-        trackPath = [[UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, width, 10) 
-                                                cornerRadius:10] retain];
+        trackPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, width, 10) 
+                                                cornerRadius:10];
     }
     return trackPath;
 }
@@ -268,7 +259,7 @@
                            (id)kNKSliderTrackTopGradientColor.CGColor, 
                            (id)kNKSliderTrackBottomGradientColor.CGColor,
                            nil];
-        gradientRef = CGGradientCreateWithColors(colorSpace, (CFArrayRef)colors, NULL);
+        gradientRef = CGGradientCreateWithColors(colorSpace, (__bridge CFArrayRef)colors, NULL);
         CGColorSpaceRelease(colorSpace);
     }
     return gradientRef;

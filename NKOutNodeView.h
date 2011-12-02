@@ -6,10 +6,8 @@
 //  Copyright 2011 Eeoo. All rights reserved.
 //
 
-#import "NKNodeViewController.h"
+#import "NKNodeView.h"
 
-@interface NKOutNodeViewController : NKNodeViewController
-
-+ (NKOutNodeViewController *)outNode;
+@interface NKOutNodeView : NKNodeView
 
 @end

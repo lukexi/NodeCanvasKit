@@ -19,8 +19,8 @@
 
 @interface NKSliderNodeInlet : NKNodeInlet <NKSliderDelegate>
 
-@property (nonatomic, assign) id <NKSliderNodeInletDelegate> delegate;
-@property (nonatomic, retain) NKSlider *slider;
-@property (nonatomic, retain) UILabel *label;
+@property (nonatomic, unsafe_unretained) id <NKSliderNodeInletDelegate> delegate;
+@property (nonatomic, strong) NKSlider *slider;
+@property (nonatomic, strong) UILabel *label;
 
 @end

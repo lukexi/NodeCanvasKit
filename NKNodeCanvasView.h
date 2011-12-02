@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
-#import "NKNodeViewController.h"
+#import "NKNodeView.h"
 #import "NKWireView.h"
 #import "NKGridView.h"
 #import "NKWireEditorViewController.h"
@@ -36,15 +36,6 @@ removedNodeWidthID:(NSString *)nodeID;
            toPoint:(CGPoint)point;
 
 // Things to factor out
-- (void)nodeCanvas:(NKNodeCanvasView *)aNodeCanvas
-        inletNamed:(NSString *)inletName 
-      ofNodeWithID:(NSString *)nodeID
-  didChangeValueTo:(CGFloat)value;
-
-- (void)nodeCanvas:(NKNodeCanvasView *)aNodeCanvas
-        inletNamed:(NSString *)inletName 
-      ofNodeWithID:(NSString *)nodeID
-  didChangeRangeTo:(CGFloat)range;
 
 - (void)nodeCanvas:(NKNodeCanvasView *)aNodeCanvas 
 connectionOfOutletNamed:(NSString *)outletName
@@ -57,52 +48,41 @@ connectionOfOutletNamed:(NSString *)outletName
 
 @protocol NKNodeCanvasViewDataSource <NKNodeViewDataSource>
 
-- (NKNodeViewController *)nodeCanvas:(NKNodeCanvasView *)aNodeCanvas
-               nodeViewForNodeWithID:(NSString *)nodeID;
+- (NKNodeView *)nodeCanvas:(NKNodeCanvasView *)aNodeCanvas
+     nodeViewForNodeWithID:(NSString *)nodeID;
 
+/*
 // Lets our dataSource configure its own NKWireView subclass, such as one with an amplitude and delegate, etc.
 - (NKWireView *)nodeCanvas:(NKNodeCanvasView *)aNodeCanvas
 wireForConnectionFromOutletNamed:(NSString *)outletName
               ofNodeWithID:(NSString *)inletParentNodeID
               toInletNamed:(NSString *)inletName
               ofNodeWithID:(NSString *)outletParentNodeID;
+*/
 
 @end
 
 @interface NKNodeCanvasView : NKGridView <NKNodeViewControllerDelegate, NKWireViewDelegate, NKWireEditorViewControllerDelegate>
 
-+ (Class)nodeClass;
+@property (nonatomic, weak) IBOutlet id <NKNodeCanvasViewDelegate> delegate;
+@property (nonatomic, weak) IBOutlet id <NKNodeCanvasViewDataSource> dataSource;
 
-@property (nonatomic, assign) IBOutlet id <NKNodeCanvasViewDelegate> delegate;
-@property (nonatomic, assign) IBOutlet id <NKNodeCanvasViewDataSource> dataSource;
-
+- (NKNodeView *)nodeViewWithID:(NSString *)nodeID;
 - (void)removeAllNodes;
 
-- (void)addOutNode;
+- (void)addNodeInCenterWithID:(NSString *)nodeID
+                     animated:(BOOL)animated;
+
 - (void)addNodeWithID:(NSString *)nodeID
-                named:(NSString *)nodeName
-           withInlets:(NSArray *)inletNames
               atPoint:(CGPoint)point
              animated:(BOOL)animated;
 
-// Add to center
-- (void)addNodeWithID:(NSString *)nodeID
-                named:(NSString *)nodeName
-           withInlets:(NSArray *)inletNames
-             animated:(BOOL)animated;
+
 
 - (void)connectOutletNamed:(NSString *)inletName
               ofNodeWithID:(NSString *)inletParentNodeID
               toInletNamed:(NSString *)inletName
               ofNodeWithID:(NSString *)outletParentNodeID
                      atAmp:(CGFloat)amp;
-
-- (void)setValueOfInletNamed:(NSString *)inletName 
-                ofNodeWithID:(NSString *)nodeID 
-                          to:(CGFloat)value;
-
-- (void)setRangeOfInletNamed:(NSString *)inletName 
-                ofNodeWithID:(NSString *)nodeID 
-                          to:(CGFloat)range;
 
 @end

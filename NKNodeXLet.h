@@ -8,15 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@class NKNodeViewController;
+@class NKNodeView;
 @class NKWireView;
 @interface NKNodeXLet : UIView
 
-+ (id)XLetForNode:(NKNodeViewController *)node withFrame:(CGRect)frame;
+@property (weak, nonatomic, readonly) NKNodeView *parentNode;
+@property (weak, nonatomic, readonly) NSArray *connections;
+@property (nonatomic, strong) NSString *name;
 
-@property (nonatomic, assign, readonly) NKNodeViewController *parentNode;
-@property (nonatomic, readonly) NSArray *connections;
-@property (nonatomic, retain) NSString *name;
++ (id)XLetForNode:(NKNodeView *)node;
 
 - (void)addConnection:(NKWireView *)connection;
 - (void)removeConnection:(NKWireView *)connection;
@@ -26,5 +26,7 @@
 
 // Override to move the connection point — defaults to the center of the XLet
 - (CGPoint)connectionPointInView:(UIView *)aView;
+
++ (CGSize)XLetSize;
 
 @end

@@ -13,9 +13,9 @@
 + (UIBezierPath *)arrowPath;
 + (UIBezierPath *)dotPath;
 
-@property (nonatomic, retain) UIBezierPath *dotPath;
-@property (nonatomic, retain) UIBezierPath *wirePath;
-@property (nonatomic, retain) UIBezierPath *arrowPath;
+@property (nonatomic, strong) UIBezierPath *dotPath;
+@property (nonatomic, strong) UIBezierPath *wirePath;
+@property (nonatomic, strong) UIBezierPath *arrowPath;
 
 - (CGRect)centeredRectOfSize:(CGFloat)size;
 
@@ -36,7 +36,7 @@
 
 + (NKWireView *)wireWithDelegate:(UIView <NKWireViewDelegate> *)delegate;
 {
-    NKWireView *wire = [[[self alloc] initWithFrame:CGRectZero] autorelease];
+    NKWireView *wire = [[self alloc] initWithFrame:CGRectZero];
     wire.delegate = delegate;
     return wire;
 }
@@ -72,8 +72,8 @@
     if (self) 
     {
         self.backgroundColor = [UIColor clearColor];
-        UITapGestureRecognizer *tapRecognizer = [[[UITapGestureRecognizer alloc] initWithTarget:self 
-                                                                                         action:@selector(wireTapped:)] autorelease];
+        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self 
+                                                                                         action:@selector(wireTapped:)];
         [self addGestureRecognizer:tapRecognizer];
         
         // For debugging:
@@ -144,13 +144,13 @@
     if (!cachedArrowPath) 
     {
         CGFloat halfArrowSize = KNKWireArrowSize / 2;
-        cachedArrowPath = [[UIBezierPath bezierPath] retain];
+        cachedArrowPath = [UIBezierPath bezierPath];
         [cachedArrowPath moveToPoint:CGPointMake(-halfArrowSize, -KNKWireArrowSize)];
         [cachedArrowPath addLineToPoint:CGPointMake(halfArrowSize, -KNKWireArrowSize)];
         [cachedArrowPath addLineToPoint:CGPointMake(0, 0)];
         [cachedArrowPath closePath];
     }
-    return [[cachedArrowPath copy] autorelease];
+    return [cachedArrowPath copy];
 }
 
 + (UIBezierPath *)dotPath
@@ -158,28 +158,17 @@
     static UIBezierPath *dotPath = nil;
     if (!dotPath) 
     {
-        dotPath = [[UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, KNKWireDotSize, KNKWireDotSize)] retain];
+        dotPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(0, 0, KNKWireDotSize, KNKWireDotSize)];
     }
-    return [[dotPath copy] autorelease];
+    return [dotPath copy];
 }
 
-- (void)dealloc 
-{
-    [representedObject release];
-    [dotPath release];
-    [wirePath release];
-    [arrowPath release];
-    [fromOutlet release];
-    [toInlet release];
-    [super dealloc];
-}
 
 - (void)setWirePath:(UIBezierPath *)aPath
 {
     if (wirePath != aPath) 
     {
-        [wirePath autorelease];
-        wirePath = [aPath retain];
+        wirePath = aPath;
         [self setNeedsDisplay];
     }
 }
@@ -188,8 +177,7 @@
 {
     if (arrowPath != aPath) 
     {
-        [arrowPath autorelease];
-        arrowPath = [aPath retain];
+        arrowPath = aPath;
         [self setNeedsDisplay];
     }
 }

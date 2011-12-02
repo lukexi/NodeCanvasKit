@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
-#import "NKNodeViewController.h"
+#import "NKNodeView.h"
 #import "NKNodeInlet.h"
 #import "NKNodeOutlet.h"
 
@@ -26,10 +26,10 @@
                       to:(NKNodeInlet *)toInlet
                    atAmp:(CGFloat)amp
                 delegate:(UIView <NKWireViewDelegate> *)delegate;
-@property (nonatomic, retain) id representedObject;
-@property (nonatomic, assign) UIView <NKWireViewDelegate> *delegate;
-@property (nonatomic, retain) NKNodeOutlet *fromOutlet;
-@property (nonatomic, retain) NKNodeInlet *toInlet;
+@property (nonatomic, strong) id representedObject;
+@property (nonatomic, weak) UIView <NKWireViewDelegate> *delegate;
+@property (nonatomic, strong) NKNodeOutlet *fromOutlet;
+@property (nonatomic, strong) NKNodeInlet *toInlet;
 @property (nonatomic) CGFloat amp;
 @property (nonatomic) CGPoint endPoint;
 

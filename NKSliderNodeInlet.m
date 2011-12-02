@@ -22,12 +22,6 @@
 @synthesize slider;
 @synthesize label;
 
-- (void)dealloc 
-{
-    [slider release];
-    [label release];
-    [super dealloc];
-}
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -43,17 +37,17 @@
 {
     CGFloat margin = kNKNodeInletLeftMargin + (self.bounds.size.height - 10);
     CGFloat thirds = floor((self.bounds.size.width - margin) / 3);
-    self.slider = [[[NKSlider alloc] initWithFrame:CGRectMake(margin, 
+    self.slider = [[NKSlider alloc] initWithFrame:CGRectMake(margin, 
                                                               0, 
                                                               2 * thirds, 
-                                                              self.frame.size.height)] autorelease];
+                                                              self.frame.size.height)];
     self.slider.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleRightMargin;
     self.slider.delegate = self;
     
-    self.label = [[[UILabel alloc] initWithFrame:CGRectMake(margin + 2 * thirds, 
+    self.label = [[UILabel alloc] initWithFrame:CGRectMake(margin + 2 * thirds, 
                                                             0, 
                                                             1 * thirds, 
-                                                            self.frame.size.height)] autorelease];
+                                                            self.frame.size.height)];
     self.label.backgroundColor = [UIColor clearColor];
     self.label.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleLeftMargin;
     self.label.font = [UIFont boldSystemFontOfSize:11];
