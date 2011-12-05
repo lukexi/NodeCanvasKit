@@ -23,8 +23,10 @@
 {
     self.isHighPrecisionEnabled = NO;
     
-    UIPanGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanRecognizer:)];
+    UIPanGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self 
+                                                                                 action:@selector(handlePanRecognizer:)];
     [self addGestureRecognizer:recognizer];
+    recognizer.cancelsTouchesInView = NO;
     
     [self addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -85,7 +87,7 @@
     [self setTitle:formattedValue forState:UIControlStateNormal];
 }
 
-- (void)buttonAction:(id)sender
+- (IBAction)buttonAction:(id)sender
 {
     self.isHighPrecisionEnabled = !isHighPrecisionEnabled;
 }
