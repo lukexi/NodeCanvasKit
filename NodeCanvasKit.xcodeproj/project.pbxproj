@@ -173,7 +173,7 @@
 			name = Retired;
 			sourceTree = "<group>";
 		};
-		C29335511483405D001BBC26 /* WIres */ = {
+		C29335511483405D001BBC26 /* Wires */ = {
 			isa = PBXGroup;
 			children = (
 				C2FFA9271403731F00DCBDD4 /* NKWireView.h */,
@@ -182,7 +182,7 @@
 				C271E5461410765500D90BE3 /* NKWireEditorViewController.m */,
 				C271E54B1410771600D90BE3 /* NKWireEditorViewController.xib */,
 			);
-			name = WIres;
+			name = Wires;
 			sourceTree = "<group>";
 		};
 		C293355214834074001BBC26 /* XLets */ = {
@@ -308,7 +308,7 @@
 				C2FFA9221403731F00DCBDD4 /* NKNodeCanvasView.m */,
 				C2E0D860140B9DFF000B1F73 /* NKGridView.h */,
 				C2E0D861140B9E00000B1F73 /* NKGridView.m */,
-				C29335511483405D001BBC26 /* WIres */,
+				C29335511483405D001BBC26 /* Wires */,
 				C293354A148328D6001BBC26 /* Retired */,
 				C2E0D85F140B3D6D000B1F73 /* Nodes */,
 				C293355214834074001BBC26 /* XLets */,

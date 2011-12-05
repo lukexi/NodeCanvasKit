@@ -253,7 +253,10 @@
     frame.origin.y += halfHeight;
     frame.size.height = halfHeight;
     
-    UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:[NKWireEditorViewController wireEditorViewControllerWithDelegate:self value:aWireView.amp inNavController:YES]];
+    UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:
+                                    [NKWireEditorViewController wireEditorViewControllerWithDelegate:self 
+                                                                                               value:aWireView.amp 
+                                                                                     inNavController:YES]];
     
     [self showPopover:popover fromRect:frame];
     
