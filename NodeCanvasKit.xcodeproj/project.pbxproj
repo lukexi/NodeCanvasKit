@@ -390,7 +390,7 @@
 		C2FFA8E51403729000DCBDD4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = Eeoo;
 			};
 			buildConfigurationList = C2FFA8E81403729000DCBDD4 /* Build configuration list for PBXProject "NodeCanvasKit" */;
@@ -561,6 +561,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NodeCanvasDemo/NodeCanvasKit-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "NodeCanvasDemo/NodeCanvasKit-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = NodeCanvasKit;
@@ -573,6 +574,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NodeCanvasDemo/NodeCanvasKit-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "NodeCanvasDemo/NodeCanvasKit-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = NodeCanvasKit;
