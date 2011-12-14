@@ -180,7 +180,6 @@
 				C2FFA9281403731F00DCBDD4 /* NKWireView.m */,
 				C271E5451410765500D90BE3 /* NKWireEditorViewController.h */,
 				C271E5461410765500D90BE3 /* NKWireEditorViewController.m */,
-				C271E54B1410771600D90BE3 /* NKWireEditorViewController.xib */,
 			);
 			name = Wires;
 			sourceTree = "<group>";
@@ -200,6 +199,16 @@
 			name = XLets;
 			sourceTree = "<group>";
 		};
+		C2D62EA3149891F4000F534B /* NodeCanvasKit Bundle */ = {
+			isa = PBXGroup;
+			children = (
+				C271E54B1410771600D90BE3 /* NKWireEditorViewController.xib */,
+				C2FFA9261403731F00DCBDD4 /* NKNodeView.xib */,
+				C2E0D854140B3315000B1F73 /* NKOutNodeView.xib */,
+			);
+			name = "NodeCanvasKit Bundle";
+			sourceTree = "<group>";
+		};
 		C2E0D85E140B37B3000B1F73 /* Master Out Node */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,7 +216,6 @@
 				C2E0D85A140B37A3000B1F73 /* NKOutNodeInlet.m */,
 				C2E0D852140B3313000B1F73 /* NKOutNodeView.h */,
 				C2E0D853140B3314000B1F73 /* NKOutNodeView.m */,
-				C2E0D854140B3315000B1F73 /* NKOutNodeView.xib */,
 				C2E0D844140B2C0B000B1F73 /* NKSpiralView.h */,
 				C2E0D845140B2C0B000B1F73 /* NKSpiralView.m */,
 			);
@@ -219,7 +227,6 @@
 			children = (
 				C2FFA9241403731F00DCBDD4 /* NKNodeView.h */,
 				C2FFA9251403731F00DCBDD4 /* NKNodeView.m */,
-				C2FFA9261403731F00DCBDD4 /* NKNodeView.xib */,
 				C2E0D824140A6B46000B1F73 /* NKNodeBackgroundView.h */,
 				C2E0D825140A6B47000B1F73 /* NKNodeBackgroundView.m */,
 			);
@@ -229,6 +236,7 @@
 		C2FFA8E31403729000DCBDD4 = {
 			isa = PBXGroup;
 			children = (
+				C2D62EA3149891F4000F534B /* NodeCanvasKit Bundle */,
 				C2FFA9361403732C00DCBDD4 /* Classes */,
 				C2FFA8F81403729100DCBDD4 /* NodeCanvasDemo */,
 				C2FFA918140372D800DCBDD4 /* NodeCanvasKit */,
@@ -526,11 +534,12 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -544,12 +553,13 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
