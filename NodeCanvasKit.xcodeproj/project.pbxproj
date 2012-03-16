@@ -398,7 +398,7 @@
 		C2FFA8E51403729000DCBDD4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0440;
 				ORGANIZATIONNAME = Eeoo;
 			};
 			buildConfigurationList = C2FFA8E81403729000DCBDD4 /* Build configuration list for PBXProject "NodeCanvasKit" */;
