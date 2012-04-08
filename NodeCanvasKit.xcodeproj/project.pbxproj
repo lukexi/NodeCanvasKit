@@ -83,6 +83,7 @@
 		C210209714839A7F007CE090 /* NKDragButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKDragButton.m; sourceTree = "<group>"; };
 		C22E89F5140CD1DC003DF1B0 /* NKSliderNodeInlet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKSliderNodeInlet.h; sourceTree = "<group>"; };
 		C22E89F6140CD1DD003DF1B0 /* NKSliderNodeInlet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKSliderNodeInlet.m; sourceTree = "<group>"; };
+		C25569C4152FBD9B00488385 /* NodeCanvasKit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = NodeCanvasKit.entitlements; sourceTree = "<group>"; };
 		C271E5451410765500D90BE3 /* NKWireEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NKWireEditorViewController.h; sourceTree = "<group>"; };
 		C271E5461410765500D90BE3 /* NKWireEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NKWireEditorViewController.m; sourceTree = "<group>"; };
 		C271E54B1410771600D90BE3 /* NKWireEditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NKWireEditorViewController.xib; sourceTree = "<group>"; };
@@ -269,6 +270,7 @@
 		C2FFA8F81403729100DCBDD4 /* NodeCanvasDemo */ = {
 			isa = PBXGroup;
 			children = (
+				C25569C4152FBD9B00488385 /* NodeCanvasKit.entitlements */,
 				C2FFA9011403729100DCBDD4 /* NodeCanvasDemoAppDelegate.h */,
 				C2FFA9021403729100DCBDD4 /* NodeCanvasDemoAppDelegate.m */,
 				C2FFA9041403729100DCBDD4 /* MainWindow.xib */,
@@ -569,6 +571,7 @@
 		C2FFA9101403729100DCBDD4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = NodeCanvasDemo/NodeCanvasKit.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NodeCanvasDemo/NodeCanvasKit-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
